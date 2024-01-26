@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'grotesk-sharp';
+    src: url('/font/sharp-grotesk-light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'berkeley';
+    src: url('/font/berkeley-mono.woff') format('woff');
+}
+
+@media screen and (max-width: 540px) {
+
+}
+  
+@media screen and (min-width: 541px) and (max-width: 1500px) {
+
+}
+
+.container {
+    font-family: 'grotesk-sharp', 'berkeley';
+    font-weight: 550;
+}
+
+.container img {
+    max-width: 90%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}

@@ -1,0 +1,186 @@
+/*
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+@font-face {
+    font-family: 'berkeley';
+    src: url('/font/berkeley-mono.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'grotesk-sharp';
+    src: url('/font/sharp-grotesk-light.woff') format('woff');
+}
+
+:root {
+	--dark-gray: rgb(16, 16, 16);
+	--white: white;
+	--off-white: rgb(196, 196, 196);
+}
+
+body {
+	color: var(--white);
+	background: var(--dark-gray);
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'berkeley', monospace;
+	line-height: 1.6;
+	font-size: 18px;
+    overflow-x: hidden; 
+}
+
+* {
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+    color: orange;
+	text-decoration: none;
+}
+
+.hover-box {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-right: 15vw;
+}
+
+a:hover .hover-box {
+    display: block;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bolder;
+    margin-bottom: -3vh;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: -3vh;
+}
+
+h3 {
+    margin-bottom: -3vh;
+}
+
+pre {
+    font-family: 'berkeley';
+    font-size: 16px;
+    line-height: 1.1; 
+    padding: 1vw 1vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    width: 100%;
+    border: 1px solid white;
+    overflow: auto;
+}
+
+figure {
+    text-align: center;
+    margin-top: 5vh;
+    max-width: 90%;
+}
+
+img {
+	margin: auto;
+	display: block;
+	max-width: 100%;
+}
+
+figcaption {
+    display: block;
+    margin: auto;
+    margin-top: -1vh;
+    margin-bottom: 4vh;
+    font-size: 18px;
+    color:rgb(196, 196, 196);
+}
+
+ul {
+    margin-left: 0%;
+    list-style: disc;
+}
+
+ol {
+    margin-left: 30px;
+    list-style: decimal;
+}
+
+li {
+    margin-left: 0;
+}
+
+table {
+    margin: auto;
+    margin-bottom: 3vh;
+}
+
+table, th, td {
+    border: 1px solid white;
+    padding: 8px;
+}
+
+.katex-html {
+    display: none;
+}
+
+.katex-mathml {
+    display: block;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    font-size: 32px;
+}
+
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+    body {
+        overflow: auto;
+    }
+
+    .katex-mathml {
+        font-size: 24px;
+    }
+
+    .hover-box {
+        max-width: unset;
+    }
+
+    figcaption {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1500px) {
+    figcaption {
+        font-size: 18px;
+    }
+
+    html, body {
+        padding: 0;
+        margin: 0;
+        font-family: 'berkeley', monospace;
+        line-height: 1.6;
+        font-size: 22px;
+    }
+
+    .hover-box {
+        max-width: 30%;
+    }
+}

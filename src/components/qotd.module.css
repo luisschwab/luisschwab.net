@@ -1,0 +1,34 @@
+.container {
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.text {
+    font-family: serif;
+    font-size: larger;
+    text-align: center;
+    line-break: wrap;
+}
+
+@media screen and (max-width: 540px) {
+    .container {
+        padding: unset;
+    }
+
+    .text {
+        font-size: large;
+    }
+}
+  
+@media screen and (min-width: 541px) and (max-width: 1500px) {
+    .container {
+        padding-left: 20%;
+        padding-right: 20%s;
+    }
+    
+    .text {
+        font-size: large;
+    }
+}

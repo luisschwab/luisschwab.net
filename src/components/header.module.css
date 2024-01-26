@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'grotesk-bold';
+    src: url('/font/sharp-grotesk-bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'berkeley';
+    src: url('/font/berkeley-mono.woff') format('woff');
+}
+
+@media screen and (max-width: 540px) {
+    .text {
+        font-size: 40px;
+    }
+}
+  
+  @media screen and (min-width: 541px)
+                and (max-width: 1500px) {
+    .text {
+        font-size: 50px;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin-bottom: 2vh;
+    margin-top: -5vh;
+}
+
+.name {
+    margin-top: 0;
+    font-family: 'grotesk-bold', monospace, sans-serif;
+    font-size: 40px;
+    color: white;
+
+    position: relative;
+    z-index: 10;
+}
+
+.pic { 
+    height: 120px;
+    width: 120px;
+    position: relative;
+    z-index: 10;
+}
