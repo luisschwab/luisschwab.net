@@ -12,6 +12,9 @@ import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeKatex from 'rehype-katex';
 import remarkFigureCaption from '@microflash/remark-figure-caption';
+import remarkToc from 'remark-toc';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeHighlight from 'rehype-highlight';
 
 import {unified} from 'unified'
@@ -20,7 +23,7 @@ const postsDirectory = path.join(process.cwd(), 'posts');
 const draftsDirectory = path.join(process.cwd(), 'post-drafts');
 
 export function getSortedPostsData() {
-	// Get file names under /posts
+	// Get file names under /posts and /post-drafts
 	let fileNames;
     let postNames;
     let draftNames;
@@ -29,8 +32,8 @@ export function getSortedPostsData() {
         postNames = fs.readdirSync(postsDirectory);
         draftNames = fs.readdirSync(draftsDirectory);
 
-        console.log(postNames);
-        console.log(draftNames);
+        //console.log(postNames);
+        //console.log(draftNames);
 
         fileNames = postNames.concat(draftNames);
     } else {
@@ -80,8 +83,8 @@ export function getAllPostIds() {
         postNames = fs.readdirSync(postsDirectory);
         draftNames = fs.readdirSync(draftsDirectory);
 
-        console.log(postNames);
-        console.log(draftNames);
+        //console.log(postNames);
+        //console.log(draftNames);
 
         fileNames = postNames.concat(draftNames);
     } else {
@@ -119,13 +122,16 @@ export async function getPostData(id) {
         .use(remarkGfm)
         .use(remarkImages)
         .use(remarkFigureCaption)
+        .use(remarkToc)
         .use(remarkRehype)
+        .use(rehypeSlug)
+        .use(rehypeAutolinkHeadings)
         .use(rehypeKatex)
         .use(rehypeStringify)
         .process(matterResult.content);
         
-	const contentHTML = processedContent.toString();
     //console.log(processedContent.toString());
+	const contentHTML = processedContent.toString();
 
 	// Combine the data with the id
 	return {

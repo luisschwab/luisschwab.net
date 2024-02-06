@@ -6,10 +6,22 @@ import Banner from "@/components/banner";
 import Title from "@/components/title";
 
 export default function Custom404() {
+
     return (
         <>
         <Head>
-            <title>404 not found</title>
+            <title>404 not found | luisschwab.net</title>
+
+            <meta name="title" content="404 Not Found | luisschwab.net"/>
+
+            <meta property="og:title" content="404 Not Found"/>
+            <meta property="og:image" content="https://luisschwab.net/img/diogenes.jpg"/>
+
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:image" content="https://luisschwab.net/img/diogenes.jpg"/>
+            <meta name="twitter:domain" content="luisschwab.net"/>
+            <meta name="twitter:title" content="404 Not Found"/>
+            <meta name="twitter:description" content="404 Not Found"/>
         </Head>
         
         <Wrapper>
@@ -25,8 +37,8 @@ export default function Custom404() {
             <br/>
 
             <img
-                src="/img/milei.jpg"
-                alt="Javier Milei"
+                src="/img/k.jpg"
+                alt="Officer K stares blankly"
                 width="80%"
             />
 

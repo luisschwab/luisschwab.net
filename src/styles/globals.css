@@ -31,7 +31,7 @@ body {
 	margin: 0;
 	font-family: 'berkeley', monospace;
 	line-height: 1.6;
-	font-size: 18px;
+	font-size: 22px;
     overflow-x: hidden; 
 }
 
@@ -64,20 +64,26 @@ a:hover .hover-box {
     display: block;
 }
 
+code {
+    font-family: 'berkeley';
+    font-size: medium;
+}
+
 h1 {
     font-size: 32px;
     font-weight: bolder;
-    margin-bottom: -3vh;
+    margin-bottom: -2vh;
 }
 
 h2 {
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: -3vh;
+    margin-bottom: -2vh;
 }
 
 h3 {
-    margin-bottom: -3vh;
+    font-size: 26px;
+    margin-bottom: -2vh;
 }
 
 pre {
@@ -114,12 +120,12 @@ figcaption {
 }
 
 ul {
-    margin-left: 0%;
+    margin-left: 0;
     list-style: disc;
 }
 
 ol {
-    margin-left: 30px;
+    margin-left: -20px;
     list-style: decimal;
 }
 
@@ -151,6 +157,7 @@ table, th, td {
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
     body {
+        font-size: 18px;
         overflow: auto;
     }
 

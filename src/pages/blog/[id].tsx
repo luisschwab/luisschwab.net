@@ -26,10 +26,36 @@ export async function getStaticPaths() {
 }
 
 export default function Post({ postData }) {
+
+    let post_url = "https://luisschwab.net/blog/" + postData.id;
+    
+    let open_graph_image_url;
+
+    if (postData.og_image_url != '') {
+        open_graph_image_url = "https://luisschwab.net" + postData.og_image_url;
+    } else {
+        open_graph_image_url = "https://luisschwab.net/img/diogenes.jpg";
+    }
+
+
     return (
         <>
         <Head>
-            <title>{postData.title}</title>
+            <title>{postData.title} | luisschwab.net</title>
+
+            <meta name="title" content={postData.title}/>
+            <meta name="description" content={postData.description} />
+
+            <meta property="og:title" content={postData.title} />
+            <meta property="og:image" content="https://luisschwab.net/img/diogenes.jpg"/>
+            <meta property="og:description" content={postData.description}/>
+
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:image" content={open_graph_image_url}/>
+            <meta name="twitter:domain" content="luisschwab.net/"/>
+            <meta name="twitter:url" content={post_url}/>
+            <meta name="twitter:title" content={postData.title}/>
+            <meta name="twitter:description" content={postData.description}/>
         </Head>
 
         <Wrapper>
