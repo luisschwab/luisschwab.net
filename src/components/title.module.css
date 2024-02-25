@@ -3,19 +3,6 @@
     src: url('/font/sharp-grotesk-bold.woff') format('woff');
 }
 
-@media screen and (max-width: 540px) {
-    .text {
-        font-size: 40px;
-    }
-}
-  
-  @media screen and (min-width: 541px)
-                and (max-width: 1500px) {
-    .text {
-        font-size: 50px;
-    }
-}
-
 .container {
     display: flex;
     align-items: left;
@@ -37,4 +24,23 @@
     line-height: normal;
     
     padding: 5px;
+
+    color: white;
+}
+
+@media screen and (max-width: 540px) {
+    .text {
+        font-size: 40px;
+    }
+}
+  
+@media screen and (min-width: 541px)
+              and (max-width: 1500px) {
+    .container {
+        margin-top: 42vh;
+    }
+
+    .text {
+        font-size: 50px;
+    }
 }

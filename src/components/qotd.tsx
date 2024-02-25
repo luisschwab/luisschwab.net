@@ -17,15 +17,17 @@ export default function QOTD() {
                 const quotes = data.quotes;
                 const quoteIndex = (day) % quotes.length;
                 
-                // same quote for the day
+                // random quote on every request
+                setQuote(quotes[Math.floor( Math.random() * (quotes.length ))]);
+
+                // same quote for whole the day
                 //setQuote(quotes[quoteIndex]);
                 
-                // random quote on every request
-                setQuote(quotes[Math.floor(Math.random() * (quotes.length))]);
 
                 // last quote of quotes.json
                 //setQuote(quotes[quotes.length-1]);
-
+                
+                // cherry pick quote
                 //setQuote(quotes[19]);
             })
             .catch((err) => console.error('error:', err));
@@ -34,7 +36,7 @@ export default function QOTD() {
     return (
         <div className={style.container} id="qotd">
             <div className={style.text}>
-                QØTD:
+                QOTD:
                 <br/>
                 &#x275D;{quote[0]}&#x275E;
                 <br/>

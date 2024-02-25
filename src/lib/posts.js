@@ -1,13 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 
+import {unified} from 'unified'
 import matter from 'gray-matter';
-import { remark } from 'remark';
 import remarkParse from 'remark-parse';
 import html from 'remark-html';
 import remarkImages from 'remark-images';
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw'
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeKatex from 'rehype-katex';
@@ -17,7 +18,6 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeHighlight from 'rehype-highlight';
 
-import {unified} from 'unified'
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 const draftsDirectory = path.join(process.cwd(), 'post-drafts');
@@ -118,12 +118,15 @@ export async function getPostData(id) {
 	// User remark to convert markdown into HTML
 	const processedContent = await unified()
         .use(remarkParse)
+        //.use(selector)
         .use(remarkMath)
         .use(remarkGfm)
         .use(remarkImages)
+        .use(html)
         .use(remarkFigureCaption)
         .use(remarkToc)
-        .use(remarkRehype)
+        .use(remarkRehype, {allowDangerousHtml: true})
+        .use(rehypeRaw)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings)
         .use(rehypeKatex)
@@ -139,4 +142,6 @@ export async function getPostData(id) {
 		contentHTML,
 		...matterResult.data,
 	};
-  }
+}
+
+

@@ -7,6 +7,7 @@ export default function Header() {
     return (
         <>  
             <div className={style.container}>
+
                 <div className={style.pic}>
                     <Image
                         src="/img/headshot.jpg"
@@ -17,7 +18,7 @@ export default function Header() {
                 </div>
 
                 <div className={style.name}>
-                    luisschwab <span style={{fontFamily: 'Helvetica' }}>&#9775;</span>
+                    luisschwab <span style={{fontFamily: 'Helvetica'}}>&#9775;</span>
                 </div>
             </div>
         </>

@@ -31,22 +31,13 @@ return (
         ~$ whoami 
         <br/>
         computer engineering @ <a href="https://cic.unb.br" target="_blank">unb</a>
-        
-        {/*
-        <br/>
-        jiujitsu <span style={{fontFamily: 'Helvetica' }}>🥋</span>
-        <br/>
-        bitcoin <span style={{fontFamily: 'Helvetica' }}>&#8383;</span>
-        <br/>
-        books <span style={{fontFamily: 'Helvetica' }}>📖</span>
-        */}
 
         <br/>
         <br/>
 
+        &gt;systems should be beautiful
+        <br/>
         &gt;trying to understand how everything works
-        <br/>
-        &gt;systems should be beautiful and well engineered
 
         {/*
         <br/>
@@ -54,15 +45,15 @@ return (
 
         ~$ ls projects/
         <br/>
-        ..
         <Link href="https://civilization.energy">
-            https://civilization.energy
+            civilization.energy
             <div className="hover-box">
             How much energy does human
             civilization consume? How much more could we consume?
             </div>
         </Link>
         */}
+        
 
         <br/>
         <br/>
@@ -78,12 +69,16 @@ return (
         <br/>
         <br/>
 
-        ~$ <Link href="https://mempool.luisschwab.net">open mempool.luisschwab.net</Link> (self-hosted Mempool)
+        ~$ <Link href="https://mempool.luisschwab.net">open mempool.luisschwab.net</Link>
+        <br/>
+        &gt;self-hosted Mempool
 
         <br/>
         <br/>
 
-        ~$ <Link href="https://lib.luisschwab.net">open lib.luisschwab.net</Link> (pdf collection)
+        ~$ <Link href="https://lib.luisschwab.net">open lib.luisschwab.net</Link>
+        <br/>
+        &gt;pdf collection
 
         <br/>
         <br/>

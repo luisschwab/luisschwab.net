@@ -36,12 +36,12 @@ export default function Post({ postData }) {
     } else {
         open_graph_image_url = "https://luisschwab.net/img/diogenes.jpg";
     }
-
+    
 
     return (
         <>
         <Head>
-            <title>{postData.title} | luisschwab.net</title>
+            <title>{postData.title.toLowerCase() + ' | luisschwab.net'}</title>
 
             <meta name="title" content={postData.title}/>
             <meta name="description" content={postData.description} />
@@ -66,8 +66,10 @@ export default function Post({ postData }) {
             <PostContent>
                 <div style={{ fontWeight: 'bold', marginTop: `-5vh`, marginBottom: `6vh` }}>
                     <Link href="/blog">&larr; post index</Link>
-                    &nbsp;&nbsp;\\&nbsp;&nbsp;
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
                     {postData.date}
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {postData.tags}
                 </div>
 
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />

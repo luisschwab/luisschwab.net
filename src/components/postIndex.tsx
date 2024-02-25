@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import style from "@/components/postIndex.module.css";
 
-export default function PostIndexItem({ id, title, date }) {
+export default function PostIndexItem({ id, title, date, tags }) {
     return (
         <>  
             <li className={style.container}>
@@ -11,7 +11,7 @@ export default function PostIndexItem({ id, title, date }) {
                     </div>
                     
                     <div className={style.date}>
-                        {date}
+                        {date} | {tags}
                     </div>
 
                     <br/>

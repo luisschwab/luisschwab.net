@@ -15,14 +15,12 @@ img .container {
 }
 
 @media screen and (max-width: 540px) {
-    .container {
-        
-    }
+
 }
-  
+
 @media screen and (min-width: 541px)
-            and (max-width: 1500px) {
+and (max-width: 1500px) {
     .container {
-        
+        height: 45vh;
     }
 }

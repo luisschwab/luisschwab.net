@@ -27,7 +27,7 @@ body {
 
 html,
 body {
-	padding: 0;
+    padding: 0;
 	margin: 0;
 	font-family: 'berkeley', monospace;
 	line-height: 1.6;
@@ -57,7 +57,8 @@ a:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    margin-right: 15vw;
+    margin-right: 32vw;
+    text-wrap: wrap;
 }
 
 a:hover .hover-box {
@@ -154,6 +155,10 @@ table, th, td {
     font-size: 32px;
 }
 
+blockquote {
+    font-style: italic;
+}
+
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
     body {
@@ -172,6 +177,10 @@ table, th, td {
     figcaption {
         font-size: 12px;
     }
+
+    .hover-box {
+        margin-right: 15vw;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1500px) {
@@ -188,6 +197,7 @@ table, th, td {
     }
 
     .hover-box {
-        max-width: 30%;
+        margin-right: 30vw;
     }
+    
 }
