@@ -1,9 +1,5 @@
 {
     "quotes": [
-        ["They say evil prevails when good men fail to act. What they ought to say is: evil prevails.", "Yuri Orlov"],
-        ["There are only two tragedies in life. One is not getting what you want; the other is getting it.", "Yuri Orlov"],
-        ["That's the secret to survival: never go to war; especially with yourself.", "Yuri Orlov"],
-
         ["Lying is a delightful thing for it leads to the truth.", "Fyodor Dostoyevsky"],
         ["To go wrong in one's own way is better than to go right in someone else's.", "Fyodor Dostoyevsky"],
         ["Right or wrong, it's very pleasant to break something from time to time.", "Fyodor Dostoyevsky"],
@@ -11,7 +7,44 @@
         ["There is no subject so old that nothing new can be said about it. ", "Fyodor Dostoyevsky"],
         ["Nothing is more seductive to a man than his freedom of conscience, but nothing is a greater cause of suffering.", "Fyodor Dostoyevsky"],
 
-        ["When in doubt, Meriadoc, always follow your nose.", "Gandalf"],
-        ["", ""]
+
+        ["There are only two tragedies in life: one is not getting what you want, and the other is getting it.", "Oscar Wilde"],
+
+
+        ["It ain't what you don't know that gets you into trouble. It's what you know for sure that just ain't so.", "Mark Twain"],
+
+
+        ["The cost of a thing is the amount of what I will call life which is required to be exchanged for it, immediately or in the long run.", "Henry David Thoreau"],
+        ["Any fool can make a rule. And any fool will mind it.", "Henry David Thoreau"],
+        ["A man is rich in proportion to the number of things which he can afford to let alone.", "Henry David Thoreau"],
+        ["A truly good book…teaches me better than to read it. I must soon lay it down and commence living on its hint.", "Henry David Thoreau"],
+        ["I have an immense appetite for solitude, like an infant for sleep, and if I don't get enough for this year, I shall cry all the next.", "Henry David Thoreau"],
+        ["I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived.", "Henry David Thoreau"],
+
+
+        ["Self-education is, I firmly believe, the only kind of education there is.", "Isaac Asimov"],
+        ["Any book worth banning is a book worth reading.", "Isaac Asimov"],
+
+
+        ["If I have been able to see further, it was only because I stood on the shoulders of giants.", "Isaac Newton"],
+
+
+        ["Two roads diverged in a wood, and I— I took the one less traveled by, And that has made all the difference.", "Robert Frost"],
+
+
+        ["If you want to build a ship, don't drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea.", "Antoine de Saint-Exupéry"],
+
+        
+        ["Learn to live on lentils and you will not have to be subservient to the king.", "Diogenes of Sinope"],
+
+
+        ["If I had more time, I would have written a shorter letter.", "Blaise Pascal"],
+
+
+        ["I don't believe we shall ever have a good money again before we take the thing out of the hands of government, that is, we can't take it violently out of the hands of government, all we can do is by some sly roundabout way introduce something that they can't stop.", "Friedrich Hayek"],
+
+
+        ["The ultimate aim of martial arts is not having to use them.", "Miyamoto Musashi"]
+        
     ]
 }
