@@ -5,6 +5,7 @@ import Wrapper from "@/components/wrapper";
 import Banner from "@/components/banner";
 import Title from "@/components/title";
 import PostContent from "@/components/postContent";
+import Utterances from "@/components/utterances";
 
 import { getAllPostIds, getPostData } from '../../lib/posts';
 
@@ -75,7 +76,12 @@ export default function Post({ postData }) {
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
             </PostContent>
 
-            <div style={{marginTop: '5em', fontSize: '75%', fontFamily:'serif', textAlign:'center', color:'#F7931A'}}>
+
+            <Utterances></Utterances>
+            <div id="utterance"></div>
+
+
+            <div style={{marginTop: '1.5em', fontSize: '75%', fontFamily:'serif', textAlign:'center', color:'#F7931A'}}>
                 <hr/>
                 <em>follow the <a href="/bitcoin-whitepaper.pdf" className="white_rabbit">🐇 white rabbit</a></em>
             </div>
@@ -83,4 +89,4 @@ export default function Post({ postData }) {
         </Wrapper>
         </>
     );
-  }
+}
