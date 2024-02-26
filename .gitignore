@@ -2,8 +2,7 @@
 
 deploy.sh
 
-# posts md folder
-/posts
+# post drafts folder
 /post-drafts
 
 # dependencies
