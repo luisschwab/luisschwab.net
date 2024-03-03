@@ -127,6 +127,7 @@ export async function getPostData(id) {
         .use(remarkToc)
         .use(remarkRehype, {allowDangerousHtml: true})
         .use(rehypeRaw)
+        .use(rehypeHighlight)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings)
         .use(rehypeKatex)
