@@ -6,7 +6,7 @@ export default function Utterances() {
         script.src = 'https://utteranc.es/client.js';
         script.setAttribute('repo', 'luisschwab/luisschwab.net');
         script.setAttribute('issue-term', 'pathname');
-        script.setAttribute('theme', 'photon-dark');
+        script.setAttribute('theme', 'gruvbox-dark');
         script.setAttribute('crossorigin', 'anonymous');
         script.setAttribute('async', '');
         

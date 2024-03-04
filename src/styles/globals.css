@@ -14,6 +14,16 @@
     src: url('/font/sharp-grotesk-light.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('/font/noto-serif-italic.woff');
+}
+
+@font-face {
+    font-family: 'emoji';
+    src: url('/font/one-ui.woff');
+}
+
 :root {
 	--dark-gray: rgb(16, 16, 16);
 	--white: white;
@@ -91,12 +101,13 @@ pre {
     font-family: 'berkeley';
     font-size: 16px;
     line-height: 1.1; 
-    padding: 1vw 1vh;
+    padding: 1vh 0.25vw;
     margin-top: 2vh;
     margin-bottom: 2vh;
     width: 100%;
     border: 1px solid white;
     overflow: auto;
+    color: #fff;
 }
 
 figure {
@@ -137,11 +148,20 @@ li {
 table {
     margin: auto;
     margin-bottom: 3vh;
+    width: 100%;
+    font-size: 70%;
+}
+
+th, td {
+    padding: 2px white;
 }
 
 table, th, td {
     border: 1px solid white;
-    padding: 8px;
+}
+
+table a:hover {
+    text-decoration: underline;
 }
 
 .katex-html {

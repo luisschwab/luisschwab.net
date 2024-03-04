@@ -11,7 +11,7 @@ export default function PostIndexItem({ id, title, date, tags }) {
                     </div>
                     
                     <div className={style.date}>
-                        {date} | {tags}
+                        {date} | <span style={{fontSize: 'smaller'}}>{tags}</span>
                     </div>
 
                     <br/>
