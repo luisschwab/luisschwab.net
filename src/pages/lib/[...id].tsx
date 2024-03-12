@@ -16,7 +16,7 @@ export async function getStaticProps(context) {
 
 	const allFilesData: any = getFileIndex(currentPath)['index'];
 
-    console.log(currentPath);
+    //console.log(currentPath);
 
 	return {
 		props: {
@@ -31,8 +31,8 @@ export async function getStaticPaths() {
 
     const paths = getPathsRecursive(rootDir, rootDir);
 
-    console.log(paths);
-
+    //console.log(paths);
+    
     return {
         paths,
         fallback: false,
@@ -44,16 +44,16 @@ export default function LibIndex({ allFilesData, currentPath }) {
     return (
     	<>
         <Head>
-            <title>library | luisschwab.net</title>
+            <title>{"index of /lib/" + currentPath + "/"} | luisschwab.net</title>
 
             <meta name="title" content="library"/>
             <meta name="description" content="luisschwab's library" />
 
             <meta property="og:title" content="luisschwab's library"/>
-            <meta property="og:image" content="http://luisschwab.net/img/diogenes.jpg"/>
+            <meta property="og:image" content="http://luisschwab.net/img/alexandria.jpg"/>
 
             <meta name="twitter:card" content="summary_large_image"/>
-            <meta name="twitter:image" content="http://luisschwab.net/img/diogenes.jpg"/>
+            <meta name="twitter:image" content="http://luisschwab.net/img/alexandria.jpg"/>
             <meta name="twitter:domain" content="luisschwab.net/"/>
             <meta name="twitter:url" content="https://luisschwab.net"/>
             <meta name="twitter:title" content="luisschwab's library"/>
@@ -62,7 +62,7 @@ export default function LibIndex({ allFilesData, currentPath }) {
         <Wrapper>
         	<Banner></Banner>
 
-            <Title content={"library"}></Title>
+            <Title content={"index of /lib/" + currentPath + "/"}></Title>
 
             <div style={{ marginTop: '-5vh', marginBottom: '3vh' }}>
                 <span style={{ fontFamily: 'grotesk-sharp', fontWeight: 600, fontSize: '21px'}}>

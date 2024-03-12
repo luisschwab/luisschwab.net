@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 
+
 import Wrapper from "@/components/wrapper";
 import Banner from "@/components/banner";
 import Title from "@/components/title";
@@ -35,29 +36,15 @@ export default function Custom404() {
 
             <br/>
             <br/>
-
+            
             <img
                 src="/img/k.jpg"
                 alt="Officer K stares blankly"
-                width="80%"
-                />
+                style={{width:"80%"}}
+            />
             
             <br/>
             <br/>
-
-            {/*
-            <div style={{ borderRadius: '12px' }}>
-                <iframe 
-                    src="https://open.spotify.com/embed/track/5FzHSw0AMQq2UtsDFSfW67?utm_source=generator" 
-                    width="100%" 
-                    height="352" 
-                    frameBorder="0" 
-                    allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                    loading="lazy">
-                </iframe>
-            </div>
-            */}
 
         </Wrapper>
         </>

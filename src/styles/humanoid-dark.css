@@ -53,7 +53,7 @@ code.hljs {
 }
 .hljs::selection,
 .hljs ::selection {
-    background-color: transparent;
+    background-color: red;
     color: #f8f8f2
 }
 /* purposely do not highlight these things */

@@ -30,14 +30,7 @@ export default function Post({ postData }) {
 
     let post_url = "https://luisschwab.net/blog/" + postData.id;
     
-    let open_graph_image_url;
-
-    if (postData.og_image_url != '') {
-        open_graph_image_url = "https://luisschwab.net" + postData.og_image_url;
-    } else {
-        open_graph_image_url = "https://luisschwab.net/img/diogenes.jpg";
-    }
-    
+    let open_graph_image_url = "https://luisschwab.net" + postData.og_image_url;;
 
     return (
         <>
@@ -48,7 +41,7 @@ export default function Post({ postData }) {
             <meta name="description" content={postData.description} />
 
             <meta property="og:title" content={postData.title} />
-            <meta property="og:image" content="https://luisschwab.net/img/diogenes.jpg"/>
+            <meta property="og:image" content={open_graph_image_url}/>
             <meta property="og:description" content={postData.description}/>
 
             <meta name="twitter:card" content="summary_large_image"/>
@@ -66,11 +59,11 @@ export default function Post({ postData }) {
 
             <PostContent>
                 <div style={{ fontWeight: 'bold', marginTop: `-5vh`, marginBottom: `6vh` }}>
-                    <Link href="/blog">&larr; post index</Link>
+                    <Link href="/blog">&larr; blog index</Link>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     {postData.date}
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    {postData.tags}
+                    <span style={{fontSize: 'smaller'}}>{postData.tags}</span>
                 </div>
 
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
@@ -81,9 +74,9 @@ export default function Post({ postData }) {
             <div id="utterance"></div>
 
 
-            <div style={{marginTop: '1.5em', fontSize: '75%', fontFamily:'serif', textAlign:'center', color:'#F7931A'}}>
+            <div style={{marginTop: '1.5em', fontSize: '75%', fontFamily:'Noto Serif', textAlign:'center', color:'#F7931A'}}>
                 <hr/>
-                <em>follow the <a href="/bitcoin-whitepaper.pdf" className="white_rabbit">🐇 white rabbit</a></em>
+                <em>follow the <a href="/lib/bitcoin/whitepaper.pdf" className="white_rabbit">white rabbit</a></em>
             </div>
 
         </Wrapper>

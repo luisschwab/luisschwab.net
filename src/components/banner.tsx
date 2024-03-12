@@ -10,7 +10,7 @@ export default function Banner() {
                 src="/img/diogenes.jpg"
                 alt="diogenes and alexander in corinth"
                 fill={true}
-                objectFit="cover"
+                style={{objectFit:"cover"}}
                 priority={true}
             />
         </div>

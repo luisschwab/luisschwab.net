@@ -13,7 +13,7 @@ export default function Header() {
                         src="/img/headshot.jpg"
                         alt="luisschwab"
                         fill={true}
-                        objectFit="cover"
+                        style={{objectFit:"cover"}}
                     />
                 </div>
 

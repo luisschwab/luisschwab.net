@@ -17,7 +17,7 @@ export default function QOTD() {
                 const quotes = data.quotes;
                 const qotdIndex = (day) % quotes.length;
                 
-                let e = 1;
+                let e = 2;
                 switch (e) {
                     case 1:
                         // same quote for whole the day
@@ -34,7 +34,7 @@ export default function QOTD() {
                     case 4:
                     default:
                         // cherry pick quote
-                        let index = 21;
+                        let index = 14;
                         setQuote(quotes[index]);
                         break;
                 }

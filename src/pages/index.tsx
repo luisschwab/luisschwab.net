@@ -39,32 +39,22 @@ return (
         <br/>
         &gt;trying to understand how everything works
 
-        {/*
         <br/>
         <br/>
 
-        ~$ ls projects/
+        ~$ <Link href="/blog">cd blog/</Link>
+
         <br/>
-        <Link href="https://civilization.energy">
-            civilization.energy
-            <div className="hover-box">
-            How much energy does human
-            civilization consume? How much more could we consume?
-            </div>
-        </Link>
-        */}
-        
+        &gt;<Link href="/blog/sovereign-bitcoin-stack">sovereign-bitcoin-stack.md</Link>
+        <br/>
+        &gt;<Link href="/blog/books-2024">books-2024.md</Link>
 
         <br/>
         <br/>
 
-        ~$ ls <Link href="/blog">blog/</Link>
+        ~$ <Link href="/lib">cd library/</Link>
         <br/>
-        <Link href="/blog/sovereign-bitcoin-stack">sovereign-bitcoin-stack.md</Link>
-        <br/>
-        <Link href="/blog/books-2024">books-of-2024.md</Link>
-        <br/>
-        <Link href="/blog/">[...]</Link>
+        &gt;pdf collection
 
         <br/>
         <br/>
@@ -72,13 +62,6 @@ return (
         ~$ <Link href="https://mempool.luisschwab.net">open mempool.luisschwab.net</Link>
         <br/>
         &gt;self-hosted Mempool
-
-        <br/>
-        <br/>
-
-        ~$ <Link href="https://lib.luisschwab.net">open lib.luisschwab.net</Link>
-        <br/>
-        &gt;pdf collection
 
         <br/>
         <br/>
