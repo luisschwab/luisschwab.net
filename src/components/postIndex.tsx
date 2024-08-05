@@ -7,11 +7,17 @@ export default function PostIndexItem({ id, title, date, tags }) {
         <>  
             <li className={style.container}>
                     <div className={style.title}>
-                        <Link href={'/blog/' + id }>{title}</Link>
+                        <Link href={'/blog/' + id}>{title}</Link>
                     </div>
                     
                     <div className={style.date}>
-                        {date} | <span style={{fontSize: 'smaller'}}>{tags}</span>
+                        <div style={{fontSize: 'smaller'}}>{date}</div>
+                         
+                        {tags ? (<div style={{fontSize: 'smaller'}}>
+                                    {tags.replace(/ /g, " • ")}
+                                    <br/>
+                                </div> ) : null}
+                        
                     </div>
 
                     <br/>

@@ -24,10 +24,10 @@ ul .container {
 }
 
 .title {
-    font-family: 'grotesk-bold';
+    font-family: "source-serif-pro", 'grotesk-bold';
     font-weight: 600;
-    font-size: 42px;
-    line-height: normal;
+    font-size: 36px;
+    line-height: 1em;
 }
 
 .title a {
@@ -43,6 +43,7 @@ ul .container {
     font-family: 'berkeley';
     font-weight: inherit;
     font-size: 16px;
+    line-height: -5em;
 }
 
 @media screen and (max-width: 540px) {

@@ -22,6 +22,7 @@ export function getFileIndex(partialPath) {
         } else { 
             name = file; 
         }
+
         const size = info.size;
         const modified = info.mtime;
 

@@ -8,14 +8,14 @@ export default function Header() {
         <>  
             <div className={style.container}>
 
-                <div className={style.pic}>
-                    <Image
+                    <div className={style.pic}>
+                        <Image
                         src="/img/headshot.jpg"
                         alt="luisschwab"
                         fill={true}
                         style={{objectFit:"cover"}}
-                    />
-                </div>
+                        />
+                    </div>
 
                 <div className={style.name}>
                     luisschwab <span style={{fontFamily: 'Helvetica'}}>&#9775;</span>

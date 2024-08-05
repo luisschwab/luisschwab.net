@@ -4,10 +4,11 @@
 }
 
 .text {
-    font-family: serif;
-    font-size: larger;
+    font-family: 'source-serif-pro', serif;
+    font-size: large;
     text-align: center;
     line-break: wrap;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 540px) {

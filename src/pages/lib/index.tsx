@@ -22,7 +22,7 @@ export default function LibIndex({ allFilesData }) {
     return (
     	<>
         <Head>
-            <title>index of {"/lib/"} | luisschwab.net</title>
+            <title>{"index of /lib/ | luisschwab.net"}</title>
 
             <meta name="title" content="library"/>
             <meta name="description" content="luisschwab's library"/>

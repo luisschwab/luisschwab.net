@@ -30,7 +30,7 @@ export default function Post({ postData }) {
 
     let post_url = "https://luisschwab.net/blog/" + postData.id;
     
-    let open_graph_image_url = "https://luisschwab.net" + postData.og_image_url;;
+    let open_graph_image_url = "https://luisschwab.net" + postData.og_image_url;
 
     return (
         <>
@@ -58,21 +58,19 @@ export default function Post({ postData }) {
             <Title content={postData.title.toLowerCase()}></Title>
 
             <PostContent>
-                <div style={{ fontWeight: 'bold', marginTop: `-5vh`, marginBottom: `6vh` }}>
+                <div className="nav" style={{ fontFamily: "grotesk-sharp", fontWeight: 'bold', marginTop: `-5vh`, marginBottom: `6vh` }}>
                     <Link href="/blog">&larr; blog index</Link>
+
                     &nbsp;&nbsp;|&nbsp;&nbsp;
+
                     {postData.date}
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <span style={{fontSize: 'smaller'}}>{postData.tags}</span>
                 </div>
 
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
             </PostContent>
 
-
             <Utterances></Utterances>
             <div id="utterance"></div>
-
 
             <div style={{marginTop: '1.5em', fontSize: '75%', fontFamily:'Noto Serif', textAlign:'center', color:'#F7931A'}}>
                 <hr/>

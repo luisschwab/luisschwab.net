@@ -17,10 +17,10 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeHighlight from 'rehype-highlight';
-
+import rehypeMathjax from 'rehype-mathjax'
 
 const postsDirectory = path.join(process.cwd(), 'posts');
-const draftsDirectory = path.join(process.cwd(), 'post-drafts');
+const draftsDirectory = path.join(process.cwd(), 'drafts');
 
 export function getSortedPostsData() {
 	// Get file names under /posts and /post-drafts
@@ -119,18 +119,19 @@ export async function getPostData(id) {
 	const processedContent = await unified()
         .use(remarkParse)
         //.use(selector)
-        .use(remarkMath)
+        //.use(remarkMath)
         .use(remarkGfm)
         .use(remarkImages)
         .use(html)
         .use(remarkFigureCaption)
         .use(remarkToc)
         .use(remarkRehype, {allowDangerousHtml: true})
+        .use(rehypeKatex)
+        .use(rehypeMathjax)
         .use(rehypeRaw)
         .use(rehypeHighlight)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings)
-        .use(rehypeKatex)
         .use(rehypeStringify)
         .process(matterResult.content);
         
@@ -144,5 +145,3 @@ export async function getPostData(id) {
 		...matterResult.data,
 	};
 }
-
-

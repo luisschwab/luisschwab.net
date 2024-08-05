@@ -44,7 +44,7 @@ export default function LibIndex({ allFilesData, currentPath }) {
     return (
     	<>
         <Head>
-            <title>{"index of /lib/" + currentPath + "/"} | luisschwab.net</title>
+            <title>{"index of /lib/" + currentPath + "/ | luisschwab.net"}</title>
 
             <meta name="title" content="library"/>
             <meta name="description" content="luisschwab's library" />

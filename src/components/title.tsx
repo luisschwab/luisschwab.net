@@ -1,8 +1,5 @@
 import style from './title.module.css';
 
-import Image from 'next/image';
-
-
 export default function Title({ content }) {
     return (
         <>  
@@ -12,6 +9,5 @@ export default function Title({ content }) {
                 </div>
             </div>
         </>
-    );
-        
+    );       
 }

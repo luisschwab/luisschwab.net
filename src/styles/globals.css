@@ -20,13 +20,13 @@
 }
 
 @font-face {
-    font-family: 'emoji';
-    src: url('/font/one-ui.woff');
+    font-family: 'source-serif-pro';
+    src: url('/font/source-serif-pro.woff') format('woff');
 }
 
 :root {
 	--dark-gray: rgb(16, 16, 16);
-	--white: white;
+	--white: #f1f1f1;
 	--off-white: rgb(196, 196, 196);
 }
 
@@ -39,7 +39,8 @@ html,
 body {
     padding: 0;
 	margin: 0;
-	font-family: 'berkeley', monospace;
+	font-family: 'source-serif-pro';
+    font-weight: 400;
 	line-height: 1.6;
 	font-size: 22px;
     overflow-x: hidden; 
@@ -75,9 +76,23 @@ a:hover .hover-box {
     display: block;
 }
 
+.title {
+    font-family: "source-serif-pro", 'grotesk-bold';
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1em;
+}
+
 code {
     font-family: 'berkeley';
     font-size: medium;
+}
+
+code:not(pre) {
+    font-size: 85%;
+    background-color: rgb(56, 56, 56);
+    padding: 2px;
+    overflow-wrap: break-word;
 }
 
 h1 {
@@ -181,6 +196,9 @@ table a:hover {
 
 blockquote {
     font-style: italic;
+    padding-left: 1em;
+    margin-left: -0.2em;
+    border-left: 2px solid var(--off-white);;
 }
 
 .white_rabbit:hover {
@@ -219,8 +237,6 @@ blockquote {
     html, body {
         padding: 0;
         margin: 0;
-        font-family: 'berkeley', monospace;
-        line-height: 1.6;
         font-size: 22px;
     }
 
