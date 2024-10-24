@@ -5,12 +5,11 @@ date: "2024.01.01"
 og_image_url: "/img/blog/books.jpg"
 ---
 
-Currently:\
-**Softwar: A Novel Theory on Power Projection and the National Strategic Significance of Bitcoin**, Major Jason P. Lowery
+Currently: **None**
 
 ----
 
-this is my reading log for 2024:
+This is my reading log for 2024:
 
 1. **Guns, Germs and Steel**\
 Jared Diamond
@@ -47,3 +46,10 @@ David Deutsch
 
 12. **Great Founder Theory** [📄](/lib/geopolitics/great-founder-theory.pdf)\
 Samo Burja
+
+13. **Softwar** [📄](/lib/bitcoin/softwar.pdf)\
+Jason P. Lowery
+
+14. **Chip War**\
+Chris Miller
+

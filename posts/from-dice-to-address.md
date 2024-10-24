@@ -437,7 +437,7 @@ Address -> 1HS7czgBHsRy93JTXfp974mM4G7WPF5xgW
 If you try to import this WIF into Sparrow, for example, you see that
 the address it derives is the same we did:
 
-![importing our WIF into Sparrow Wallet](/img/blog/wif-import.png)
+![Importing our WIF into Sparrow Wallet](/img/blog/wif-import.png)
 
 ---
 

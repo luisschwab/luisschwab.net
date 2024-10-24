@@ -16,7 +16,7 @@ Artifacts produced during the project:
 - https://github.com/rust-bitcoin/rust-bitcoincore-rpc/pull/366
 
 # Context
-Summer of Bitcoin is "a global, online summer internship program focused on introducing university students to bitcoin open-source development and design." It pairs project mentors and interns to work on FOSS projects during summer.
+Summer of Bitcoin is "a global, online summer internship program focused on introducing university students to bitcoin open-source development and design." It pairs project mentors and interns to work on Bitcoin FOSS projects.
 
 Bitcoin Dev Kit is a project focused on building a concise set of tools & libraries to be used in cross platform Bitcoin wallets. "The `bdk` libraries aim to provide well engineered and reviewed components for Bitcoin based applications. It is built upon the excellent [`rust-bitcoin`](https://github.com/rust-bitcoin/rust-bitcoin) and [`rust-miniscript`](https://github.com/rust-bitcoin/rust-miniscript) crates."
 
@@ -65,10 +65,14 @@ use bitcoincore_rpc::{Auth, Client, RpcApi};
 use bitcoincore_rpc_json::ScanTxOutRequest;
 
 fn main() {
-    let client = Client::new(
-                         "127.0.0.1",
-                         Auth::UserPass("satoshi".to_string(), "satoshi".to_string())
-    ).unwrap();
+    let client = 
+        Client::new(
+            "127.0.0.1",
+            Auth::UserPass(
+                "satoshi".to_string(),
+                "satoshi".to_string()
+            )
+        ).unwrap();
 
     let scan_txout_request = ScanTxOutRequest::Single("pkh(02c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5)".to_string());
 
@@ -168,5 +172,8 @@ In parallel, I also made a [PR](https://github.com/bitcoin/bitcoin/pull/30515) t
   "total_amount": 0.00091190
 }
 ```
+
+It was recently merged and will be available on v28.
+
 ---
 

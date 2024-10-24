@@ -79,7 +79,7 @@ a:hover .hover-box {
 .title {
     font-family: "source-serif-pro", 'grotesk-bold';
     font-weight: 600;
-    font-size: 36px;
+    font-size: 30px;
     line-height: 1em;
 }
 
@@ -169,6 +169,7 @@ table {
     margin-bottom: 3vh;
     width: 100%;
     font-size: 70%;
+    font-family: 'berkeley';
 }
 
 th, td {

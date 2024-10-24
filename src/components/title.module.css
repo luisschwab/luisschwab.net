@@ -37,7 +37,7 @@
 @media screen and (min-width: 541px)
               and (max-width: 1500px) {
     .container {
-        margin-top: 42vh;
+        margin-top: -3vh;
     }
 
     .text {
