@@ -8,7 +8,25 @@ import Header from "@/components/header";
 import Title from "@/components/title";
 import QOTD from "@/components/qotd";
 
-export default function Home() {
+import { getSortedPostsData } from '../lib/posts';
+
+export async function getStaticProps() {
+	const allPostsData: any = getSortedPostsData();
+
+    // show n latest blogs
+    const n = 7
+    const latestPostsData = allPostsData
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, n)
+
+	return {
+		props: {
+			latestPostsData,
+		},
+	};
+}
+
+export default function Home({ latestPostsData }) {
 return (
     <>
     <Head>
@@ -26,7 +44,7 @@ return (
 
 	<Wrapper>
     	<Banner></Banner>
-
+ 
         <br/>
         <div className="title">Luis Henrique Schwab</div>
         <br/>
@@ -34,8 +52,8 @@ return (
         <div className="title">About</div>
         <ul style={{marginTop: "0", marginBottom: "-2em", marginLeft: "-0.75em"}}>
             <li>Computer Engineering student @ Universidade de Brasília</li>
-            <li><a href="https://summerofbitcoin.org">Summer of Bitcoin</a> &apos;24 Intern @ <a href="https://bitcoindevkit.org"><b>Bitcoin Dev Kit</b></a></li>
-            <li>Interested in Bitcoin, cryptography, privacy tech</li>
+            <li><a href="https://summerofbitcoin.org">Summer of Bitcoin</a> &apos;24 @ <a href="https://bitcoindevkit.org"><b>Bitcoin Dev Kit</b></a></li>
+            <li>Bitcoin, Cryptography, Freedom Tech, Jiu-Jitsu, Bikes</li>
         </ul>
         
         <br/>
@@ -43,12 +61,9 @@ return (
 
         <Link href="/blog"><div className="title">Blog</div></Link>
         <ul style={{marginTop: "0", marginBottom: "-2em", marginLeft: "-0.75em"}}>
-            <li><Link href="/blog/portable-self-hosting">Portable Self-Hosting</Link></li>
-            <li><Link href="/blog/summer-of-bitcoin-2024">Summer of Bitcoin 2024</Link></li>
-            <li><Link href="/blog/how-digital-signatures-work">How Digital Signatures Work</Link></li>
-            <li><Link href="/blog/from-dice-to-address">From Dice to Address</Link></li>
-            <li><Link href="/blog/sovereign-bitcoin-stack">A Sovereign Bitcoin Stack</Link></li>
-            <li><Link href="/blog/books-2024">Books of 2024</Link></li>
+            {latestPostsData.map(({ id, title }) => (
+                <li key={id}><Link href={id}>{title}</Link></li>
+            ))}
         </ul>
 
         <br/>
@@ -56,7 +71,7 @@ return (
 
         <div className="title">Projects</div>
         <ul style={{marginTop: "0", marginBottom: "-2em", marginLeft: "-0.75em"}}>
-            <li><a href="https://github.com/luisschwab/getaddress">getaddress: a Bitcoin P2P crawler</a></li>
+            <li><a href="https://github.com/luisschwab/getaddress">getaddress: a bitcoin p2p crawler</a></li>
         </ul>
 
         <br/>
@@ -74,7 +89,7 @@ return (
         <br/>
         <a href="https://mempool.space/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
             022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17
-        </a>@ln.luisschwab.net:9735
+        </a>@lnd.luisschwab.net:9735
 
         <br/>
         <br/>
@@ -103,12 +118,10 @@ return (
             </li>
             <li>BIP353: pay@luisschwab.net</li>
         </ul>
- 
-        
+         
         <br/>
         <br/>
 
-        
         <hr/>
 
         <QOTD></QOTD>

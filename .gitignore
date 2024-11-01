@@ -3,7 +3,7 @@
 deploy.sh
 
 # post drafts folder
-/post-drafts
+/drafts
 
 # dependencies
 /node_modules
@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 notes.txt
+
+public/.well-known/*
+public/lib/*
+public/sitemap-0.xml

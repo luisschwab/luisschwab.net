@@ -6,18 +6,16 @@ import Banner from "@/components/banner";
 import Title from "@/components/title";
 import PostIndexItem from "@/components/postIndex";
 
-import { getSortedPostsData } from '../../lib/posts';
+import { getAllSortedPostsData } from '../../lib/posts';
 
 export async function getStaticProps() {
-	const allPostsData: any = getSortedPostsData();
-
+	const allPostsData: any = getAllSortedPostsData();
 	return {
 		props: {
 			allPostsData,
 		},
 	};
 }
-
 
 export default function BlogIndex({ allPostsData }) {
     return (
