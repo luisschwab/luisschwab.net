@@ -59,7 +59,7 @@ export default function Post({ postData }) {
 
             <PostContent>
                 <div className="nav" style={{ fontFamily: "grotesk-sharp", fontWeight: 'bold', marginTop: `-5vh`, marginBottom: `6vh` }}>
-                    <Link href="/blog">&larr; blog index</Link>
+                    <Link style={{ textDecoration: 'none' }} href="/blog">&larr; blog index</Link>
 
                     &nbsp;&nbsp;|&nbsp;&nbsp;
 
@@ -68,9 +68,6 @@ export default function Post({ postData }) {
 
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
             </PostContent>
-
-            <Utterances></Utterances>
-            <div id="utterance"></div>
 
             <div style={{marginTop: '1.5em', fontSize: '75%', fontFamily:'Noto Serif', textAlign:'center', color:'#F7931A'}}>
                 <hr/>

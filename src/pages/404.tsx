@@ -11,7 +11,7 @@ export default function Custom404() {
     return (
         <>
         <Head>
-            <title>404 not found | luisschwab.net</title>
+            <title>404 | luisschwab.net</title>
 
             <meta name="title" content="404 Not Found | luisschwab.net"/>
 

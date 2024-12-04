@@ -14,8 +14,8 @@ This is just my own setup, YMMV.
 ![](/img/blog/self-host-diagram-inv.png)
 
 # BOM
-- VPS (even a $5/mo droplet will do)
-- Mikrotik RB750r2 (or any router with Wireguard support)
+1. VPS (even a $5/mo droplet will do)
+2. Mikrotik RB750r2 (or any router with Wireguard support)
 
 # VPS setup
 First, acquire a VPS. It can be very weak, since it will simply forward traffic (1GB of RAM is more than enough). 

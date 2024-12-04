@@ -1,24 +1,19 @@
 /** @type {import('next').NextConfig} */
+const withFonts = require('next-fonts');
 
 const nextConfig = {
     output: 'export',
     reactStrictMode: true,
-
     images: {
         unoptimized: true,
     },
-
-    trailingSlash: true,
+    trailingSlash: true
 }
 
-const withFonts = require('next-fonts');
-module.exports = {
-    withFonts: withFonts({
-        enableSvg: true,
-        webpack: (config, options) => {
-            return config;
-        },
-    }),
-};
-
-module.exports = nextConfig
+module.exports = withFonts({
+    ...nextConfig,
+    enableSvg: true,
+    webpack: (config, options) => {
+        return config;
+    }
+});

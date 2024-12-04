@@ -151,17 +151,13 @@ figcaption {
 }
 
 ul {
-    margin-left: 0;
-    list-style: disc;
+    margin-left: -1em;
+    list-style: none;
 }
 
 ol {
-    margin-left: -20px;
+    margin-left: -0.5em;
     list-style: decimal;
-}
-
-li {
-    margin-left: 0;
 }
 
 table {

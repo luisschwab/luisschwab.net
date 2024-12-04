@@ -5,7 +5,7 @@ date: "2024.01.01"
 og_image_url: "/img/blog/books.jpg"
 ---
 
-Currently: **None**
+Currently: ~
 
 ----
 
@@ -52,4 +52,7 @@ Jason P. Lowery
 
 14. **Chip War**\
 Chris Miller
+
+15. **The Blocksize Wars**\
+Jonathan Bier
 
