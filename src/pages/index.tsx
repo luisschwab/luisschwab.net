@@ -42,19 +42,19 @@ return (
 	<Wrapper>
     	<Banner></Banner>
  
-        <br />
+        <br/>
         <div className="title">Luis Henrique Schwab</div>
         <br/>
         
         <div className="title">About</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
-            Computer Engineering student @ Universidade de Brasília
+            * Computer Engineering @ Universidade de Brasília
             <br/>
-            Fellow @ <a href="https://vinteum.org"><b>Vinteum</b></a>, working on <b>BDK-Floresta</b> integration.
+            * Fellow @ <a href="https://vinteum.org"><b>Vinteum</b></a>, currently working on <a href="https://github.com/luisschwab/bdk-floresta"><b>BDK-Floresta</b></a> integration
             <br/>
-            <a href="https://summerofbitcoin.org">Summer of Bitcoin</a> &apos;24 @ <a href="https://bitcoindevkit.org"><b>Bitcoin Dev Kit</b></a>
+            * <a href="https://summerofbitcoin.org">Summer of Bitcoin</a> &apos;24 @ <a href="https://bitcoindevkit.org"><b>Bitcoin Dev Kit</b></a>
             <br/>
-            Bitcoin, Cryptography, Freedom Tech, Jiu-Jitsu, Bikes
+            * Interested in tech that transfers power from the state to the individual
         </div>
         
         <br/>
@@ -64,7 +64,7 @@ return (
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
             {latestPostsData.map(({ id, title }) => (
                 <>
-                    <span key={id}><Link href={"blog/" + id}>{title}</Link></span>
+                    * <span key={id}><Link href={"blog/" + id}>{title}</Link></span>
                     <br/>
                 </>
             ))}
@@ -75,7 +75,9 @@ return (
 
         <div className="title">Projects</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
-            <span><a href="https://github.com/luisschwab/getaddress">getaddress: a bitcoin p2p crawler</a></span>
+            <span>* <a href="https://github.com/luisschwab/bdk-floresta"><b>bdk-floresta</b>: leveraging Floresta as a chain source for BDK</a></span>
+            <br/>
+            <span>* <a href="https://github.com/luisschwab/getaddress"><b>getaddress</b>: a bitcoin p2p crawler</a></span>
         </div>
 
         <br/>
@@ -83,9 +85,13 @@ return (
 
         <div className="title">Lightning Network</div>
         <div style={{overflowWrap: 'break-word'}}>
-            <a href="https://mempool.space/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
+            *&nbsp;<a href="https://mempool.space/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
                 022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17
-            </a>@lnd.luisschwab.net:9735
+            </a>@159.203.191.48:9735
+            <br/>
+            * 0 base-fee + 1,000 ppm
+            <br/>
+            * 1M sat minimum chansize
         </div>
 
         
@@ -93,15 +99,17 @@ return (
 
         <div className="title">Self-Hosted Stuff</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
-            nostr.luisschwab.net
+            * bitcoin.luisschwab.net:8333
             <br/>
-            <a href="https://mempool.luisschwab.net">mempool.luisschwab.net</a>
+            * electrs.luisschwab.net:50002
             <br/>
-            mint.luisschwab.net:3338
+            * lnd.luisschwab.net:9735
             <br/>
-            electrs.luisschwab.net:50002
+            * <a href="https://mempool.luisschwab.net">mempool.luisschwab.net</a>
             <br/>
-            lnd.luisschwab.net:9735
+            * mint.luisschwab.net:3338
+            <br/>
+            * nostr.luisschwab.net
         </div>
         
         <br />
@@ -115,18 +123,18 @@ return (
         
         <div className="title">Contact</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
-            x: <a href="https://x.com/luisschwab_">luisschwab_</a>
+            * x: <a href="https://x.com/luisschwab_">luisschwab_</a>
             <br/>
-            github: <a href="https://github.com/luisschwab">luisschwab</a>
+            * github: <a href="https://github.com/luisschwab">luisschwab</a>
             <br/>
-            pgp: <a href="/3AD29E6FA7031B76.txt">3AD2 9E6F A703 1B76</a>
+            * pgp: <a href="/3AD29E6FA7031B76.txt">3AD2 9E6F A703 1B76</a>
             <br/>
-            email: luisschwab [shift+2] protonmail
+            * email: luisschwab [shift+2] protonmail
             <br/>
-            <div style={{overflowWrap: 'break-word'}}>
-                nostr:&nbsp;<a href="https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n">npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n</a>
+            <div style={{overflowWrap: "break-word"}}>
+                *&nbsp;nostr:&nbsp;<a href="https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n">npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n</a>
             </div>
-            BIP353: pay@luisschwab.net
+            * bip353: pay@luisschwab.net
         </div>
          
         <br/>
@@ -136,8 +144,8 @@ return (
         <QOTD></QOTD>
         <hr/>
 
-        <div style={{textAlign: 'center'}}>
-        ₿ λ ⌘ ⛁ ∇ ∯ ♛ Σ ∂
+        <div style={{textAlign: "center"}}>
+            <img src="/img/blog/coin.gif" style={{display: "inline", height: "1em"}}/>
         </div>
 
     </Wrapper>

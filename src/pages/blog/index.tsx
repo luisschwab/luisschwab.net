@@ -48,9 +48,9 @@ export default function BlogIndex({ allPostsData }) {
             </div>
 
             <ul style={{ marginLeft: '-30px', listStyle: 'none' }}>
-            	{allPostsData.map(({ id, title, date, tags }) => (
-                	<PostIndexItem key={id} id={id} title={title} date={date} tags={tags}></PostIndexItem>
-              	))}
+                {allPostsData.map(({ id, title, date, tags }) => (
+                    <PostIndexItem key={id} id={id} title={title} date={date} tags={tags}></PostIndexItem>
+                ))}
             </ul>
             
         </Wrapper>

@@ -12,12 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <Head>
                 <title>luisschwab.net</title>
 
-                <link rel="icon" href="/img/headshot.jpg"/>
+                <link rel="icon" href="/img/alexander-diogenes-square.jpg"/>
                 
                 <meta name="twitter:site" content="@luisschwab_"/>
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
             </Head>
 
             <Component {...pageProps} />

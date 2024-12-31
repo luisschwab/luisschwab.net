@@ -13,7 +13,7 @@ This is just my own setup, YMMV.
 
 ![](/img/blog/self-host-diagram-inv.png)
 
-# BOM
+# BoM
 1. VPS (even a $5/mo droplet will do)
 2. Mikrotik RB750r2 (or any router with Wireguard support)
 
@@ -65,7 +65,7 @@ $ ip route add <Mikrotik LAN subnet> via 10.10.10.1 dev wg0
 ```
 
 # Mikrotik setup
-Note: you could do this using a virtualized pfSense just as well.
+Note: you could do this using anything that supports wireguard (pfSense, a simple linux host, etc.)
 
 Create a new Wireguard interface:
 ![](/img/blog/mikrotik-create-interface.png)

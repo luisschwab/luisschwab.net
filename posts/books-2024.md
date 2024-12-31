@@ -5,7 +5,8 @@ date: "2024.01.01"
 og_image_url: "/img/blog/books.jpg"
 ---
 
-Currently: ~
+Currently:\
+nil
 
 ----
 
@@ -46,7 +47,6 @@ David Deutsch
 
 12. **Great Founder Theory** [📄](/lib/geopolitics/great-founder-theory.pdf)\
 Samo Burja
-
 13. **Softwar** [📄](/lib/bitcoin/softwar.pdf)\
 Jason P. Lowery
 
@@ -56,3 +56,8 @@ Chris Miller
 15. **The Blocksize Wars**\
 Jonathan Bier
 
+16. **Bitcoin Development Philosophy**\
+Kalle & Linnéa Rosenbaum
+
+17. **Bitcoin: Separation of Money and State** [📄](/lib/bitcoin/bitcoin-separation-money-state.pdf)\
+Josef Tětek

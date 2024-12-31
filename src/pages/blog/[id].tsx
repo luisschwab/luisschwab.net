@@ -27,9 +27,7 @@ export async function getStaticPaths() {
 }
 
 export default function Post({ postData }) {
-
     let post_url = "https://luisschwab.net/blog/" + postData.id;
-    
     let open_graph_image_url = "https://luisschwab.net" + postData.og_image_url;
 
     return (
