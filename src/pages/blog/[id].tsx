@@ -33,7 +33,7 @@ export default function Post({ postData }) {
     return (
         <>
         <Head>
-            <title>{postData.title.toLowerCase() + ' | luisschwab.net'}</title>
+            <title>{postData.title + ' | luisschwab.net'}</title>
 
             <meta name="title" content={postData.title}/>
             <meta name="description" content={postData.description} />
@@ -69,7 +69,7 @@ export default function Post({ postData }) {
 
             <div style={{marginTop: '1.5em', fontSize: '75%', fontFamily:'Noto Serif', textAlign:'center', color:'#F7931A'}}>
                 <hr/>
-                <em>follow the <a href="/lib/bitcoin/whitepaper.pdf" className="white_rabbit">white rabbit</a></em>
+                <em>Follow the <a href="/lib/bitcoin/papers/whitepaper.pdf" className="white_rabbit">White Rabbit</a></em>
             </div>
 
         </Wrapper>

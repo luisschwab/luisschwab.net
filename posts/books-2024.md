@@ -5,11 +5,6 @@ date: "2024.01.01"
 og_image_url: "/img/blog/books.jpg"
 ---
 
-Currently:\
-nil
-
-----
-
 This is my reading log for 2024:
 
 1. **Guns, Germs and Steel**\

@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Head>
                 <title>luisschwab.net</title>
 
-                <link rel="icon" href="/img/alexander-diogenes-square.jpg"/>
+                <link rel="icon" href="/img/diogenes-square.jpg"/>
                 
                 <meta name="twitter:site" content="@luisschwab_"/>
 

@@ -11,7 +11,7 @@ export async function getStaticProps() {
 	const allPostsData: any = getSortedPostsData();
 
     // show n latest blogs
-    const n = 7
+    const n = 5
     const latestPostsData = allPostsData
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, n)
@@ -85,11 +85,17 @@ return (
 
         <div className="title">Lightning Network</div>
         <div style={{overflowWrap: 'break-word'}}>
-            *&nbsp;<a href="https://mempool.space/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
+            *&nbsp;<a href="https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
                 022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17
-            </a>@159.203.191.48:9735
+                </a>
+                @159.203.191.48:9735
+            <br/> 
+            *&nbsp;<a href="https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
+                022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17
+            </a>
+            @fp7joq2n66kq5oem3uweaov4ndeu4ulb2mzk6v34zgkrgmradpcmwxyd.onion:9735
             <br/>
-            * 0 base-fee + 1,000 ppm
+            * 0 base-fee + 250 ppm
             <br/>
             * 1M sat minimum chansize
         </div>
@@ -103,24 +109,18 @@ return (
             <br/>
             * electrs.luisschwab.net:50002
             <br/>
-            * lnd.luisschwab.net:9735
+            * lightning.luisschwab.net:9735
             <br/>
             * <a href="https://mempool.luisschwab.net">mempool.luisschwab.net</a>
             <br/>
-            * mint.luisschwab.net:3338
+            * seed.bitcoin.luisschwab.com:53
             <br/>
-            * nostr.luisschwab.net
+            * wss://nostr.luisschwab.net
         </div>
         
         <br />
         <br />
-
-        <Link href="/lib">
-            <div className="title">Library</div>
-        </Link>
-
-        <br/>
-        
+ 
         <div className="title">Contact</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
             * x: <a href="https://x.com/luisschwab_">luisschwab_</a>
@@ -134,10 +134,16 @@ return (
             <div style={{overflowWrap: "break-word"}}>
                 *&nbsp;nostr:&nbsp;<a href="https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n">npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n</a>
             </div>
-            * bip353: pay@luisschwab.net
+            * lnaddress: zap@luisschwab.net
         </div>
          
         <br/>
+        <br/>
+
+        <Link href="/lib">
+            <div className="title">Library</div>
+        </Link>
+
         <br/>
 
         <hr/>

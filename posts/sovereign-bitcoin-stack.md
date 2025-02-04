@@ -265,7 +265,7 @@ $ sudo systemctl start electrs.service
 
 Sync took about 5 hours on my box.
 
-That's it. Onto the enxt.
+That's it. Onto the next.
 
 ---------
 

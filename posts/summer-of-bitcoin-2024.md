@@ -5,6 +5,8 @@ og_image_url: ""
 date: "2024.05.31"
 ---
 
+**Status:** currently paused due to unmaintained dependency; awaiting on corepc to mature.
+
 This is a running log of my progress on [Summer of Bitcoin](https://www.summerofbitcoin.org/) 2024. I applied to [BDK](https://bitcoindevkit.org), to work on [this issue](https://github.com/bitcoindevkit/bdk/issues/1371).
 
 # Artifacts
