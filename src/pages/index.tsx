@@ -126,7 +126,7 @@ return (
             <br/>
             * github: <a href="https://github.com/luisschwab">luisschwab</a>
             <br/>
-            * pgp: <a href="/3AD29E6FA7031B76.txt">3AD2 9E6F A703 1B76</a>
+            * pgp: <a href="/FC43D25BEDD5EE7C.txt">FC43 D25B EDD5 EE7C</a>
             <br/>
             * email: luisschwab [shift+2] protonmail
             <br/>
