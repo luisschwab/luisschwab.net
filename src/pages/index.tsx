@@ -56,7 +56,6 @@ return (
             <br/>
             * Interested in tech that transfers power from the state to the individual
         </div>
-        
         <br/>
         <br/>
 
@@ -88,7 +87,7 @@ return (
             *&nbsp;<a href="https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
                 022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17
                 </a>
-                @159.203.191.48:9735
+                @209.126.80.42:9735
             <br/> 
             *&nbsp;<a href="https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17">
                 022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17
@@ -105,7 +104,7 @@ return (
 
         <div className="title">Self-Hosted Stuff</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
-            * bitcoin.luisschwab.net:8333
+            * bitcoind.luisschwab.net:8333
             <br/>
             * electrs.luisschwab.net:50002
             <br/>
@@ -141,8 +140,8 @@ return (
         <br/>
 
         <Link href="/lib">
-            <div className="title">Library</div>
-        </Link>
+            <div className="title">Library 📜</div>
+        </Link >
 
         <br/>
 
