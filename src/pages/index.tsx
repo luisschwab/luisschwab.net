@@ -41,7 +41,6 @@ return (
 
 	<Wrapper>
     	<Banner></Banner>
- 
         <br/>
         <div className="title">Luis Henrique Schwab</div>
         <br/>
@@ -50,9 +49,7 @@ return (
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
             * Computer Engineering @ Universidade de Brasília
             <br/>
-            * Fellow @ <a href="https://vinteum.org"><b>Vinteum</b></a>, currently working on <a href="https://github.com/luisschwab/bdk-floresta"><b>BDK-Floresta</b></a> integration
-            <br/>
-            * <a href="https://summerofbitcoin.org">Summer of Bitcoin</a> &apos;24 @ <a href="https://bitcoindevkit.org"><b>Bitcoin Dev Kit</b></a>
+            * Fellow @ <a href="https://vinteum.org"><b>Vinteum</b></a>, currently working on <a href="https://github.com/luisschwab/bdk-floresta"><b>bdk-floresta</b></a>
             <br/>
             * Interested in tech that transfers power from the state to the individual
         </div>
@@ -74,9 +71,11 @@ return (
 
         <div className="title">Projects</div>
         <div style={{marginTop: "0", marginBottom: "-2em"}}>
-            <span>* <a href="https://github.com/luisschwab/bdk-floresta"><b>bdk-floresta</b>: leveraging Floresta as a chain source for BDK</a></span>
+            <span>* <a href="https://github.com/luisschwab/bdk-floresta"><b>bdk-floresta</b>: Floresta-powered chain source crate for BDK</a></span>
             <br/>
-            <span>* <a href="https://github.com/luisschwab/getaddress"><b>getaddress</b>: a bitcoin p2p crawler</a></span>
+            <span>* <a href="https://github.com/luisschwab/fakhr"><b>fakhr</b>: vanity bitcoin address and nostr key generator</a></span>
+            <br/>
+            <span>* <a href="https://github.com/luisschwab/getaddress"><b>getaddress</b>: bitcoin p2p crawler</a></span>
         </div>
 
         <br/>
@@ -133,7 +132,7 @@ return (
             <div style={{overflowWrap: "break-word"}}>
                 *&nbsp;nostr:&nbsp;<a href="https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n">npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n</a>
             </div>
-            * lnaddress: zap@luisschwab.net
+            * lightning ☇: sats@luisschwab.net
         </div>
          
         <br/>
