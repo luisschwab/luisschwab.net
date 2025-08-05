@@ -1,8 +1,13 @@
 _default:
     @just --list
 
-build:
-    cargo build
+build: clean
+    cargo run --release
+    cp -r src/assets/* build
+
+dev port="8000": build
+    @echo "Serving on http://127.0.0.1:{{port}}"
+    python3 -m http.server {{port}} -b 127.0.0.1 -d build
 
 check:
     cargo +nightly fmt --all -- --check
@@ -10,8 +15,7 @@ check:
     cargo clippy
 
 clean:
-    rm -f build/*
-    rm -rf target
+    rm -rf build/*
 
 fmt:
     cargo +nightly fmt
