@@ -2,6 +2,7 @@ _default:
     @just --list
 
 build: clean
+    mkdir -p build
     cargo run --release
     cp -r src/assets/* build
 

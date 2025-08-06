@@ -1,14 +1,12 @@
-use std::path::PathBuf;
-
 use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub(crate) enum EngineError {
     #[error("I/O: {0}")]
-    IO(#[from] std::io::Error),
+    Io(#[from] std::io::Error),
 
     #[error("TOML: {0}")]
-    TOML(#[from] toml::de::Error),
+    Toml(#[from] toml::de::Error),
 
     #[error("Invalid path: {0}")]
     InvalidPath(String),
@@ -21,4 +19,7 @@ pub(crate) enum EngineError {
 
     #[error("StripPrefix: {0}")]
     StripPrefix(#[from] std::path::StripPrefixError),
+
+    #[error("Regex: {0}")]
+    Regex(#[from] regex::Error),
 }
