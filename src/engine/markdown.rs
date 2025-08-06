@@ -122,13 +122,13 @@ fn process_md_content(content: &str) -> Result<(FrontMatter, String), EngineErro
 
     let markdown = extracted.1;
 
-    // Process code blocks with `syntect`.
-    let markdown_syntect = process_syntect(&markdown)?;
-
     // Process `LaTeX` expressions with `katex-rs`.
-    let markdown_katex = process_katex(&markdown_syntect)?;
+    let markdown_katex = process_katex(&markdown)?;
 
-    let parser = Parser::new_ext(&markdown_katex, Options::empty());
+    // Process code blocks with `syntect`.
+    let markdown_syntect = process_syntect(&markdown_katex)?;
+
+    let parser = Parser::new_ext(&markdown_syntect, Options::empty());
     let mut html_content = String::new();
     html::push_html(&mut html_content, parser);
 
@@ -140,10 +140,26 @@ fn process_md_content(content: &str) -> Result<(FrontMatter, String), EngineErro
 /// The KaTeX CSS file must be available. You can get it from
 /// https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.css
 fn process_katex(content: &str) -> Result<String, EngineError> {
+    let mut result = content.to_string();
+
+    // Exclude code blocks from `katex` processing
+    // by matching and removing them temporarily.
+    let mut ctr = 0;
+    let mut code_blocks = Vec::new();
+    let code_block_rgx = Regex::new(r"(?s)```[^\n]*\n.*?```")?;
+    result = code_block_rgx
+        .replace_all(&result, |caps: &regex::Captures| {
+            let placeholder = format!("__CODE_BLOCK_PLACEHOLDER_{}__", ctr);
+            code_blocks.push(caps[0].to_string());
+            ctr += 1;
+            placeholder
+        })
+        .to_string();
+
     // Render display math: $$ <expr> $$
     let display_rgx = Regex::new(r"(?s)\$\$(.*?)\$\$")?;
     let mut processed = display_rgx
-        .replace_all(content, |caps: &regex::Captures| {
+        .replace_all(&result, |caps: &regex::Captures| {
             let math = caps[1].trim();
             match katex::render_with_opts(
                 math,
@@ -169,6 +185,12 @@ fn process_katex(content: &str) -> Result<String, EngineError> {
             }
         })
         .to_string();
+
+    // Insert code blocks back by matching and replacing.
+    for (i, code_block) in code_blocks.iter().enumerate() {
+        let placeholder = format!("__CODE_BLOCK_PLACEHOLDER_{}__", i);
+        processed = processed.replace(&placeholder, code_block);
+    }
 
     Ok(processed)
 }

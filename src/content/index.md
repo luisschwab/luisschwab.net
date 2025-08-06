@@ -29,7 +29,7 @@ use crate::EngineError;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct SiteConfig {
-    /// The cannonical name for the site. ($ \int $)
+    /// The cannonical name for the site. ($ \int $) <-- this wont render as LaTeX anymore!
     pub(crate) cname: String,
     /// The deafult title for the site.
     pub(crate) title: String,
