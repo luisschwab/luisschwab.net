@@ -4,7 +4,7 @@ description = "ye"
 date = "2022"
 +++
 
-## Inline Math
+# Inline Math
 
 The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
 
@@ -47,4 +47,40 @@ pub(crate) fn parse_config_file(config_path: PathBuf) -> Result<SiteConfig, Engi
 
     Ok(config)
 }
+```
+
+Bitcoin Core[^core] is the reference implementation of the bitcoin consensus protocol, written in `C++`.
+It is responsible for building your own copy of the blockchain, connecting to other nodes,
+broadcasting transactions and deciding, based on it's own rules[*rule], if a received transaction
+block is valid or not. Your API to the network, in short.
+
+[^core]:
+    This is a numbered sidenote. aaaaaaaaaaaaaaaaaaluUîc ccnlflsfsglf;ga;gkwjklfjewkjfkl
+    ndfndfnjdnfdfjn gjfkjgfkjgklf.
+
+[*rule]: This NOT a numbered sidenote.
+
+![And Diogened said: "Yes, stand a little out of my sun (ἀπὸ τοῦ ἡλίου μετάστηθι)"](/img/diogenes-banner.jpg)
+
+Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte’s books and handouts. Tufte’s style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.
+
+![](/img/zuck.gif)
+
+Tufte CSS was created by Dave Liepmann and is now an Edward Tufte project. The original idea was cribbed from Tufte-LaTeX and R Markdown’s Tufte Handout format. We give hearty thanks to all the people who have contributed to those projects.
+
+<figure>
+    <img src="/img/reim.png">
+    <figcaption>Real and Imaginary</figcaption>
+</figure>
+
+If you see anything that Tufte CSS could improve, we welcome your contribution in the form of an issue or pull request on the GitHub project: tufte-css. Please note the contribution guidelines.
+
+<div class="fullwidth">
+    <img src="/img/wave.jpeg">
+</div>
+
+Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
+
+```
+code blocks
 ```

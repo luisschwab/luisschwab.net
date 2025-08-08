@@ -1,4 +1,4 @@
-use std::{fs, path::Path};
+use std::{collections::HashMap, fs, path::Path};
 
 use matter;
 use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd, html};
@@ -48,7 +48,7 @@ impl Highlighter {
         // Set the theme.
         //
         // TODO(@luisschwab): set the theme on `config.toml`.
-        let theme = &self.theme_set.themes["InspiredGitHub"];
+        let theme = &self.theme_set.themes["base16-ocean.dark"];
 
         highlighted_html_for_string(code, &self.syntax_set, syntax, theme).unwrap_or_else(|_| {
             format!("<pre><code>{}</code></pre>", html_escape::encode_text(code))
@@ -122,13 +122,17 @@ fn process_md_content(content: &str) -> Result<(FrontMatter, String), EngineErro
 
     let markdown = extracted.1;
 
+    // Process and convert sidenote notation into Tufte classes.
+    let markdown_sidenotes = process_sidenotes(&markdown)?;
+
     // Process `LaTeX` expressions with `katex-rs`.
-    let markdown_katex = process_katex(&markdown)?;
+    let markdown_katex = process_katex(&markdown_sidenotes)?;
 
     // Process code blocks with `syntect`.
     let markdown_syntect = process_syntect(&markdown_katex)?;
 
-    let parser = Parser::new_ext(&markdown_syntect, Options::empty());
+    // Finally, process the rest of the markdown.
+    let parser = Parser::new_ext(&markdown_syntect, Options::ENABLE_TABLES);
     let mut html_content = String::new();
     html::push_html(&mut html_content, parser);
 
@@ -198,7 +202,7 @@ fn process_katex(content: &str) -> Result<String, EngineError> {
 /// Process code blocks into HTML with `syntect`.
 fn process_syntect(content: &str) -> Result<String, EngineError> {
     let highlighter = Highlighter::new();
-    let parser = Parser::new_ext(content, Options::empty());
+    let parser = Parser::new_ext(content, Options::ENABLE_TABLES);
     let mut html_content = String::new();
 
     let events: Vec<_> = parser.collect();
@@ -237,4 +241,86 @@ fn process_syntect(content: &str) -> Result<String, EngineError> {
     html::push_html(&mut html_content, processed_events.into_iter());
 
     Ok(html_content)
+}
+
+/// Process sidenote (`[^key]`) and marginnote (`[*key]`) into TufteCSS classes.
+fn process_sidenotes(content: &str) -> Result<String, EngineError> {
+    let lines: Vec<&str> = content.lines().collect();
+    let mut result_lines = Vec::new();
+    let mut sidenotes = HashMap::new();
+    let mut marginnotes = HashMap::new();
+
+    let mut i = 0;
+    while i < lines.len() {
+        let line = lines[i];
+
+        // Match on sidenote notation: `[^key]`
+        if let Some(caps) = Regex::new(r"^\[\^([^\]]+)\]:\s*(.*)$")?.captures(line) {
+            let key = caps[1].to_string();
+            let mut content = caps[2].to_string();
+
+            // Sidenote notations can be multiline, given they are indented with 4 spaces.
+            i += 1;
+            while i < lines.len() && (lines[i].starts_with("    ") || lines[i].starts_with("\t")) {
+                content.push(' ');
+                content.push_str(lines[i].trim());
+                i += 1;
+            }
+
+            sidenotes.insert(key, content.trim().to_string());
+            continue; // Skip adding this line to result
+        }
+
+        // Match on marginnote definition: `[*key]`
+        if let Some(caps) = Regex::new(r"^\[\*([^\]]+)\]:\s*(.*)$")?.captures(line) {
+            let key = caps[1].to_string();
+            let mut content = caps[2].to_string();
+
+            // Marginnote notations can be multiline, given they are indented with 4 spaces.
+            i += 1;
+            while i < lines.len() && (lines[i].starts_with("    ") || lines[i].starts_with("\t")) {
+                content.push(' ');
+                content.push_str(lines[i].trim());
+                i += 1;
+            }
+
+            marginnotes.insert(key, content.trim().to_string());
+            continue; // Skip adding this line to result
+        }
+
+        result_lines.push(line);
+        i += 1;
+    }
+
+    let mut result = result_lines.join("\n");
+
+    // Replace numbered sidenote references [^key]
+    let sidenote_ref_rgx = Regex::new(r"\[\^([^\]]+)\]")?;
+    result = sidenote_ref_rgx.replace_all(&result, |caps: &regex::Captures| {
+        let key = &caps[1];
+        if let Some(note_content) = sidenotes.get(key) {
+            format!(
+                r#"<label for="sn-{}" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-{}" class="margin-toggle"/><span class="sidenote">{}</span>"#,
+                key, key, note_content
+            )
+        } else {
+            format!("[^{} - NOT FOUND]", key)
+        }
+    }).to_string();
+
+    // Replace unnumbered marginnote references [*key]
+    let marginnote_ref_rgx = Regex::new(r"\[\*([^\]]+)\]")?;
+    result = marginnote_ref_rgx.replace_all(&result, |caps: &regex::Captures| {
+        let key = &caps[1];
+        if let Some(note_content) = marginnotes.get(key) {
+            format!(
+                r#"<label for="mn-{}" class="margin-toggle">⊕</label><input type="checkbox" id="mn-{}" class="margin-toggle"/><span class="marginnote">{}</span>"#,
+                key, key, note_content
+            )
+        } else {
+            format!("[*{} - NOT FOUND]", key)
+        }
+    }).to_string();
+
+    Ok(result)
 }

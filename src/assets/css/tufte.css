@@ -81,6 +81,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-left: 12.5%;
+    padding-right: 12.5%;
+    overflow-x: hidden;
     font-family:
         et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
         "Book Antiqua", Georgia, serif;
@@ -246,7 +248,7 @@ figure {
 }
 
 figcaption {
-    float: right;
+    /*float: right;*/
     clear: right;
     margin-top: 0;
     margin-bottom: 0;
@@ -294,6 +296,7 @@ img {
 .sidenote-number:after,
 .sidenote:before {
     font-family: et-book-roman-old-style;
+    font-weight: bold;
     position: relative;
     vertical-align: baseline;
 }
