@@ -20,6 +20,8 @@ pub(crate) struct FrontMatter {
     /// The pages's description.
     pub(crate) description: String,
     /// The page's date of creation.
+    ///
+    /// TODO(@luisschwab): parse this into a date type.
     pub(crate) date: String,
     /// The page's last edit date.
     pub(crate) edited: Option<String>,
@@ -245,10 +247,10 @@ fn process_syntect(content: &str) -> Result<String, EngineError> {
 
 /// Process sidenote (`[^key]`) and marginnote (`[*key]`) into TufteCSS classes.
 fn process_sidenotes(content: &str) -> Result<String, EngineError> {
-    let lines: Vec<&str> = content.lines().collect();
     let mut result_lines = Vec::new();
     let mut sidenotes = HashMap::new();
     let mut marginnotes = HashMap::new();
+    let lines: Vec<&str> = content.lines().collect();
 
     let mut i = 0;
     while i < lines.len() {
@@ -292,23 +294,24 @@ fn process_sidenotes(content: &str) -> Result<String, EngineError> {
         i += 1;
     }
 
+    // Replace numbered sidenote references: `[^key]`
+    let mut sidenote_ctr = 0;
     let mut result = result_lines.join("\n");
-
-    // Replace numbered sidenote references [^key]
     let sidenote_ref_rgx = Regex::new(r"\[\^([^\]]+)\]")?;
     result = sidenote_ref_rgx.replace_all(&result, |caps: &regex::Captures| {
         let key = &caps[1];
         if let Some(note_content) = sidenotes.get(key) {
+            sidenote_ctr += 1;
             format!(
-                r#"<label for="sn-{}" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-{}" class="margin-toggle"/><span class="sidenote">{}</span>"#,
-                key, key, note_content
+                r#"<sup>{}</sup><label for="sn-{}" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-{}" class="margin-toggle"/><span class="sidenote"><sup>{}</sup> {}</span>"#,
+                sidenote_ctr, key, key, sidenote_ctr, note_content,
             )
         } else {
             format!("[^{} - NOT FOUND]", key)
         }
     }).to_string();
 
-    // Replace unnumbered marginnote references [*key]
+    // Replace unnumbered marginnote references: `[*key]`
     let marginnote_ref_rgx = Regex::new(r"\[\*([^\]]+)\]")?;
     result = marginnote_ref_rgx.replace_all(&result, |caps: &regex::Captures| {
         let key = &caps[1];

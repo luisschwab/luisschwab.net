@@ -4,3 +4,12 @@ pre {
     overflow-x: auto;
     display: inline-block;
 }
+
+a {
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
+
+a:hover {
+    color: orange !important;
+}
