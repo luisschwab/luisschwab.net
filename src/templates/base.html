@@ -8,10 +8,11 @@
         <title>{{ page.title }} ☇ luisschwab.net</title>
 
         <link rel="icon" href="/img/diogenes.jpg" />
+        <link rel="stylesheet" type="text/css" href="/css/base.css" />
         <link rel="stylesheet" type="text/css" href="/css/tufte.css" />
         <link rel="stylesheet" type="text/css" href="/css/katex.css" />
     </head>
     <body>
-        {{ content | safe }}
+        <section>{{ content | safe }}</section>
     </body>
 </html>
