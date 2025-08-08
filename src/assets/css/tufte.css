@@ -86,19 +86,22 @@ body {
     font-family:
         et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
         "Book Antiqua", Georgia, serif;
-    background-color: #fffff8;
-    color: #111;
+    /*background-color: #fffff8;*/
+    /*color: #111;*/
+    background-color: #101010;
+    color: #f1f1f1;
     max-width: 1400px;
     counter-reset: sidenote-counter;
 }
 
-/* Adds dark mode */
+/* Adds dark mode
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #151515;
         color: #ddd;
     }
 }
+*/
 
 h1 {
     font-weight: 400;
