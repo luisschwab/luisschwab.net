@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        {% for blog in blog_index %}
+        <li>
+            <a href="{{ blog.path }}">{{ blog.title }}</a>
+            {{ blog.date }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>

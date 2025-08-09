@@ -1,5 +1,5 @@
 +++
-title = "blog index"
+title = "Features"
 description = ""
 date = "2025-08-09"
 template = "blog/blog.html"

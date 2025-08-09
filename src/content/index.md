@@ -1,86 +1,92 @@
 +++
-title = "ye"
-description = "ye"
-date = "2022"
+title = "index"
+description = ""
+date = "2025-08-08"
+template = "index.html"
 +++
 
-# Inline Math
+# Luis Henrique Schwab
 
-The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+Currently, I'm a Computer Engineering student at [University of Brasília](https://ene.unb.br),
+where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB), a student club
+focused on Bitcoin-related  Research, Development and Education. I'm also an open-source developer
+funded by the [BitcoinDevKit Foundation](https://bitcoindevkit.com).
 
-Einstein's famous equation: $E = mc^2$.
+I'm interested in permissionless technology that transfers power from third parties
+to the individual—trustless money transmission and anonimous communications—,
+computer systems and networks, and economics.
 
-## Display Math
+## [Blog](/blog)
 
-$$ E = mc^2 $$
+These are my latest blog posts. Click [here](/blog) to see all my blog posts.
 
-$$
-\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
-$$
+{% include "blog_index_5.html" %}
 
-## Code Block
+## Presentations
 
-```rs
-use std::{fs, path::PathBuf};
+These are my latest presentations. Click [here](/presentations) to see all my presentations.
 
-use serde::{Serialize, Deserialize};
+TODO
 
-use crate::EngineError;
+## Lightning Network
 
-#[derive(Debug, Serialize, Deserialize)]
-pub(crate) struct SiteConfig {
-    /// The cannonical name for the site. ($ \int $) <-- this wont render as LaTeX anymore!
-    pub(crate) cname: String,
-    /// The deafult title for the site.
-    pub(crate) title: String,
-    /// The default description for the site.
-    pub(crate) description: String,
-    /// The content directory path, relative to the project's root.
-    pub(crate) content_path: String,
-    /// The build directory path, relative to the project's root.
-    pub(crate) build_path: String,
-}
+You can open a channel to my node on the lightning network[^ln]. The minimum channel size is 1M satoshis,
+the base fee is 0 and the fee rate is dynamic.
 
-pub(crate) fn parse_config_file(config_path: PathBuf) -> Result<SiteConfig, EngineError> {
-    let config_raw: String = fs::read_to_string(config_path)?;
-    let config: SiteConfig = toml::from_str(&config_raw)?;
+- Pubkey: [022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17](https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17)
+- IPv4 socket: 209.126.80.42:9735
+- Tor[^tor] socket: fp7joq2n66kq5oem3uweaov4ndeu4ulb2mzk6v34zgkrgmradpcmwxyd.onion:9735
 
-    Ok(config)
-}
-```
+[^ln]:
+    The [lightning network](https://river.com/learn/what-is-the-lightning-network/)
+    is a second layer that enables instant settlement of Bitcoin
+    payments in a trustless manner, since it allows unilateral exit.
+    It also allows for payments between users without a direct connection,
+    by implementing a onion routing schme, similar to Tor. Read the paper
+    [here](https://lightning.network/lightning-network-paper.pdf).
+[^tor]:
+    [Tor](https://en.wikipedia.org/wiki/Tor_(network))
+    is a overlay network that enabling anonymous communication,
+    pwered by volunteer-operated relays, which route internet traffic
+    via random paths through these relays.
 
-Bitcoin Core[^core] is the reference implementation of the bitcoin consensus protocol, written in `C++`.
-It is responsible for building your own copy of the blockchain, connecting to other nodes,
-broadcasting transactions and deciding, based on it's own rules[*rule], if a received transaction
-block is valid or not. Your API to the network, in short.
+You can send me some sats via `sats@luisschwab.net`.
 
-[^core]:
-    This is a numbered sidenote. aaaaaaaaaaaaaaaaaaluUîc ccnlflsfsglf;ga;gkwjklfjewkjfkl
-    ndfndfnjdnfdfjn gjfkjgfkjgklf.
+## Self-Hosted Stuff
 
-[*rule]: This NOT a numbered sidenote.
+I like to self-host as much as possible, because not your hardware, not your data.
+These are my publicly availabe services:
 
-![And Diogened said: "Yes, stand a little out of my sun (ἀπὸ τοῦ ἡλίου μετάστηθι)"](/img/diogenes-banner.jpg)
+- mempool.space instance: [mempool.luisschwab.net](https://mempool.luisschwab.net)
+- Bitcoin DNS seeder[^seed]: [seed.bitcoin.luisschwab.com](https://seed.bitcoin.luisschwab.com:53)
+- Nostr relay[^nostr]: [wss://nostr.luisschwab.net](wss://nostr.luisschwab.net)
 
-Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte’s books and handouts. Tufte’s style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.
+[^seed]:
+    A Bitcoin DNS seeder behaves like regular DNS server;
+    but instead of returning IP addresses for a website, for example,
+    it returns IP addresses of known, public Bitcoin nodes.
+    You can test it out by running `dig seed.bitcoin.luisschwab.com`.
+[^nostr]:
+    This is my personal nostr relay, only I get to write to it,
+    but anyone can read from it. Learn about nostr [here](https://nostr.com).
 
-![](/img/zuck.gif)
+## Library
 
-Tufte CSS was created by Dave Liepmann and is now an Edward Tufte project. The original idea was cribbed from Tufte-LaTeX and R Markdown’s Tufte Handout format. We give hearty thanks to all the people who have contributed to those projects.
+Click [here](/library) to go to my personal bootleg PDF collection.
 
-<figure>
-    <img src="/img/reim.png">
-    <figcaption>Real and Imaginary</figcaption>
-</figure>
+## Contact
 
-If you see anything that Tufte CSS could improve, we welcome your contribution in the form of an issue or pull request on the GitHub project: tufte-css. Please note the contribution guidelines.
+You can get in touch with me through one of these channels;
+if you want to encrypt it, use PGP[^pgp]. You can get my key
+[here 🔑](/pgp/FC43D25BEDD5EE7C.asc).
 
-<div class="fullwidth">
-    <img src="/img/wave.jpeg">
-</div>
+- email: luisschwab at protonmail dot com
+- npub: [npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n](https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n)
+- x: [@luisschwab_](https://x.com/luisschwab_)
+- github: [luisschwab](https://github.com/luisschwab)
+- codeberg: [luisschwab](https://codeberg.org/luisschwab)
 
-Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
-
-```
-code blocks
-```
+[^pgp]:
+    If you don't know what [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy),
+    is, you probably should. Read about why it's important
+    [here](https://nakamotoinstitute.org/pt-br/library/porque-eu-escrevi-o-pgp/).

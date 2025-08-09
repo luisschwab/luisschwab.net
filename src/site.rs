@@ -11,7 +11,7 @@ mod quotes;
 use engine::{
     config::{SiteConfig, parse_config_file},
     error::EngineError,
-    markdown::process_md_file,
+    markdown::{PageMetadata, process_md_file},
 };
 use quotes::QUOTES;
 
@@ -33,7 +33,7 @@ fn main() -> Result<(), EngineError> {
     let mut tera = Tera::new("./src/templates/**/*")?;
     let mut tera_ctx = Context::new();
 
-    // Build a quote json array from `QUOTES`.
+    // Build a quote JSON array from `QUOTES`.
     let quotes_json = json!(
         QUOTES
             .iter()
@@ -51,11 +51,39 @@ fn main() -> Result<(), EngineError> {
 
     let build_dir = &config.build_path;
     let content_dir = &config.content_path;
-    for entry in WalkDir::new(content_dir)
-        .follow_links(true)
-        .into_iter()
-        .filter_map(|e| e.ok())
-    {
+
+    // Build an index of blog posts to be inserted to the context later.
+    let mut blog_posts = Vec::new();
+    for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
+        let file_path = entry.path();
+        if file_path.extension().and_then(|s| s.to_str()) == Some("md")
+            && file_path.to_str().unwrap().contains("/blog/")
+        {
+            // Read and parse frontmatter only
+            let content = std::fs::read_to_string(file_path)?;
+            if let Some(extracted) = matter::matter(&content) {
+                let mut metadata: PageMetadata = toml::from_str(&extracted.0)?;
+                let rel_path = file_path.strip_prefix(content_dir)?;
+                let path = format!("/{}", rel_path.with_extension("html").display());
+                metadata.path = Some(path);
+
+                // Don't index the index.
+                if !metadata.clone().path.unwrap().contains("index.html") {
+                    blog_posts.push(metadata);
+                }
+            }
+        }
+    }
+    // Insert blog post metadata to Tera's context, sorted by date in descending order.
+    blog_posts.sort_by(|a, b| {
+        let date_a = a.date;
+        let date_b = b.date;
+        date_b.cmp(&date_a)
+    });
+    tera_ctx.insert("blog_index", &blog_posts);
+
+    // Process file contents.
+    for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
         let file_path = entry.path();
 
         if file_path.extension().and_then(|s| s.to_str()) == Some("md") {

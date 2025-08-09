@@ -1,5 +1,6 @@
 use std::{collections::HashMap, fs, path::Path};
 
+use chrono::NaiveDate;
 use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd, html};
 use regex::Regex;
 use serde::{Deserialize, Serialize};
@@ -10,20 +11,22 @@ use crate::{EngineError, SiteConfig};
 
 /// The frontmatter is parsed from markdwown
 /// files and deserialized into [`FrontMatter`].
-#[derive(Debug, Serialize, Deserialize)]
-pub(crate) struct FrontMatter {
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub(crate) struct PageMetadata {
     /// The template to be used for this page.
     pub(crate) template: Option<String>,
     /// The page's title.
     pub(crate) title: String,
     /// The pages's description.
     pub(crate) description: String,
-    /// The page's date of creation.
-    ///
-    /// TODO(@luisschwab): parse this into a date type.
-    pub(crate) date: String,
-    /// The page's last edit date.
+    /// The page's date of creation in
+    /// ISO8601 format (the only correct one).
+    pub(crate) date: NaiveDate,
+    /// The page's last edit date in
+    /// ISO8601 format (the only correct one).
     pub(crate) edited: Option<String>,
+    /// The path for the page.
+    pub(crate) path: Option<String>,
 }
 
 pub(crate) struct Highlighter {
@@ -67,26 +70,28 @@ pub(crate) fn process_md_file(
     file_path: &Path,
     content_dir: &str,
     build_dir: &str,
-) -> Result<(), EngineError> {
-    // Read the file to a [`String`].
-    let content = fs::read_to_string(file_path)?;
-
-    // Split the Frontmatter from the Markdown and process the Markdown.
-    let (frontmatter, html_content) = process_md_content(&content)?;
-
-    // Insert parameters to Tera's context.
-    tera_ctx.insert("site", &site_config);
-    tera_ctx.insert("page", &frontmatter);
-    tera_ctx.insert("content", &html_content);
-
+) -> Result<PageMetadata, EngineError> {
     // Assemble the final build path.
     let relative_path = file_path.strip_prefix(content_dir)?;
     let build_path = Path::new(build_dir)
         .join(relative_path)
         .with_extension("html");
 
-    // Select a template defined in the Frontmatter. Defaults to "base.html".
-    let template = frontmatter.template.unwrap_or("base.html".to_string());
+    // Read the file to a [`String`].
+    let content = fs::read_to_string(file_path)?;
+
+    // Split the Frontmatter from the Markdown and process the Markdown.
+    let (mut metadata, html_content) = process_md_content(&content, tera, tera_ctx)?;
+    let page_path = format!("/{}", relative_path.with_extension("html").display());
+    metadata.path = Some(page_path);
+
+    // Insert parameters to Tera's context.
+    tera_ctx.insert("site", &site_config);
+    tera_ctx.insert("page", &metadata);
+    tera_ctx.insert("content", &html_content);
+
+    // Select a template defined in the Frontmatter, or default to "base.html".
+    let template = metadata.clone().template.unwrap_or("base.html".to_string());
 
     // Render the `tera` context with the selected template.
     let rendered = tera.render(&template, tera_ctx)?;
@@ -104,12 +109,16 @@ pub(crate) fn process_md_file(
         build_path.display()
     );
 
-    Ok(())
+    Ok(metadata)
 }
 
 /// Processing of the markdown contents
 /// (split from `process_md_file` for this to be a pure function).
-fn process_md_content(content: &str) -> Result<(FrontMatter, String), EngineError> {
+fn process_md_content(
+    content: &str,
+    tera: &mut Tera,
+    tera_ctx: &Context,
+) -> Result<(PageMetadata, String), EngineError> {
     // Extract and split TOML frontmatter and markdown.
     let extracted = match matter::matter(content) {
         Some(ext) => ext,
@@ -118,12 +127,17 @@ fn process_md_content(content: &str) -> Result<(FrontMatter, String), EngineErro
 
     // Parse frontmatter into [`Frontmatter`].
     let frontmatter_str = extracted.0;
-    let frontmatter: FrontMatter = toml::from_str(&frontmatter_str)?;
+    let frontmatter: PageMetadata = toml::from_str(&frontmatter_str)?;
 
-    let markdown = extracted.1;
+    // Process Tera directives before markdown processing.
+    let mut markdown = extracted.1;
+    markdown = tera.render_str(&markdown, tera_ctx)?;
+
+    // Strip leading whitespace from HTML blocks (thx for that, CommonMark).
+    let markdown_stripped = strip_leading_whitespace_from_html(&markdown);
 
     // Process and convert sidenote notation into TufteCSS classes.
-    let markdown_sidenotes = process_sidenotes(&markdown)?;
+    let markdown_sidenotes = process_tufte_notes(&markdown_stripped)?;
 
     // Process `LaTeX` expressions with `katex-rs`.
     let markdown_katex = process_katex(&markdown_sidenotes)?;
@@ -216,18 +230,24 @@ fn process_syntect(content: &str) -> Result<String, EngineError> {
     for event in events {
         match event {
             Event::Start(Tag::CodeBlock(lang)) => {
-                in_code_block = true;
-                code_lang = match lang {
-                    pulldown_cmark::CodeBlockKind::Indented => "".to_string(),
-                    pulldown_cmark::CodeBlockKind::Fenced(lang_str) => lang_str.to_string(),
-                };
-                code_content.clear();
+                // Don't highlight indented codeblocks (wtf is that, CommonMark?)
+                if let pulldown_cmark::CodeBlockKind::Fenced(lang_str) = &lang {
+                    in_code_block = true;
+                    code_lang = lang_str.to_string();
+                    code_content.clear();
+                } else {
+                    // Pass start tag for indented code blocks
+                    processed_events.push(Event::Start(Tag::CodeBlock(lang)));
+                }
             }
             Event::End(TagEnd::CodeBlock) => {
                 if in_code_block {
                     let highlighted = highlighter.highlight(&code_content, &code_lang);
                     processed_events.push(Event::Html(highlighted.into()));
                     in_code_block = false;
+                } else {
+                    // Pass end tag for indented code blocks
+                    processed_events.push(Event::End(TagEnd::CodeBlock));
                 }
             }
             Event::Text(text) if in_code_block => {
@@ -246,7 +266,7 @@ fn process_syntect(content: &str) -> Result<String, EngineError> {
 }
 
 /// Process sidenote (`[^key]`) and marginnote (`[*key]`) into TufteCSS classes.
-fn process_sidenotes(content: &str) -> Result<String, EngineError> {
+fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
     let mut result_lines = Vec::new();
     let mut sidenotes = HashMap::new();
     let mut marginnotes = HashMap::new();
@@ -327,4 +347,19 @@ fn process_sidenotes(content: &str) -> Result<String, EngineError> {
     }).to_string();
 
     Ok(result)
+}
+
+/// Strip leading whitespaces from HTML.
+fn strip_leading_whitespace_from_html(content: &str) -> String {
+    content
+        .lines()
+        .map(|line| {
+            if line.trim_start().starts_with('<') && line.starts_with("    ") {
+                line.trim_start()
+            } else {
+                line
+            }
+        })
+        .collect::<Vec<_>>()
+        .join("\n")
 }
