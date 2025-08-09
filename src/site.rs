@@ -67,8 +67,8 @@ fn main() -> Result<(), EngineError> {
                 let path = format!("/{}", rel_path.with_extension("html").display());
                 metadata.path = Some(path);
 
-                // Don't index the index.
-                if !metadata.clone().path.unwrap().contains("index.html") {
+                // Don't index the main index.
+                if metadata.path.as_ref().unwrap() != "/blog/index.html" {
                     blog_posts.push(metadata);
                 }
             }
