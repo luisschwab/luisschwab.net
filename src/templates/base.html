@@ -8,13 +8,16 @@
         <title>{{ page.title }} ☇ luisschwab.net</title>
 
         <link rel="icon" href="/img/diogenes.jpg" />
-        <link rel="stylesheet" type="text/css" href="/css/base.css" />
         <link rel="stylesheet" type="text/css" href="/css/tufte.css" />
         <link rel="stylesheet" type="text/css" href="/css/katex.css" />
+        <link rel="stylesheet" type="text/css" href="/css/base.css" />
     </head>
     <body>
         {% include "banner.html" %}
+        <section>
+            {{ content | safe }}
 
-        <section>{{ content | safe }}</section>
+            {% include "footer.html" %}
+        </section>
     </body>
 </html>

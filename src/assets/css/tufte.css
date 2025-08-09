@@ -78,8 +78,9 @@ html {
 
 body {
     width: 87.5%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;
+    display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
     padding-left: 12.5%;
     padding-right: 12.5%;
     overflow-x: hidden;

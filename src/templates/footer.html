@@ -1,0 +1,63 @@
+<style>
+    .footer {
+        margin-top: 5vh !important;
+        margin-bottom: 3vh !important;
+        display: block !important;
+        text-align: center;
+
+    }
+    .text {
+        width: 55%;
+        text-align: match-parent;
+        font-size: large !important;
+        text-align: center !important;
+    }
+    .text > h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 540px) {
+        .footer {
+            padding: unset !important;
+        }
+        .footer > .text {
+            font-size: large !important;
+        }
+    }
+
+    @media screen and (min-width: 541px) and (max-width: 1500px) {
+        .footer > .text {
+            font-size: 20px !important;
+        }
+    }
+</style>
+
+<div class="footer" id="qotd">
+    <hr/>
+    <div class="text">
+        <h3>Random Quote</h3>
+        <br/>
+        <div id="quote-container">
+            &#x275D; {{ quote_text }} &#x275E;
+            <br/>
+            <br/>
+            <em>&mdash;{{ quote_author }}</em>
+        </div>
+        <br/>
+    </div>
+    <hr/>
+    <div style="width: 55%;">
+        <img src="/img/coin.gif" style="display: inline; height: 2em;">
+    </div>
+</div>
+
+<script>
+    (function() {
+        const quotes = {{ quotes_json | safe }};
+        const randQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+        document.getElementById('quote-container').innerHTML =
+            `&#x275D; ${randQuote.text} &#x275E;<br/><em>&mdash;${randQuote.author}</em>`;
+    })();
+</script>
