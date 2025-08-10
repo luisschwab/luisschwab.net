@@ -17,7 +17,9 @@
         <section>
             {{ content | safe }}
 
-            {% include "footer.html" %}
+            {% if page.template != "blog/index.html" %}
+                {% include "footer.html" %}
+            {% endif %}
         </section>
     </body>
 </html>

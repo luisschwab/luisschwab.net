@@ -1,5 +1,5 @@
 +++
-title = "From Dice to Addres"
+title = "From Dice to Address"
 description = "a"
 date = "2024-03-19"
 template = "blog/blog.html"

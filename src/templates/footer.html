@@ -4,7 +4,6 @@
         margin-bottom: 3vh !important;
         display: block !important;
         text-align: center;
-
     }
     .text {
         width: 55%;
@@ -18,6 +17,10 @@
     .text > h3 {
         margin-top: 0;
         margin-bottom: 0;
+    }
+    .author {
+        margin-top: 1em;
+        font-style: italic;
     }
 
     @media screen and (max-width: 540px) {
@@ -43,10 +46,8 @@
         <br/>
         <div id="quote-container">
             &#x275D; {{ quote_text }} &#x275E;
-            <br/>
-            <br/>
             <div class="author">
-                <em>&mdash;{{ quote_author }}</em>
+                &mdash;{{ quote_author }}
             </div>
         </div>
         <br/>
@@ -63,6 +64,6 @@
         const randQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
         document.getElementById('quote-container').innerHTML =
-            `&#x275D; ${randQuote.text} &#x275E;<br/><em>&mdash;${randQuote.author}</em>`;
+            `&#x275D; ${randQuote.text} &#x275E;<div class="author">&mdash;${randQuote.author}</div>`;
     })();
 </script>

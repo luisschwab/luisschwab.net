@@ -302,7 +302,6 @@ fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
         }
 
         // Match on marginnote definition: `[*key]`
-
         if let Some(caps) = marginnote_rgx.captures(line) {
             let key = caps[1].to_string();
             let mut content = caps[2].to_string();

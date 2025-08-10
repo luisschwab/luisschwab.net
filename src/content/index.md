@@ -39,16 +39,16 @@ the base fee is 0 and the fee rate is dynamic.
 
 [^ln]:
     The [lightning network](https://river.com/learn/what-is-the-lightning-network/)
-    is a second layer that enables instant settlement of Bitcoin
-    payments in a trustless manner, since it allows unilateral exit.
-    It also allows for payments between users without a direct connection,
-    by implementing a onion routing schme, similar to Tor. Read the paper
+    is a Bitcoin L2 that enables instant settlement of Bitcoin
+    payments in a trustless manner, as it allows unilateral exit of
+    either party. It also allows for payments between users without a direct connection,
+    by implementing an onion routing schme similar to that of Tor. Read the paper
     [here](https://lightning.network/lightning-network-paper.pdf).
 [^tor]:
     [Tor](https://en.wikipedia.org/wiki/Tor_(network))
-    is a overlay network that enabling anonymous communication,
-    pwered by volunteer-operated relays, which route internet traffic
-    via random paths through these relays.
+    is a overlay network that enables anonymous communications,
+    powered by volunteer-operated relays which route internet traffic
+    via random paths through this relay network.
 
 You can send me some sats via `sats@luisschwab.net`.
 

@@ -100,6 +100,64 @@ If you see anything that Tufte CSS could improve, we welcome your contribution i
 
 Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
 
-```
-code blocks
+```rs
+/// Process inline (`$ <expr> $`) and display (`$$ <expr> $$) LaTeX into HTML with `katex`.
+///
+/// The KaTeX CSS file must be available. You can get it from
+/// https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.css
+fn process_katex(content: &str) -> Result<String, EngineError> {
+    let mut result = content.to_string();
+
+    // Exclude code blocks from `katex` processing
+    // by matching and removing them temporarily.
+    let mut ctr = 0;
+    let mut code_blocks = Vec::new();
+    let code_block_rgx = Regex::new(r"(?s)```[^\n]*\n.*?```")?;
+    result = code_block_rgx
+        .replace_all(&result, |caps: &regex::Captures| {
+            let placeholder = format!("__CODE_BLOCK_PLACEHOLDER_{ctr}__");
+            code_blocks.push(caps[0].to_string());
+            ctr += 1;
+            placeholder
+        })
+        .to_string();
+
+    // Render display math: $$ <expr> $$
+    let display_rgx = Regex::new(r"(?s)\$\$(.*?)\$\$")?;
+    let mut processed = display_rgx
+        .replace_all(&result, |caps: &regex::Captures| {
+            let math = caps[1].trim();
+            match katex::render_with_opts(
+                math,
+                katex::Opts::builder().display_mode(true).build().unwrap(),
+            ) {
+                Ok(rendered) => rendered,
+                Err(_) => "wtf".to_owned(),
+            }
+        })
+        .to_string();
+
+    // Render inline math: $ <expr> $
+    let inline_rgx = Regex::new(r"\$([^$\n]+?)\$")?;
+    processed = inline_rgx
+        .replace_all(&processed, |caps: &regex::Captures| {
+            let math = caps[1].trim();
+            match katex::render(math) {
+                Ok(rendered) => rendered,
+                Err(e) => {
+                    println!("display not rendered: {e}");
+                    "wtf".to_owned()
+                }
+            }
+        })
+        .to_string();
+
+    // Insert code blocks back by matching and replacing.
+    for (i, code_block) in code_blocks.iter().enumerate() {
+        let placeholder = format!("__CODE_BLOCK_PLACEHOLDER_{i}__");
+        processed = processed.replace(&placeholder, code_block);
+    }
+
+    Ok(processed)
+}
 ```
