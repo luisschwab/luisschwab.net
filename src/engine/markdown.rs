@@ -27,6 +27,8 @@ pub(crate) struct PageMetadata {
     pub(crate) edited: Option<String>,
     /// The path for the page.
     pub(crate) path: Option<String>,
+    /// Whether the page is still a draft.
+    pub(crate) draft: Option<bool>,
 }
 
 pub(crate) struct Highlighter {

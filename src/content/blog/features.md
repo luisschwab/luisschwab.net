@@ -3,6 +3,7 @@ title = "Functionality Test"
 description = "Lorem Ipsum"
 date = "0000-01-01"
 template = "blog/blog.html"
+draft = true
 +++
 
 # Cypherpunks write code

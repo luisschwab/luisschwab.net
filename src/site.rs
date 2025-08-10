@@ -1,5 +1,5 @@
 use std::{
-    fs,
+    env, fs,
     path::{Path, PathBuf},
 };
 
@@ -25,6 +25,12 @@ const CONFIG_FILE: &str = "config.toml";
 const IMAGE_EXTS: &[&str] = &["jpg", "jpeg", "png", "gif", "webp", "svg"];
 
 fn main() -> Result<(), EngineError> {
+    // Check if this is a production build.
+    let prod: bool = env::var("PROD")
+        .unwrap_or("false".to_string())
+        .parse()
+        .unwrap();
+
     let config_path: PathBuf = PathBuf::from(CONFIG_FILE);
     if !config_path.exists() {
         return Err(EngineError::InvalidPath(config_path.display().to_string()));
@@ -62,10 +68,13 @@ fn main() -> Result<(), EngineError> {
         if file_path.extension().and_then(|s| s.to_str()) == Some("md")
             && file_path.to_str().unwrap().contains("/blog/")
         {
-            // Read and parse frontmatter only.
+            // Parse the frontmatter.
             let content = std::fs::read_to_string(file_path)?;
             if let Some(extracted) = matter::matter(&content) {
                 let mut metadata: PageMetadata = toml::from_str(&extracted.0)?;
+                if metadata.draft == Some(true) && prod == true {
+                    continue;
+                }
                 let rel_path = file_path.strip_prefix(content_dir)?;
 
                 // Generate clean URLs
@@ -76,7 +85,6 @@ fn main() -> Result<(), EngineError> {
                     // For regular files, use the filename
                     format!("/{}", rel_path.with_extension("html").display())
                 };
-
                 metadata.path = Some(path);
 
                 let is_main_blog_index = rel_path.to_str().unwrap() == "blog/index.md";
