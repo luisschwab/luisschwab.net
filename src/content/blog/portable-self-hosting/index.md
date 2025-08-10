@@ -12,7 +12,7 @@ _not your hardware, not your data_. This is an extended version of the
 [workshop](https://x.com/ClubeBitcoinUnB/status/1882250321029980236) I gave at
 [Clube Bitcoin UnB](https://x.com/ClubeBitcoinUnB).
 
-# Why you should host your own services
+## Why you should host your own services
 
 As stated above, _not your hardware, not your data_. People in general have become too used
 to uploading whatever to some cloud, not knowing that this cloud is just someone else's
@@ -25,7 +25,7 @@ you should run your node on your hardware; if you run it on a VPS anyone with ro
 can snatch away your funds. Leaving the realest money there is on a hot-wallet connected
 to the internet is not very safe, especially if you don't own the hardware it's on.
 
-# Network Topology
+## Network Topology
 
 This is what the network will look like:
 
@@ -48,14 +48,14 @@ or if you wan't to connect other devices to this network[*interface].
     If your serve has only one NIC, buy a USB to RJ45 adapter and configure it as the
     other interface on Proxmox.
 
-# Bill of Materials
+## Bill of Materials
 
 | Item | Quantity | Price |
 | --- | --- | --- |
 | Server with 2 NICs | 1 | / |
 | VPS | 1 | ~5 USD/mo |
 
-# VPS Hardening
+## VPS Hardening
 
 Disable SSH password authentication (password auth is a shitcoin), and ideally use hardware-based auth:
 ```shell
@@ -71,7 +71,7 @@ Install `ufw`:
 Later, open the ports necessary to run what you want (eg: 8333 for bitcoind,
 9735 for lightning and 50002 for SSL electrum).
 
-# VPS Setup
+## VPS Setup
 
 The VPS will serve as a the VPN server, and pfSense will serve as the VPN client, since the client
 can be behind CG-NAT and it's IP can change. The client will **always** initiate the connection.
@@ -117,7 +117,7 @@ Now, enable the new interface:
 ~$ wg-quick up wg0
 ```
 
-# Server Setup
+## Server Setup
 
 First, we need to define what our Wireguard and LAN networks will be. Here, we'll use `10.10.10.0/24`
 for Wireguard and `10.10.20.0/24` for LAN.
@@ -133,7 +133,7 @@ Also create a new network bridge `vmbr1` and connect a physical port to it
 
 ![](/img/blog/portable-self-hosting/proxmox.png)
 
-# pfSense Setup
+## pfSense Setup
 
 Now, install pfSense as a VM. Follow
 [this Mullvad blog post](https://mullvad.net/en/help/pfsense-with-wireguard),
@@ -158,7 +158,7 @@ Test this via:
 ```
 You should be seeing your VPS's IP information.
 
-# Reverse proxy
+## Reverse proxy
 
 To proxy requests, we'll use `nginx`.
 
@@ -215,6 +215,6 @@ If you're feeling fancy, segregate public and private services on different
 LANs. This would imply creating `vmbr2` and adjusting pfSense and the VPS
 routing configuration accordingly.
 
-# Conclusion
+## Conclusion
 
 Now, you should be able to plug the server anywhere, and everything should magically work.

@@ -15,10 +15,11 @@ code {
 }
 
 pre {
-    max-width: 55%;
+    max-width: 69%;
     padding: 1rem;
     overflow-x: auto;
     display: inline-block;
+    background-color: transparent !important;
 }
 
 a {

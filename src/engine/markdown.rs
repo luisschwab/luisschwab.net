@@ -36,9 +36,15 @@ pub(crate) struct Highlighter {
 
 impl Highlighter {
     fn new() -> Self {
+        let mut theme_set = ThemeSet::load_defaults();
+
+        // Load the Gruvbox theme into the theme set.
+        let gruvbox = ThemeSet::get_theme("src/templates/themes/gruvbox-dark.tmTheme").unwrap();
+        theme_set.themes.insert("gruvbox_dark".to_string(), gruvbox);
+
         Self {
             syntax_set: SyntaxSet::load_defaults_newlines(),
-            theme_set: ThemeSet::load_defaults(),
+            theme_set,
         }
     }
 
@@ -48,10 +54,8 @@ impl Highlighter {
             .find_syntax_by_token(lang)
             .unwrap_or_else(|| self.syntax_set.find_syntax_plain_text());
 
-        // Set the theme.
-        //
-        // TODO(@luisschwab): set the theme on `config.toml`.
-        let theme = &self.theme_set.themes["base16-ocean.dark"];
+        // Select the Gruvbox theme from the theme set.
+        let theme = self.theme_set.themes.get("gruvbox_dark").unwrap();
 
         highlighted_html_for_string(code, &self.syntax_set, syntax, theme).unwrap_or_else(|_| {
             format!("<pre><code>{}</code></pre>", html_escape::encode_text(code))

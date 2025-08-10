@@ -48,8 +48,6 @@ You should get something like this:
 2146516424
 ```
 
----
-
 ## Mapping Entropy to BIP39 Words
 
 Ok, so how do we go from 100 digits to 24 words? Here's the process:
@@ -213,8 +211,6 @@ This same principle is used in BIP32 child key derivation: a
 single, `master`, private key has the information to create virtually
 infinite child keys.
 
----
-
 ## Elliptic Curve Cryptography 101
 
 Bitcoin uses this thing called Elliptic Curve Cryptography.
@@ -263,8 +259,6 @@ and becomes discrete. It actually looks like this:
 
 When doing finite field math, all operations are done _modulo p_,
 so that we don't overflow out of the field.
-
----
 
 ## Finding the Point, or Public Key
 
@@ -326,8 +320,6 @@ P.format().hex()
 
 Great, now we have a public key. How do we transform it into an address?
 
----
-
 ## From Public Key to Address
 
 Let's calculate the address corresponding to the public key above. Note that
@@ -380,8 +372,6 @@ The address derived from the public key
 is `1HS7czgBHsRy93JTXfp974mM4G7WPF5xgW`.
 
 You can now send bitcoin to this address (but you really shouldn't).
-
----
 
 ## From Private Key to WIF
 
@@ -468,8 +458,6 @@ If you try to import this WIF into Sparrow, for example, you see that
 the address it derives is the same we did:
 
 ![](wif-import.png)
-
----
 
 ## Conclusion
 
