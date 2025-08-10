@@ -7,4 +7,4 @@ template = "blog/index.html"
 
 # Blog
 
-{% include "blog_index_5.html" %}
+{% include "blog/post_index.html" %}

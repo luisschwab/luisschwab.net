@@ -1,6 +1,6 @@
 +++
 title = "From Dice to Address"
-description = "a"
+description = "Creating a Bitcoin address from scratch"
 date = "2024-03-19"
 template = "blog/blog.html"
 +++
@@ -30,9 +30,9 @@ keyboard/mouse input as entropy sources for `/dev/random`. You could flip
 a coin just as well; we'll use dice throws `🎲`.
 
 To create a key with enough entropy (ie: hard to guess),
-we want around `256 bits`. Since a dice has 6 possible values,
-a single throw contributes `log2 6 = 2.58 bits` of entropy,
-so we'll do 100 throws to get a little over `256 bits`.
+we want around _256 bits_. Since a dice has 6 possible values,
+a single throw contributes $\log_26 \approx 2.58$ bits of entropy,
+so from 100 we can source a little over _256 bits_.
 You should get something like this:
 
 ```
@@ -52,7 +52,7 @@ You should get something like this:
 
 Ok, so how do we go from 100 digits to 24 words? Here's the process:
 
-First, calculate the `SHA256`[^sha256] hash of this number:
+First, calculate the _SHA256_[^sha256] hash of this number:
 
 [^sha256]:
     `SHA256` is a [cryptographic hasing function (CHF)](https://en.wikipedia.org/wiki/Cryptographic_hash_function)
@@ -96,8 +96,8 @@ binary = bin(int(digest, 16))
 '''
 ```
 
-The BIP39 wordlist has 2048 words, so you need `log2(2048) = 11 bits`
-to index a word. We can make 23 words with `256 bits` and have 3 bits left.
+The BIP39 wordlist has 2048 words, so you need $log_22048 \eq 11$ bits
+to index a word. We can make 23 words with _256 bits and have 3 bits left.
 We still need 8 bits more; where's the rest?
 
 The last 8 bits are a checksum[^checksum]!
@@ -109,7 +109,7 @@ The last 8 bits are a checksum[^checksum]!
     if you use the wrong word. As a consequence, this implies that most word
     combinations are invalid (i.e.: you can't randomly pick 24 words).
 
-Let's separate the digest bits into `11 bit` words[^word] and get the corresponding
+Let's separate the digest bits into _11 bit_ words[^word] and get the corresponding
 words from the [BIP39 wordlist](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt)[^index].
 
 [^word]: Don't mistake binary words with english words!
@@ -146,7 +146,7 @@ words from the [BIP39 wordlist](https://github.com/bitcoin/bips/blob/master/bip-
 
 Now, let's calculate the checksum. We have bits `000` left from
 the process and we need 8 more to make 11. To get it, we hash our
-entropy digest from above using `SHA256` again. Then get the first
+entropy digest from above using _SHA256_ again. Then get the first
 byte of this new digest and append them to the sequence:
 
 ```py
@@ -161,7 +161,7 @@ digest2 = sha256(bytes.fromhex(digest))
 
 The first byte of the new digest is `4F`. Converting this to binary yields
 `01001111`. Appending this to `000` yields `00001001111`, or $ 79_{10}$.
-This corresponds to the word `antique` in the wordlist. Our BIP39 mnemonic will then be:
+This corresponds to the word _antique_ in the wordlist. Our BIP39 mnemonic will then be:
 
 ```console
  1: 11001101001 -> 1641 -> snake
@@ -204,11 +204,11 @@ human-readable format.
 You can check that you did everything correctly with
 this utility made by Coinkite: [`rolls.py`](https://coldcard.com/docs/rolls.py).
 
-You might be wondering: isn't the private key `264 bits` long,
-since `24 * 11 = 264`? No, because the last `8 bits` are derived
-from the previous `256 bits`, so they don't encode any new information.
+You might be wondering: isn't the private key _264 bits_ long,
+since $24 \cdot 11 = 264$? No, because the last _8 bits_ are derived
+from the previous __256 bits__, so they don't encode any new information.
 This same principle is used in BIP32 child key derivation: a
-single, `master`, private key has the information to create virtually
+single, **master**, private key has the information to create virtually
 infinite child keys.
 
 ## Elliptic Curve Cryptography 101

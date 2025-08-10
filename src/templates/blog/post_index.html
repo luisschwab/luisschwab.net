@@ -1,0 +1,31 @@
+<style>
+    .blog-list {
+        list-style: none;
+        font-size: 175%;
+        padding: 0;
+        margin: 0;
+    }
+    .blog-description {
+        font-size: 90%;
+        font-style: italic;
+        font-weight: normal;
+    }
+    .blog-list li {
+        margin-bottom: 1em !important;
+        position: relative;
+        padding-left: 1rem;
+    }
+</style>
+<div>
+    <ul class="blog-list">
+        {% for blog in blog_index %}
+        <li>
+            <a href="{{ blog.path }}">{{ blog.title }}</a> \ {{ blog.date }}
+            <br/>
+            <div class="blog-description">
+                {{ blog.description }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,11 +1,17 @@
 +++
-title = "features"
-description = ""
-date = "2025-08-09"
+title = "Functionality Test"
+description = "Lorem Ipsum"
+date = "0000-01-01"
 template = "blog/blog.html"
 +++
 
 # Cypherpunks write code
+
+## Lists
+
+- abc
+- def
+- ghi
 
 ## Inline Math
 
@@ -69,9 +75,9 @@ block is valid or not. Your API to the network, in short.
 
 ![And Diogened said: "Yes, stand a little out of my sun (ἀπὸ τοῦ ἡλίου μετάστηθι)"](/img/diogenes-banner.jpg)
 
-Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte’s books and handouts. Tufte’s style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.
+Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte’s books and handouts. Tufte’s style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.[*zuck]
 
-![](/img/zuck.gif)
+[*zuck]: ![](/img/zuck.gif)
 
 Tufte CSS was created by Dave Liepmann and is now an Edward Tufte project. The original idea was cribbed from Tufte-LaTeX and R Markdown’s Tufte Handout format. We give hearty thanks to all the people who have contributed to those projects.
 
@@ -86,17 +92,7 @@ If you see anything that Tufte CSS could improve, we welcome your contribution i
     <img src="/img/wave.jpeg">
 </div>
 
-> First step to not being a noob is to not think like a noob. If you think like a noob,
-    you're a noob. Noobs ask questions like, 'If only I had a college degree, the world
-    would open up to me, right?' No. That's newb thinking. You're looking for validation
-    from other people instead of skill.\n\nThe system isn't a conspiracy, like there's
-    someone pulling the strings. It’s just a decentralized dystopia—everyone buying
-    into everyone else’s limitations. Power isn't what you have; it’s what the other
-    person thinks you have.\n\nTo stop being a noob, stop engaging with the system.
-    Don’t let validation define you. Build systems that don’t involve social capital,
-    legitimacy, or who you are—just pure technicality. Bitcoin’s a great example.
-    It doesn’t care where its coins come from. It’s just technicality,
-    not artificial barriers of control."
+> I dreamt of wordly success once.
 
 Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
 

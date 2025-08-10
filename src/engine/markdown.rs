@@ -152,7 +152,10 @@ fn process_md_content(
     // Finally, process the rest of the markdown into HTML.
     //
     // TODO(@luisschwab): format the output HTML ("keep it neat, inside and out").
-    let parser = Parser::new_ext(&markdown_syntect, Options::ENABLE_TABLES);
+    let parser = Parser::new_ext(
+        &markdown_syntect,
+        Options::ENABLE_TABLES | Options::ENABLE_STRIKETHROUGH,
+    );
     let mut html_content = String::new();
     html::push_html(&mut html_content, parser);
 
@@ -222,7 +225,10 @@ fn process_katex(content: &str) -> Result<String, EngineError> {
 /// Process code blocks into HTML with `syntect`.
 fn process_syntect(content: &str) -> Result<String, EngineError> {
     let highlighter = Highlighter::new();
-    let parser = Parser::new_ext(content, Options::ENABLE_TABLES);
+    let parser = Parser::new_ext(
+        content,
+        Options::ENABLE_TABLES | Options::ENABLE_STRIKETHROUGH,
+    );
     let mut html_content = String::new();
 
     let events: Vec<_> = parser.collect();

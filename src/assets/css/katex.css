@@ -181,7 +181,7 @@
 }
 .katex {
     font:
-        normal 1.21em KaTeX_Main,
+        normal KaTeX_Main,
         Times New Roman,
         serif;
     line-height: 1.2;
@@ -1240,6 +1240,7 @@
 }
 
 .katex-display {
+    font-size: 1.2em;
     display: block;
     margin: 1em 0;
     text-align: center;

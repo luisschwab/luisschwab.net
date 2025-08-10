@@ -15,7 +15,7 @@ code {
 }
 
 pre {
-    max-width: 69%;
+    max-width: 55%;
     padding: 1rem;
     overflow-x: auto;
     display: inline-block;
@@ -41,10 +41,6 @@ h2 {
 
 h2 > a {
     font-weight: normal !important;
-}
-
-ul {
-    padding-left: 4vh !important;
 }
 
 table {
