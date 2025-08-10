@@ -1,5 +1,5 @@
 +++
-title = "index"
+title = "Home"
 description = ""
 date = "2025-08-08"
 template = "index.html"
@@ -69,10 +69,6 @@ These are my publicly availabe services:
 [^nostr]:
     This is my personal nostr relay, only I get to write to it,
     but anyone can read from it. Learn about nostr [here](https://nostr.com).
-
-## Library
-
-Click [here](/library) to go to my personal bootleg PDF collection.
 
 ## Contact
 
