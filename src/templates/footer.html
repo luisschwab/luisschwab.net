@@ -8,9 +8,12 @@
     }
     .text {
         width: 55%;
-        text-align: match-parent;
         font-size: large !important;
         text-align: center !important;
+    }
+    .text > .author {
+        font-size: 150% !important;
+        margin-top: 1em !important;
     }
     .text > h3 {
         margin-top: 0;
@@ -42,7 +45,9 @@
             &#x275D; {{ quote_text }} &#x275E;
             <br/>
             <br/>
-            <em>&mdash;{{ quote_author }}</em>
+            <div class="author">
+                <em>&mdash;{{ quote_author }}</em>
+            </div>
         </div>
         <br/>
     </div>

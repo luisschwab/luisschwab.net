@@ -15,7 +15,7 @@ code {
 }
 
 pre {
-    max-width: 75vw;
+    max-width: 55%;
     padding: 1rem;
     overflow-x: auto;
     display: inline-block;
@@ -44,4 +44,14 @@ h2 > a {
 
 ul {
     padding-left: 4vh !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: left;
 }
