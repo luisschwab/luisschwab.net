@@ -1,4 +1,7 @@
-use std::path::PathBuf;
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
 
 use rand::Rng;
 use serde_json::json;
@@ -15,10 +18,11 @@ use engine::{
 };
 use quotes::QUOTES;
 
-/// The file where site-wide definitions must be defined.
-///
+/// The file where site-wide definitions must be declared.
 /// The path is relative to the Cargo project's root.
 const CONFIG_FILE: &str = "config.toml";
+/// Image extensions.
+const IMAGE_EXTS: &[&str] = &["jpg", "jpeg", "png", "gif", "webp", "svg"];
 
 fn main() -> Result<(), EngineError> {
     let mut rng = rand::rng();
@@ -86,17 +90,42 @@ fn main() -> Result<(), EngineError> {
     for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
         let file_path = entry.path();
 
-        if file_path.extension().and_then(|s| s.to_str()) == Some("md") {
-            process_md_file(
-                &mut tera,
-                &mut tera_ctx,
-                &config,
-                file_path,
-                content_dir,
-                build_dir,
-            )?;
+        if let Some(extension) = file_path.extension().and_then(|s| s.to_str()) {
+            if extension == "md" {
+                process_md_file(
+                    &mut tera,
+                    &mut tera_ctx,
+                    &config,
+                    file_path,
+                    content_dir,
+                    build_dir,
+                )?;
+            } else if IMAGE_EXTS.contains(&extension.to_lowercase().as_str()) {
+                copy_asset_file(file_path, content_dir, build_dir)?;
+            }
         }
     }
+
+    Ok(())
+}
+
+// Copy asset files (images, etc.) to the build directory while preserving structure
+fn copy_asset_file(
+    file_path: &Path,
+    content_dir: &str,
+    build_dir: &str,
+) -> Result<(), EngineError> {
+    let relative_path = file_path.strip_prefix(content_dir)?;
+    let build_path = Path::new(build_dir).join(relative_path);
+
+    // Create the build directory, if absent
+    if let Some(parent) = build_path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+
+    // Copy the file
+    fs::copy(file_path, &build_path)?;
+    println!("Copied {} to {}", file_path.display(), build_path.display());
 
     Ok(())
 }
