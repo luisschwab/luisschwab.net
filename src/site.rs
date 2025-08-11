@@ -42,7 +42,7 @@ fn main() -> Result<(), EngineError> {
     let content_dir = &config.content_path;
 
     // Create a Tera object and context.
-    let mut tera = Tera::new("./src/templates/**/*")?;
+    let mut tera = Tera::new("src/templates/**/*.html")?;
     let mut tera_ctx = Context::new();
 
     // Build a quote JSON array from `QUOTES`.

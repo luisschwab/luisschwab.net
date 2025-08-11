@@ -45,7 +45,7 @@ Ideally, the physical server should have two network interfaces: one for the WAN
 or if you wan't to connect other devices to this network[*interface].
 
 [*interface]:
-    If your serve has only one NIC, buy a USB to RJ45 adapter and configure it as the
+    If your server has only one NIC, buy a USB to RJ45 adapter and configure it as the
     other interface on Proxmox.
 
 ## Bill of Materials

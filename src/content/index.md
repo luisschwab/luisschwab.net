@@ -20,7 +20,7 @@ computer systems and networks, and economics.
 
 These are my latest blog posts. Click [here](/blog) to see all my blog posts.
 
-{% include "blog_index_5.html" %}
+{% include "blog/blog_index_5.html" %}
 
 ## Lightning Network
 
@@ -52,7 +52,7 @@ I like to self-host as much as possible, because not your hardware, not your dat
 These are my publicly availabe services:
 
 - mempool.space instance: [mempool.luisschwab.net](https://mempool.luisschwab.net)
-- Bitcoin DNS seeder[^seed]: [seed.bitcoin.luisschwab.com](https://seed.bitcoin.luisschwab.com:53)
+- Bitcoin DNS seeder[^seed]: [seed.bitcoin.luisschwab.com:53](https://seed.bitcoin.luisschwab.com:53)
 - Nostr relay[^nostr]: [wss://nostr.luisschwab.net](wss://nostr.luisschwab.net)
 
 [^seed]:
@@ -61,7 +61,7 @@ These are my publicly availabe services:
     it returns IP addresses of known, public Bitcoin nodes.
     You can test it out by running `dig seed.bitcoin.luisschwab.com`.
 [^nostr]:
-    This is my personal nostr relay, only I get to write to it,
+    This is my personal nostr relay: only I get to write to it,
     but anyone can read from it. Learn about nostr [here](https://nostr.com).
 
 ## Contact

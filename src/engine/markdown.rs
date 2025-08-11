@@ -41,7 +41,7 @@ impl Highlighter {
         let mut theme_set = ThemeSet::load_defaults();
 
         // Load the Gruvbox theme into the theme set.
-        let gruvbox = ThemeSet::get_theme("src/templates/themes/gruvbox-dark.tmTheme").unwrap();
+        let gruvbox = ThemeSet::get_theme("src/themes/gruvbox-dark.tmTheme").unwrap();
         theme_set.themes.insert("gruvbox_dark".to_string(), gruvbox);
 
         Self {

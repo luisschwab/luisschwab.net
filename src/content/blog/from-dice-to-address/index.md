@@ -62,6 +62,7 @@ First, calculate the _SHA256_[^sha256] hash of this number:
     (i.e.: Computing the input, given the output is pratically impossible. This is why SHA256 is called a _One-Way Function_.),
     and (3) finding a collision is intractable (i.e.: finding different preimages that yield the same result is pratically impossible.)
     If you want to understand how SHA256 works in a visual way, see [sha256algorithm.com](https://sha256algorithm.com/).
+    See also my C implementation [here](https://github.com/luisschwab/sha256.c).
 
 
 
@@ -96,8 +97,8 @@ binary = bin(int(digest, 16))
 '''
 ```
 
-The BIP39 wordlist has 2048 words, so you need $log_22048 \eq 11$ bits
-to index a word. We can make 23 words with _256 bits and have 3 bits left.
+The BIP39 wordlist has 2048 words, so you need $\log_{2}{2048} = 11$ bits
+to index a word. We can make 23 words with 256 bits and have 3 bits left.
 We still need 8 bits more; where's the rest?
 
 The last 8 bits are a checksum[^checksum]!
@@ -223,7 +224,7 @@ where $a$ and $b$ are integers. A curve of this family looks like this:
 
 ![an elliptic curve over an infinite field](ecc.jpg)
 
-Bitcoin uses an elliptic curve called `secp256k1`[^secp256k1].
+Bitcoin uses an elliptic curve called _secp256k1_[^secp256k1].
 It defines coefficients for the curve, where the _Generator Point_ ($G$) is,
 and the size of the [_Finite Field_](https://en.wikipedia.org/wiki/Finite_field)
 over which operations are done. They are:
@@ -262,7 +263,7 @@ so that we don't overflow out of the field.
 
 ## Finding the Point, or Public Key
 
-So we have our `256 bit` private key, and the _secp256k1_
+So we have our 256 bit private key, and the _secp256k1_
 curve. How do we derive a public key from that?
 
 A public key is just a point on this curve. We get a Public Key point, $\mathbb{P}$,
@@ -323,9 +324,10 @@ Great, now we have a public key. How do we transform it into an address?
 ## From Public Key to Address
 
 Let's calculate the address corresponding to the public key above. Note that
-this process will yield a _Legacy_ type address (starts with _1_), and not SegWit v0 (starts with _bc1q_) or SegWit v1, also called Taproot (starts with _bc1p_).
-Below are the steps in python, with
-$$ P = 031e43f3de46ad41ab1ee7d9fbcb8a731169163340e5d31788709d166924396750 $$.
+this process will yield a _Legacy_ type address (starts with _1_), and not SegWit v0
+(starts with _bc1q_) or SegWit v1, also called Taproot (starts with _bc1p_).
+Below are the steps in Python, with
+$$ P = 031e43f3de46ad41ab1ee7d9fbcb8a731169163340e5d31788709d166924396750 $$
 Remember to always do the operations on the raw bytes, and not on the hex string.
 
 ```py
@@ -461,9 +463,9 @@ the address it derives is the same we did:
 
 ## Conclusion
 
-We have generated `256 bits` of entropy by hand using dice. Then we mapped
-this entropy to `24 words`, so that it's easier to store our private
+We have generated 256 bits of entropy by hand using dice. Then we mapped
+this entropy to 24 words, so that it's easier to store our private
 key. Then we found the corresponding point to our private key on
-`secp256k1`. Then we converted this point into an address. Finally,
+_secp256k1_. Then we converted this point into an address. Finally,
 we converted our private key into WIF, a format accepted by wallet software
 for importing a single private key.
