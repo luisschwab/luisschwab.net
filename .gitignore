@@ -1,4 +1,7 @@
 /build
 /target
 
+.DS_Store
+
+deploy.sh
 NOTES.md
