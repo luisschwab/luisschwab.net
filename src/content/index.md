@@ -5,7 +5,7 @@ date = "2025-08-08"
 template = "index.html"
 +++
 
-# Luis Henrique Schwab
+# Luis Schwab
 
 Currently, I'm a Computer Engineering student at [University of Brasília](https://ene.unb.br),
 where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB), a student club
@@ -21,12 +21,6 @@ computer systems and networks, and economics.
 These are my latest blog posts. Click [here](/blog) to see all my blog posts.
 
 {% include "blog_index_5.html" %}
-
-## Presentations
-
-These are my latest presentations. Click [here](/presentations) to see all my presentations.
-
-TODO
 
 ## Lightning Network
 

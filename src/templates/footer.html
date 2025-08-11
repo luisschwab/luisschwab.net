@@ -4,9 +4,13 @@
         margin-bottom: 3vh !important;
         display: block !important;
         text-align: center;
+        width: 55%;
+    }
+    .footer > hr {
+        width: 100%;
     }
     .text {
-        width: 55%;
+        justify-self: center !important;
         font-size: large !important;
         text-align: center !important;
     }
@@ -23,18 +27,12 @@
         font-style: italic;
     }
 
-    @media screen and (max-width: 540px) {
+    @media screen and (max-width: 760px) {
         .footer {
-            padding: unset !important;
+            width: 100%;
         }
         .footer > .text {
             font-size: large !important;
-        }
-    }
-
-    @media screen and (min-width: 541px) and (max-width: 1500px) {
-        .footer > .text {
-            font-size: 20px !important;
         }
     }
 </style>
@@ -50,12 +48,9 @@
                 &mdash;{{ quote_author }}
             </div>
         </div>
-        <br/>
     </div>
     <hr/>
-    <div style="width: 55%;">
-        <img src="/img/coin.gif" style="display: inline; height: 2em;">
-    </div>
+    <img src="/img/coin.gif" style="display: inline; height: 2em; width: auto;">
 </div>
 
 <script>
