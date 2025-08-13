@@ -451,7 +451,8 @@ label.margin-toggle:not(.sidenote-number) {
     }
 
     label.margin-toggle:not(.sidenote-number) {
-        display: inline;
+        /* Control's wheter a toggle appears for small screens */
+        display: none;
     }
 
     .sidenote,

@@ -5,6 +5,8 @@ date = "2024-03-19"
 template = "blog/blog.html"
 +++
 
+{% include "blog/toc.html" %}
+
 # From Dice to Address
 
 Wan't to create a Bitcoin address from scratch? Look no further!

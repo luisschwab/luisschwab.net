@@ -170,7 +170,7 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
     (
         "Matters of great concern should be treated lightly.” Master Ittei commented,
         “Matters of small concern should be treated seriously.",
-        "Yamamoto Tsunetomo, Hagakure: The Book of the Samurai",
+        "Yamamoto Tsunetomo",
     ),
     (
         "In the modern world, you are defined not by
@@ -218,5 +218,9 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
     (
         "If privacy is outlawed, only outlaws will have privacy.",
         "Phil Zimmermann",
+    ),
+    (
+        "There are decades where nothing happens; and there are weeks where decades happen.",
+        "Vladmir Ilyich Lenin",
     ),
 ];

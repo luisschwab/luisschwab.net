@@ -21,8 +21,6 @@ use quotes::QUOTES;
 /// The file where site-wide definitions must be declared.
 /// The path is relative to the Cargo project's root.
 const CONFIG_FILE: &str = "config.toml";
-/// Image extensions.
-const IMAGE_EXTS: &[&str] = &["jpg", "jpeg", "png", "gif", "webp", "svg"];
 
 fn main() -> Result<(), EngineError> {
     // Check if this is a production build.
@@ -72,17 +70,19 @@ fn main() -> Result<(), EngineError> {
             let content = std::fs::read_to_string(file_path)?;
             if let Some(extracted) = matter::matter(&content) {
                 let mut metadata: PageMetadata = toml::from_str(&extracted.0)?;
+                // Don't include a draft page if the `PROD=true` enviromnet variable is not set.
+                #[allow(clippy::bool_comparison)]
                 if metadata.draft == Some(true) && prod == true {
                     continue;
                 }
                 let rel_path = file_path.strip_prefix(content_dir)?;
 
-                // Generate clean URLs
+                // Generate clean URLs.
                 let path = if file_path.file_name().unwrap() == "index.md" {
-                    // For index.md files, use the parent directory path
+                    // For `index.md` files, use the parent directory path.
                     format!("/{}/", rel_path.parent().unwrap().display())
                 } else {
-                    // For regular files, use the filename
+                    // For files that are not `index.md`, use their names.
                     format!("/{}", rel_path.with_extension("html").display())
                 };
                 metadata.path = Some(path);
@@ -94,7 +94,8 @@ fn main() -> Result<(), EngineError> {
             }
         }
     }
-    // Insert blog post metadata to Tera's context, sorted by date in descending order.
+    // Insert blog post metadata to Tera's
+    // context, sorted by date in descending order.
     blog_posts.sort_by(|a, b| {
         let date_a = a.date;
         let date_b = b.date;
@@ -116,7 +117,8 @@ fn main() -> Result<(), EngineError> {
                     content_dir,
                     build_dir,
                 )?;
-            } else if IMAGE_EXTS.contains(&extension.to_lowercase().as_str()) {
+            } else {
+                // Copy assets from the content directory.
                 copy_asset_file(file_path, content_dir, build_dir)?;
             }
         }

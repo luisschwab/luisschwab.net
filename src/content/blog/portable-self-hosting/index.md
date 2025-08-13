@@ -5,18 +5,20 @@ date = "2025-01-27"
 template = "blog/blog.html"
 +++
 
+{% include "blog/toc.html" %}
+
 # Portable Self-Hosting
 
 This is a guide on self-hosting publicly accessible stuff on your own hardware, from your own home; because
 _not your hardware, not your data_. This is an extended version of the
 [workshop](https://x.com/ClubeBitcoinUnB/status/1882250321029980236) I gave at
-[Clube Bitcoin UnB](https://x.com/ClubeBitcoinUnB).
+[ClubeBitcoinUnB](https://x.com/ClubeBitcoinUnB).
 
 ## Why you should host your own services
 
 As stated above, _not your hardware, not your data_. People in general have become too used
 to uploading whatever to some cloud, not knowing that this cloud is just someone else's
-computer (and who knows what this "else" does with the data you give away).
+computer (and who knows what this _else_ does with the data you give away).
 
 If you plan to use Bitcoin in a private and sovereign manner, this is even more important.
 You should run your own node–which is your interface to the Bitcoin network–to verify and

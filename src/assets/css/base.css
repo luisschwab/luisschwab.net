@@ -51,3 +51,9 @@ th, td {
     padding: 8px;
     text-align: left;
 }
+
+@media (max-width: 760px) {
+    pre {
+        max-width: 90% !important;
+    }
+}

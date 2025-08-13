@@ -7,13 +7,21 @@ template = "index.html"
 
 # Luis Schwab
 
+[*wave]
+[*wave]: ![](/img/wave.jpeg)
+
 Currently, I'm a Computer Engineering student at [University of Brasília](https://ene.unb.br),
-where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB), a student club
+where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB)[^cbunb], a student club
 focused on Bitcoin-related  Research, Development and Education. I'm also an open-source developer
 funded by the [BitcoinDevKit Foundation](https://bitcoindevkit.com).
 
-I'm interested in permissionless technology that transfers power from third parties
-to the individual—trustless money transmission and anonimous communications—,
+[^cbunb]: We hold technical seminars and workshops, and also run [Brasília BitDevs](https://bitdevs.bsb.br).
+
+[*wired-in]
+[*wired-in]: ![](/img/wired-in.jpeg)
+
+I'm interested in technology that transfers power from trusted third parties
+to the individual—permissionless money transmission and anonimous communications—,
 computer systems and networks, and economics.
 
 ## [Blog](/blog)
@@ -46,6 +54,9 @@ the base fee is 0 and the fee rate is dynamic.
 
 You can send me some sats via `sats@luisschwab.net`.
 
+[*eval_apply]
+[*eval_apply]: ![](/img/eval-apply.webp)
+
 ## Self-Hosted Stuff
 
 I like to self-host as much as possible, because not your hardware, not your data.
@@ -63,6 +74,14 @@ These are my publicly availabe services:
 [^nostr]:
     This is my personal nostr relay: only I get to write to it,
     but anyone can read from it. Learn about nostr [here](https://nostr.com).
+
+[*apology]
+[*apology]: ![](/img/apology.webp)
+
+## Selected Projects
+
+- [hashsat](https://github.com/luisschwab/hashsat): passphrase cracker.
+- [fakhr (فخر)](https://github.com/luisschwab/fakhr): vanity address and npub generator.
 
 ## Contact
 

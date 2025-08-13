@@ -2,12 +2,24 @@ use std::{collections::HashMap, fs, path::Path};
 
 use chrono::NaiveDate;
 use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd, html};
+use pulldown_cmark_toc::{GitHubSlugifier, Slugify, TableOfContents};
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use syntect::{highlighting::ThemeSet, html::highlighted_html_for_string, parsing::SyntaxSet};
 use tera::{Context, Tera};
 
-use crate::{EngineError, SiteConfig};
+use crate::engine::{
+    config::SiteConfig,
+    error::EngineError,
+    util::{inject_heading_ids_into_html, strip_leading_whitespace_from_html},
+};
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct TocEntry {
+    pub level: u8,
+    pub title: String,
+    pub id: String,
+}
 
 /// The frontmatter is parsed from markdwown
 /// files and deserialized into [`FrontMatter`].
@@ -25,6 +37,8 @@ pub(crate) struct PageMetadata {
     /// The page's last edit date in
     /// ISO8601 format (the only correct one).
     pub(crate) edited: Option<String>,
+    /// Table of Content entries.
+    pub(crate) toc: Option<Vec<TocEntry>>,
     /// The path for the page.
     pub(crate) path: Option<String>,
     /// Whether the page is still a draft.
@@ -38,9 +52,8 @@ pub(crate) struct Highlighter {
 
 impl Highlighter {
     fn new() -> Self {
-        let mut theme_set = ThemeSet::load_defaults();
-
         // Load the Gruvbox theme into the theme set.
+        let mut theme_set = ThemeSet::new();
         let gruvbox = ThemeSet::get_theme("src/themes/gruvbox-dark.tmTheme").unwrap();
         theme_set.themes.insert("gruvbox_dark".to_string(), gruvbox);
 
@@ -91,16 +104,17 @@ pub(crate) fn process_md_file(
     let page_path = format!("/{}", relative_path.with_extension("html").display());
     metadata.path = Some(page_path);
 
-    // Insert parameters to Tera's context.
-    tera_ctx.insert("site", &site_config);
-    tera_ctx.insert("page", &metadata);
-    tera_ctx.insert("content", &html_content);
+    // Create a `Tera` context for the page that inherits the global context.
+    let mut page_ctx = tera_ctx.clone();
+    page_ctx.insert("site", &site_config);
+    page_ctx.insert("page", &metadata);
+    page_ctx.insert("content", &html_content);
 
-    // Select a template defined in the Frontmatter, or default to "base.html".
+    // Select the template defined in the Frontmatter or default to "base.html".
     let template = metadata.clone().template.unwrap_or("base.html".to_string());
 
-    // Render the `tera` context with the selected template.
-    let rendered = tera.render(&template, tera_ctx)?;
+    // Render the `Tera` context with the selected template.
+    let rendered = tera.render(&template, &page_ctx)?;
 
     // Create the build directory, if absent.
     if let Some(parent) = build_path.parent() {
@@ -118,26 +132,52 @@ pub(crate) fn process_md_file(
     Ok(metadata)
 }
 
-/// Processing of the markdown contents
-/// (split from `process_md_file` for this to be a pure function).
+/// Processing of the markdown contents (split from `process_md_file` for this to be a pure function).
 fn process_md_content(
     content: &str,
     tera: &mut Tera,
     tera_ctx: &Context,
 ) -> Result<(PageMetadata, String), EngineError> {
-    // Extract and split TOML frontmatter and markdown.
+    // Extract and split `TOML` frontmatter and markdown.
     let extracted = match matter::matter(content) {
         Some(ext) => ext,
         None => return Err(EngineError::NoMatter),
     };
 
-    // Parse frontmatter into [`Frontmatter`].
+    // Parse frontmatter into [`PageMetadata`].
     let frontmatter_str = extracted.0;
-    let frontmatter: PageMetadata = toml::from_str(&frontmatter_str)?;
+    let mut frontmatter: PageMetadata = toml::from_str(&frontmatter_str)?;
 
-    // Process Tera directives before markdown processing.
-    let mut markdown = extracted.1;
-    markdown = tera.render_str(&markdown, tera_ctx)?;
+    // Get the raw markdown content.
+    let markdown = extracted.1;
+
+    // Extract the ToC from the unprocessed markdown.
+    let toc_generator = TableOfContents::new(&markdown);
+    let mut slugifier = GitHubSlugifier::default();
+    let toc_entries: Vec<TocEntry> = toc_generator
+        .headings()
+        .map(|heading| TocEntry {
+            level: heading.level() as u8,
+            title: heading.text(),
+            id: slugifier.slugify(&heading.text()).into_owned(),
+        })
+        .collect();
+
+    // Add the TOC to frontmatter iff there are headings.
+    frontmatter.toc = if toc_entries.is_empty() {
+        None
+    } else {
+        Some(toc_entries.clone())
+    };
+
+    // Process `Tera` directives selectively (protecting code blocks),
+    // and create a temporary context with ToC data for template processing.
+    let mut temp_ctx = tera_ctx.clone();
+    let temp_page_data = serde_json::json!({
+        "toc": &toc_entries
+    });
+    temp_ctx.insert("page", &temp_page_data);
+    let markdown = process_tera_selectively(&markdown, tera, &temp_ctx)?;
 
     // Strip leading whitespace from HTML blocks (thx for that, CommonMark).
     let markdown_stripped = strip_leading_whitespace_from_html(&markdown);
@@ -152,8 +192,6 @@ fn process_md_content(
     let markdown_syntect = process_syntect(&markdown_katex)?;
 
     // Finally, process the rest of the markdown into HTML.
-    //
-    // TODO(@luisschwab): format the output HTML ("keep it neat, inside and out").
     let parser = Parser::new_ext(
         &markdown_syntect,
         Options::ENABLE_TABLES | Options::ENABLE_STRIKETHROUGH,
@@ -161,7 +199,60 @@ fn process_md_content(
     let mut html_content = String::new();
     html::push_html(&mut html_content, parser);
 
-    Ok((frontmatter, html_content))
+    // Inject heading IDs into the final HTML string.
+    let html_with_ids = inject_heading_ids_into_html(&html_content)?;
+
+    Ok((frontmatter, html_with_ids))
+}
+
+/// Process only actual `Tera` directives, leaving other content untouched.
+fn process_tera_selectively(
+    content: &str,
+    tera: &mut Tera,
+    tera_ctx: &Context,
+) -> Result<String, EngineError> {
+    // Only process if there are actual `Tera` directives.
+    if !content.contains("{%") && !content.contains("{{") {
+        return Ok(content.to_string());
+    }
+
+    // Find and temporarily replace code blocks to protect them.
+    let mut protected_blocks = Vec::new();
+    let mut counter = 0;
+
+    // Protect fenced code blocks.
+    let code_block_rgx = Regex::new(r"(?s)```[^\n]*\n.*?```")?;
+    let mut protected_content = code_block_rgx
+        .replace_all(content, |caps: &regex::Captures| {
+            let placeholder = format!("__PROTECTED_BLOCK_{counter}__");
+            protected_blocks.push(caps[0].to_string());
+            counter += 1;
+            placeholder
+        })
+        .to_string();
+
+    // Protect inline code.
+    let code_inline_rgx = Regex::new(r"`[^`]+`")?;
+    protected_content = code_inline_rgx
+        .replace_all(&protected_content, |caps: &regex::Captures| {
+            let placeholder = format!("__PROTECTED_BLOCK_{counter}__");
+            protected_blocks.push(caps[0].to_string());
+            counter += 1;
+            placeholder
+        })
+        .to_string();
+
+    // Process with content with `Tera`.
+    let processed = tera.render_str(&protected_content, tera_ctx)?;
+
+    // Restore protected blocks.
+    let mut result = processed;
+    for (i, block) in protected_blocks.iter().enumerate() {
+        let placeholder = format!("__PROTECTED_BLOCK_{i}__");
+        result = result.replace(&placeholder, block);
+    }
+
+    Ok(result)
 }
 
 /// Process inline (`$ <expr> $`) and display (`$$ <expr> $$) LaTeX into HTML with `katex`.
@@ -306,7 +397,7 @@ fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
             }
 
             sidenotes.insert(key, content.trim().to_string());
-            continue; // Skip adding this line to result.
+            continue;
         }
 
         // Match on marginnote definition: `[*key]`
@@ -323,7 +414,7 @@ fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
             }
 
             marginnotes.insert(key, content.trim().to_string());
-            continue; // Skip adding this line to result.
+            continue;
         }
 
         result_lines.push(line);
@@ -358,19 +449,4 @@ fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
     }).to_string();
 
     Ok(result)
-}
-
-/// Strip leading whitespaces from HTML.
-fn strip_leading_whitespace_from_html(content: &str) -> String {
-    content
-        .lines()
-        .map(|line| {
-            if line.trim_start().starts_with('<') && line.starts_with("    ") {
-                line.trim_start()
-            } else {
-                line
-            }
-        })
-        .collect::<Vec<_>>()
-        .join("\n")
 }
