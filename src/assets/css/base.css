@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "ProtoMono";
+    src: url("../font/0xProtoMono.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    overflow-wrap: break-word !important;
+}
+
+code {
+    font-family: monospace !important;
+}
+
+pre {
+    max-width: 55%;
+    padding: 1rem;
+    overflow-x: auto;
+    display: inline-block;
+    background-color: transparent !important;
+}
+
+a {
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
+
+a:hover {
+    color: orange !important;
+}
+
+sup {
+    line-height: 0 !important;
+}
+
+h2 {
+    font-style: normal !important;
+}
+
+h2 > a {
+    font-weight: normal !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: left;
+}
+
+@media (max-width: 760px) {
+    pre {
+        max-width: 90% !important;
+    }
+}

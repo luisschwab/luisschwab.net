@@ -1,0 +1,9 @@
+<div>
+    <ul>
+        {% for blog in blog_index | slice(end=5) %}
+        <li>
+            <a href="{{ blog.path }}">{{ blog.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
