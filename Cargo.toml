@@ -10,7 +10,7 @@ path = "src/site.rs"
 [dependencies]
 anyhow = "1.0.98"
 chrono = { version = "0.4.41", features = ["serde"] }
-clap = { version = "4.5.42", features = ["derive"] }
+clap = { version = "4.5.45", features = ["derive"] }
 html-escape = "0.2.13"
 katex = "0.4.6"
 matter = "0.1.0-alpha4"
