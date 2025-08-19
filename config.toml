@@ -2,5 +2,5 @@ cname = "luisschwab.net"
 title = "luisschwab.net"
 description = "notes from a cypherpunk"
 
-content_path = "./src/content"
+content_path = "./content"
 build_path = "./build"
