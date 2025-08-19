@@ -70,7 +70,8 @@ fn main() -> Result<(), EngineError> {
             let content = std::fs::read_to_string(file_path)?;
             if let Some(extracted) = matter::matter(&content) {
                 let mut metadata: PageMetadata = toml::from_str(&extracted.0)?;
-                // Don't include a draft page if the `PROD=true` enviromnet variable is not set.
+                // Don't include a draft page in the build output
+                // if the `PROD=true` enviromnet variable is set.
                 #[allow(clippy::bool_comparison)]
                 if metadata.draft == Some(true) && prod == true {
                     continue;
@@ -94,8 +95,7 @@ fn main() -> Result<(), EngineError> {
             }
         }
     }
-    // Insert blog post metadata to Tera's
-    // context, sorted by date in descending order.
+    // Insert blog post metadata to Tera's context, sorted by date in descending order.
     blog_posts.sort_by(|a, b| {
         let date_a = a.date;
         let date_b = b.date;

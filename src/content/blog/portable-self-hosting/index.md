@@ -2,12 +2,16 @@
 title = "Portable Self-Hosting"
 description = "A guide on self-hosting stuff from wherever"
 date = "2025-01-27"
+edited = "2025-08-12"
+tags = ["infrastructure", "networks", "privacy"]
 template = "blog/blog.html"
 +++
 
 {% include "blog/toc.html" %}
 
 # Portable Self-Hosting
+
+{% include "blog/header.html" %}
 
 This is a guide on self-hosting publicly accessible stuff on your own hardware, from your own home; because
 _not your hardware, not your data_. This is an extended version of the
@@ -130,10 +134,10 @@ Also create a new network bridge `vmbr1` and connect a physical port to it
 (this will be the WAN bridge, and `vmbr0` will be the LAN bridge)[*mtu].
 
 [*mtu]:
-    **Note**: when creating new VMs and LXCs, set the MTU to 1300. That's because with the default
-    value of 1500 + the Wireguard overhead, packets can be dropped because they are too big.
+    **Note**: when creating new VMs and LXCs, set the MTU to 1300. With the default
+    value of 1500 plus the Wireguard overhead, packets can be dropped because they are too big.
 
-![](/img/blog/portable-self-hosting/proxmox.png)
+![](proxmox.png)
 
 ## pfSense Setup
 
@@ -147,12 +151,12 @@ Test this via:
 ~$ curl ipinfo.io
 {
   "ip": "< >",
-  "hostname": "< >>",
+  "hostname": "< >",
   "city": "< >",
   "region": "< >",
   "country": "< >",
-  "loc": "< >>",
-  "org": "< >>",
+  "loc": "< >",
+  "org": "< >",
   "postal": "< >",
   "timezone": "< >",
   "readme": "https://ipinfo.io/missingauth"

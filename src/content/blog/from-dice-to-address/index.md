@@ -3,11 +3,14 @@ title = "From Dice to Address"
 description = "Creating a Bitcoin address from scratch"
 date = "2024-03-19"
 template = "blog/blog.html"
+tags = ["bitcoin", "ecc"]
 +++
 
 {% include "blog/toc.html" %}
 
 # From Dice to Address
+
+{% include "blog/header.html" %}
 
 Wan't to create a Bitcoin address from scratch? Look no further!
 

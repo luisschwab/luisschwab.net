@@ -1,0 +1,19 @@
+<style>
+    .header {
+        font-style: italic;
+        margin-top: -1em;
+    }
+    .tags {
+        margin-bottom: 2.5em;
+    }
+</style>
+
+{% if page.edited %}
+<p class="header">Posted in {{ page.date }}, last edited at {{ page.edited }}</p>
+{% else %}
+<p class="header">Posted in {{ page.date }}</p>
+{% endif %}
+
+{% if page.tags %}
+<p class="header tags">Tags:{% for tag in page.tags %} <a href="/blog/tag/{{ tag }}">{{ tag }}</a> {% endfor %}</p>
+{% endif %}

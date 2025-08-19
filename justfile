@@ -1,3 +1,6 @@
+alias c  := check
+alias f  := fmt
+
 _default:
     @just --list
 
