@@ -15,5 +15,5 @@
 {% endif %}
 
 {% if page.tags %}
-<p class="header tags">Tags:{% for tag in page.tags %} <a href="/blog/tag/{{ tag }}">{{ tag }}</a> {% endfor %}</p>
+<p class="header tags">Tags:{% for tag in page.tags %} <a href="/blog/tags#{{ tag }}">{{ tag }}</a> {% endfor %}</p>
 {% endif %}
