@@ -1,7 +1,7 @@
 +++
 title = "Home"
 description = ""
-date = "2025-08-08"
+date = "1970-01-01"
 template = "index.html"
 +++
 
@@ -11,11 +11,12 @@ template = "index.html"
 [*wave]: ![](/img/wave.jpeg)
 
 Currently, I'm a Computer Engineering student at [University of Brasília](https://ene.unb.br),
-where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB)[^cbunb], a student club
-focused on Bitcoin-related  Research, Development and Education. I'm also an open-source developer
-funded by the [BitcoinDevKit Foundation](https://bitcoindevkit.com).
+where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB)[^clube-bitcoin-unb],
+a student club focused on Bitcoin-related  Research, Development, and Education.
+I'm also an open-source developer funded by the
+[BitcoinDevKit Foundation](https://bitcoindevkit.org/foundation/grantees/#luis-schwab).
 
-[^cbunb]: We hold technical seminars and workshops, and also run [Brasília BitDevs](https://bitdevs.bsb.br).
+[^clube-bitcoin-unb]: We hold technical seminars and workshops, and also host [Brasília BitDevs](https://bitdevs.bsb.br).
 
 [*wired-in]
 [*wired-in]: ![](/img/wired-in.jpeg)
@@ -28,12 +29,12 @@ computer systems and networks, and economics.
 
 These are my latest blog posts. Click [here](/blog) to see all my blog posts.
 
-{% include "blog/blog_index_5.html" %}
+{% include "blog/post_index_5.html" %}
 
 ## Lightning Network
 
-You can open a channel to my node on the lightning network[^ln]. The minimum channel size is 1M satoshis,
-the base fee is 0 and the fee rate is dynamic.
+You can open a channel to my node on the lightning network[^ln]. Channels must have >=1M sats,
+the base fee is 0 and the fee rate is dynamic, based on payment flows.
 
 - Pubkey: [022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17](https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17)
 - IPv4 socket: 209.126.80.42:9735
@@ -64,6 +65,8 @@ These are my publicly availabe services:
 
 - mempool.space instance: [mempool.luisschwab.net](https://mempool.luisschwab.net)
 - Bitcoin DNS seeder[^seed]: [seed.bitcoin.luisschwab.com:53](https://seed.bitcoin.luisschwab.com:53)
+- Payjoin Directory[^payjoin]: [payjoin.luisschwab.net](https://payjoin.luisschwab.net)
+- O-HTTP relay[^ohttp]: [ohttp.luisschwab.net](https://ohttp.luisschwab.net)
 - Nostr relay[^nostr]: [wss://nostr.luisschwab.net](wss://nostr.luisschwab.net)
 
 [^seed]:
@@ -71,6 +74,14 @@ These are my publicly availabe services:
     but instead of returning IP addresses for a website, for example,
     it returns IP addresses of known, public Bitcoin nodes.
     You can test it out by running `dig seed.bitcoin.luisschwab.com`.
+[^payjoin]:
+    Payjoin is a protocol described in [BIP78]() and [BIP77]().
+    It enables batching Bitcoin transactions from multiple senders
+    in such a way that it breaks common heuristics used for chain-analysis.
+    By breaking these heuristics, Bitcoin becomes more private for all,
+    even those that don't use Payjoin.
+[^ohttp]:
+    O-HTTP, or Oblivious HTTP, is... TODO
 [^nostr]:
     This is my personal nostr relay: only I get to write to it,
     but anyone can read from it. Learn about nostr [here](https://nostr.com).
@@ -80,6 +91,7 @@ These are my publicly availabe services:
 
 ## Selected Projects
 
+- [bdk-floresta](https://github.com/luisschwab/bdk-floresta): Floresta-powered chain-source crate for BDK.
 - [hashsat](https://github.com/luisschwab/hashsat): passphrase cracker.
 - [fakhr (فخر)](https://github.com/luisschwab/fakhr): vanity address and npub generator.
 
@@ -87,7 +99,7 @@ These are my publicly availabe services:
 
 You can get in touch with me through one of these channels;
 if you want to encrypt it, use PGP[^pgp]. You can get my key
-[here 🔑](/pgp/FC43D25BEDD5EE7C.asc).
+[here 🔑](/pgp/FC43D25BEDD5EE7C.txt).
 
 - email: luisschwab at protonmail dot com
 - npub: [npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n](https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n)

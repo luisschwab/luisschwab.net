@@ -1,9 +1,11 @@
 use std::{
+    collections::HashMap,
     env, fs,
     path::{Path, PathBuf},
 };
 
 use rand::Rng;
+use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tera::{Context, Tera};
 use walkdir::WalkDir;
@@ -21,6 +23,12 @@ use quotes::QUOTES;
 /// The file where site-wide definitions must be declared.
 /// The path is relative to the Cargo project's root.
 const CONFIG_FILE: &str = "config.toml";
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub(crate) struct TagIndex {
+    pub(crate) tag: String,
+    pub(crate) posts: Vec<PageMetadata>,
+}
 
 fn main() -> Result<(), EngineError> {
     // Check if this is a production build.
@@ -60,48 +68,11 @@ fn main() -> Result<(), EngineError> {
     tera_ctx.insert("quote_author", &fallback_quote.1);
 
     // Build an index of blog posts to be inserted to the context later.
-    let mut blog_posts = Vec::new();
-    for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
-        let file_path = entry.path();
-        if file_path.extension().and_then(|s| s.to_str()) == Some("md")
-            && file_path.to_str().unwrap().contains("/blog/")
-        {
-            // Parse the frontmatter.
-            let content = std::fs::read_to_string(file_path)?;
-            if let Some(extracted) = matter::matter(&content) {
-                let mut metadata: PageMetadata = toml::from_str(&extracted.0)?;
-                // Don't include a draft page if the `PROD=true` enviromnet variable is not set.
-                #[allow(clippy::bool_comparison)]
-                if metadata.draft == Some(true) && prod == true {
-                    continue;
-                }
-                let rel_path = file_path.strip_prefix(content_dir)?;
+    let blog_index = build_blog_index(content_dir, prod)?;
+    tera_ctx.insert("blog_index", &blog_index);
 
-                // Generate clean URLs.
-                let path = if file_path.file_name().unwrap() == "index.md" {
-                    // For `index.md` files, use the parent directory path.
-                    format!("/{}/", rel_path.parent().unwrap().display())
-                } else {
-                    // For files that are not `index.md`, use their names.
-                    format!("/{}", rel_path.with_extension("html").display())
-                };
-                metadata.path = Some(path);
-
-                let is_main_blog_index = rel_path.to_str().unwrap() == "blog/index.md";
-                if !is_main_blog_index {
-                    blog_posts.push(metadata);
-                }
-            }
-        }
-    }
-    // Insert blog post metadata to Tera's
-    // context, sorted by date in descending order.
-    blog_posts.sort_by(|a, b| {
-        let date_a = a.date;
-        let date_b = b.date;
-        date_b.cmp(&date_a)
-    });
-    tera_ctx.insert("blog_index", &blog_posts);
+    let blog_tag_index = build_tag_index(&blog_index);
+    tera_ctx.insert("blog_tag_index", &blog_tag_index);
 
     // Process file contents.
     for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
@@ -127,7 +98,84 @@ fn main() -> Result<(), EngineError> {
     Ok(())
 }
 
-// Copy asset files (images, etc.) to the build directory while preserving structure
+/// Build an index of the blog posts.
+fn build_blog_index(content_dir: &String, prod: bool) -> Result<Vec<PageMetadata>, EngineError> {
+    let mut blog_index = Vec::new();
+    for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
+        let file_path = entry.path();
+        if file_path.extension().and_then(|s| s.to_str()) == Some("md")
+            && file_path.to_str().unwrap().contains("/blog/")
+        {
+            // Parse the frontmatter.
+            let content = std::fs::read_to_string(file_path)?;
+            if let Some(extracted) = matter::matter(&content) {
+                let mut metadata: PageMetadata = toml::from_str(&extracted.0)?;
+                // Don't include a draft page in the build output
+                // if the `PROD=true` enviromnet variable is set.
+                #[allow(clippy::bool_comparison)]
+                if metadata.draft == Some(true) && prod == true {
+                    continue;
+                }
+                let rel_path = file_path.strip_prefix(content_dir)?;
+
+                // Generate clean URLs.
+                let path = if file_path.file_name().unwrap() == "index.md" {
+                    // For `index.md` files, use the parent directory path.
+                    format!("/{}/", rel_path.parent().unwrap().display())
+                } else {
+                    // For files that are not `index.md`, use their names.
+                    format!("/{}", rel_path.with_extension("html").display())
+                };
+                metadata.path = Some(path);
+
+                let is_blog_index = rel_path.to_str().unwrap() == "blog/index.md"
+                    || rel_path.to_str().unwrap() == "blog/tags/index.md";
+                if !is_blog_index {
+                    blog_index.push(metadata);
+                }
+            }
+        }
+    }
+    // Insert blog post metadata to Tera's context, sorted by date in descending order.
+    blog_index.sort_by(|a, b| {
+        let date_a = a.date;
+        let date_b = b.date;
+        date_b.cmp(&date_a)
+    });
+
+    Ok(blog_index)
+}
+
+/// Build an index of blog posts organized by tags.
+fn build_tag_index(blog_posts: &[PageMetadata]) -> Vec<TagIndex> {
+    let mut tag_map: HashMap<String, Vec<PageMetadata>> = HashMap::new();
+
+    // Group blog posts by tag.
+    for post in blog_posts {
+        if let Some(tags) = &post.tags {
+            for tag in tags {
+                tag_map.entry(tag.clone()).or_default().push(post.clone());
+            }
+        }
+    }
+
+    // Convert to Vec<TagIndex> and sort
+    let mut tag_index: Vec<TagIndex> = tag_map
+        .into_iter()
+        .map(|(tag, mut posts)| {
+            // Sort posts within each tag by date (newest first)
+            posts.sort_by(|a, b| b.date.cmp(&a.date));
+            TagIndex { tag, posts }
+        })
+        .collect();
+
+    // Sort tags alphabetically
+    tag_index.sort_by(|a, b| a.tag.cmp(&b.tag));
+
+    tag_index
+}
+
+// Copy asset files (images, etc.) to the build directory while preserving structure.
 fn copy_asset_file(
     file_path: &Path,
     content_dir: &str,

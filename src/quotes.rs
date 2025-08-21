@@ -223,4 +223,20 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
         "There are decades where nothing happens; and there are weeks where decades happen.",
         "Vladmir Ilyich Lenin",
     ),
+    (
+        "Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety.",
+        "Benjamin Franklin",
+    ),
+    (
+        "The Net interprets censorship as damage and routes around it.",
+        "Jhon Gilmore",
+    ),
+    (
+        "We can define intelligence as the ability to accurately model reality.",
+        "Luis Schwab",
+    ),
+    (
+        "Bitcoin is not a refactor; Bitcoin is a rewrite",
+        "Adam Jonas",
+    ),
 ];

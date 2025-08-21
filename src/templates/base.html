@@ -20,7 +20,7 @@
         <section>
             {{ content | safe }}
 
-            {% if page.path != "/blog/index.html" %}
+            {% if page.path != "/blog/index.html" and page.path != "/blog/tags/index.html" %}
                 {% include "footer.html" %}
             {% endif %}
         </section>

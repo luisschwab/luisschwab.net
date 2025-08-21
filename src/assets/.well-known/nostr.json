@@ -1,0 +1,25 @@
+{
+    "names": {
+        "_": "6a8c5c3f34439c8d761639f07f12acaaa89bd5c28ddd785998708226cfcd1229",
+        "luisschwab": "6a8c5c3f34439c8d761639f07f12acaaa89bd5c28ddd785998708226cfcd1229",
+        "sats_por_real": "7160eaac5f779c0a5adf083906a1511d9219e6dbf9a4e2980daf1b33dfb583a4",
+        "timechain_bot": "40798b94d1f32d8dde1de98c4b47da784b3eb08b818218a98efa56cfbde3013a"
+    },
+    "relays": {
+        "6a8c5c3f34439c8d761639f07f12acaaa89bd5c28ddd785998708226cfcd1229": [
+            "wss://nostr.luisschwab.net",
+            "wss://nos.lol",
+            "wss://relay.damus.io",
+            "wss://relay.primal.net",
+            "wss://ftp.halifax.rwth-aachen.de/nostr"
+        ],
+        "7160eaac5f779c0a5adf083906a1511d9219e6dbf9a4e2980daf1b33dfb583a4": [
+            "wss://nostr.luisschwab.net",
+            "wss://relay.primal.net"
+        ],
+        "40798b94d1f32d8dde1de98c4b47da784b3eb08b818218a98efa56cfbde3013a": [
+            "wss://nostr.luisschwab.net",
+            "wss://relay.primal.net"
+        ]
+    }
+}

@@ -14,6 +14,10 @@
         position: relative;
         padding-left: 1rem;
     }
+    .blog-date {
+        font-size: 70%;
+        vertical-align: middle;
+    }
 
     @media (max-width: 700px) {
         .blog-list {
@@ -28,7 +32,7 @@
     <ul class="blog-list">
         {% for blog in blog_index %}
         <li>
-            <a href="{{ blog.path }}">{{ blog.title }}</a> \ <span class="blog-date">{{ blog.date }}<span/>
+            <a href="{{ blog.path }}">{{ blog.title }}</a><span class="blog-date"> \ {{ blog.date }}</span>
             <br/>
             <div class="blog-description">
                 {{ blog.description }}

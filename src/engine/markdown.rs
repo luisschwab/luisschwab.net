@@ -22,7 +22,7 @@ pub struct TocEntry {
 }
 
 /// The frontmatter is parsed from markdwown
-/// files and deserialized into [`FrontMatter`].
+/// files and deserialized into [`PageMetadata`].
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub(crate) struct PageMetadata {
     /// The template to be used for this page.
@@ -37,6 +37,9 @@ pub(crate) struct PageMetadata {
     /// The page's last edit date in
     /// ISO8601 format (the only correct one).
     pub(crate) edited: Option<String>,
+    /// A blog post's tags. They are arbitrary,
+    /// there's no allowed tags list.
+    pub(crate) tags: Option<Vec<String>>,
     /// Table of Content entries.
     pub(crate) toc: Option<Vec<TocEntry>>,
     /// The path for the page.
@@ -132,7 +135,7 @@ pub(crate) fn process_md_file(
     Ok(metadata)
 }
 
-/// Processing of the markdown contents (split from `process_md_file` for this to be a pure function).
+/// Processing of the markdown contents (split from `process_md_file` in order for this to be a pure function).
 fn process_md_content(
     content: &str,
     tera: &mut Tera,
@@ -144,12 +147,17 @@ fn process_md_content(
         None => return Err(EngineError::NoMatter),
     };
 
-    // Parse frontmatter into [`PageMetadata`].
-    let frontmatter_str = extracted.0;
-    let mut frontmatter: PageMetadata = toml::from_str(&frontmatter_str)?;
-
-    // Get the raw markdown content.
+    // Parse frontmatter into [`PageMetadata`] and extract the raw markdown.
+    let metadata_str = extracted.0;
     let markdown = extracted.1;
+    let mut metadata: PageMetadata = toml::from_str(&metadata_str)?;
+
+    // Sort the `tags` array alphabetically, if present.
+    if let Some(tags) = metadata.tags.as_ref() {
+        let mut tags_sorted = tags.clone();
+        tags_sorted.sort();
+        metadata.tags = Some(tags_sorted);
+    }
 
     // Extract the ToC from the unprocessed markdown.
     let toc_generator = TableOfContents::new(&markdown);
@@ -164,7 +172,7 @@ fn process_md_content(
         .collect();
 
     // Add the TOC to frontmatter iff there are headings.
-    frontmatter.toc = if toc_entries.is_empty() {
+    metadata.toc = if toc_entries.is_empty() {
         None
     } else {
         Some(toc_entries.clone())
@@ -173,10 +181,7 @@ fn process_md_content(
     // Process `Tera` directives selectively (protecting code blocks),
     // and create a temporary context with ToC data for template processing.
     let mut temp_ctx = tera_ctx.clone();
-    let temp_page_data = serde_json::json!({
-        "toc": &toc_entries
-    });
-    temp_ctx.insert("page", &temp_page_data);
+    temp_ctx.insert("page", &metadata);
     let markdown = process_tera_selectively(&markdown, tera, &temp_ctx)?;
 
     // Strip leading whitespace from HTML blocks (thx for that, CommonMark).
@@ -202,7 +207,7 @@ fn process_md_content(
     // Inject heading IDs into the final HTML string.
     let html_with_ids = inject_heading_ids_into_html(&html_content)?;
 
-    Ok((frontmatter, html_with_ids))
+    Ok((metadata, html_with_ids))
 }
 
 /// Process only actual `Tera` directives, leaving other content untouched.
@@ -258,7 +263,7 @@ fn process_tera_selectively(
 /// Process inline (`$ <expr> $`) and display (`$$ <expr> $$) LaTeX into HTML with `katex`.
 ///
 /// The KaTeX CSS file must be available. You can get it from
-/// https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.css
+/// <https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.css>
 fn process_katex(content: &str) -> Result<String, EngineError> {
     let mut result = content.to_string();
 

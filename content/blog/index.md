@@ -1,9 +1,11 @@
 +++
 title = "Blog"
 description = ""
-date = "2025-08-09"
+date = "1970-01-01"
 +++
 
 # Blog
+
+See all posts grouped by tag [here](/blog/tags).
 
 {% include "blog/post_index.html" %}
