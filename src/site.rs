@@ -68,7 +68,39 @@ fn main() -> Result<(), EngineError> {
     tera_ctx.insert("quote_author", &fallback_quote.1);
 
     // Build an index of blog posts to be inserted to the context later.
-    let mut blog_posts = Vec::new();
+    let blog_index = build_blog_index(content_dir, prod)?;
+    tera_ctx.insert("blog_index", &blog_index);
+
+    let blog_tag_index = build_tag_index(&blog_index);
+    tera_ctx.insert("blog_tag_index", &blog_tag_index);
+
+    // Process file contents.
+    for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
+        let file_path = entry.path();
+
+        if let Some(extension) = file_path.extension().and_then(|s| s.to_str()) {
+            if extension == "md" {
+                process_md_file(
+                    &mut tera,
+                    &mut tera_ctx,
+                    &config,
+                    file_path,
+                    content_dir,
+                    build_dir,
+                )?;
+            } else {
+                // Copy assets from the content directory.
+                copy_asset_file(file_path, content_dir, build_dir)?;
+            }
+        }
+    }
+
+    Ok(())
+}
+
+/// Build an index of the blog posts.
+fn build_blog_index(content_dir: &String, prod: bool) -> Result<Vec<PageMetadata>, EngineError> {
+    let mut blog_index = Vec::new();
     for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
         let file_path = entry.path();
         if file_path.extension().and_then(|s| s.to_str()) == Some("md")
@@ -99,47 +131,22 @@ fn main() -> Result<(), EngineError> {
                 let is_blog_index = rel_path.to_str().unwrap() == "blog/index.md"
                     || rel_path.to_str().unwrap() == "blog/tags/index.md";
                 if !is_blog_index {
-                    blog_posts.push(metadata);
+                    blog_index.push(metadata);
                 }
             }
         }
     }
     // Insert blog post metadata to Tera's context, sorted by date in descending order.
-    blog_posts.sort_by(|a, b| {
+    blog_index.sort_by(|a, b| {
         let date_a = a.date;
         let date_b = b.date;
         date_b.cmp(&date_a)
     });
-    tera_ctx.insert("blog_index", &blog_posts);
 
-    let blog_tag_index = build_tag_index(&blog_posts);
-    tera_ctx.insert("blog_tag_index", &blog_tag_index);
-
-    // Process file contents.
-    for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
-        let file_path = entry.path();
-
-        if let Some(extension) = file_path.extension().and_then(|s| s.to_str()) {
-            if extension == "md" {
-                process_md_file(
-                    &mut tera,
-                    &mut tera_ctx,
-                    &config,
-                    file_path,
-                    content_dir,
-                    build_dir,
-                )?;
-            } else {
-                // Copy assets from the content directory.
-                copy_asset_file(file_path, content_dir, build_dir)?;
-            }
-        }
-    }
-
-    Ok(())
+    Ok(blog_index)
 }
 
-/// Build an index of blog posts organized by tags
+/// Build an index of blog posts organized by tags.
 fn build_tag_index(blog_posts: &[PageMetadata]) -> Vec<TagIndex> {
     let mut tag_map: HashMap<String, Vec<PageMetadata>> = HashMap::new();
 
