@@ -1,7 +1,7 @@
 +++
 title = "Home"
 description = ""
-date = "2025-08-08"
+date = "1970-01-01"
 template = "index.html"
 +++
 
