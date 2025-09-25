@@ -2,6 +2,7 @@
 title = "Blog (by tag)"
 description = ""
 date = "1970-01-01"
+template = "base.html"
 +++
 
 # Blog Posts by Tag
