@@ -2,8 +2,11 @@ use std::{
     collections::HashMap,
     env, fs,
     path::{Path, PathBuf},
+    process,
 };
 
+use env_logger::Env;
+use log::{error, info};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -31,14 +34,27 @@ pub(crate) struct TagIndex {
 }
 
 fn main() -> Result<(), EngineError> {
+    // Initialize environment logger.
+    env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
+
     // Check if this is a production build.
-    let prod: bool = env::var("PROD")
-        .unwrap_or("false".to_string())
-        .parse()
-        .unwrap();
+    let prod: bool = match env::var("PROD").unwrap_or(false.to_string()).parse() {
+        Ok(prod) => {
+            info!("Succesfully parsed PROD={prod} environment variable");
+            prod
+        }
+        Err(e) => {
+            error!("Failed to parsed PROD environment variable: {e}");
+            process::exit(1);
+        }
+    };
 
     let config_path: PathBuf = PathBuf::from(CONFIG_FILE);
     if !config_path.exists() {
+        error!(
+            "Failed to read a configuration file at {}",
+            config_path.display()
+        );
         return Err(EngineError::InvalidPath(config_path.display().to_string()));
     }
     let config: SiteConfig = parse_config_file(config_path)?;
@@ -50,29 +66,37 @@ fn main() -> Result<(), EngineError> {
     // Create a Tera object and context.
     let mut tera = Tera::new("src/templates/**/*.html")?;
     let mut tera_ctx = Context::new();
+    info!("Succesfully built a Tera context");
 
     // Build a quote JSON array from `QUOTES`.
     let quotes_json = json!(
         QUOTES
             .iter()
             .map(|(text, author)| {
-                json!({"text": text.replace('\n', "<br/>"), "author": author})
+                json!({"text": text.replace("\n", "<br/>"), "author": author.replace("\n", "<br/>")})
             })
             .collect::<Vec<_>>()
     );
     tera_ctx.insert("quotes_json", &quotes_json.to_string());
+    info!("Inserted quotes JSON array into Tera's context");
+
     // Used if the browser has "JavaScripto" disabled.
     let fallback_quote: (&str, &str) = QUOTES[rand::rng().random_range(0..QUOTES.len())];
-    let fallback_quote = (fallback_quote.0.to_string(), fallback_quote.1.to_string());
+    let fallback_quote = (
+        fallback_quote.0.replace("\n", "<br/>"),
+        fallback_quote.1.replace("\n", "<br/>"),
+    );
     tera_ctx.insert("quote_text", &fallback_quote.0);
     tera_ctx.insert("quote_author", &fallback_quote.1);
 
     // Build an index of blog posts to be inserted to the context later.
     let blog_index = build_blog_index(content_dir, prod)?;
     tera_ctx.insert("blog_index", &blog_index);
+    info!("Inserted blog post index into Tera's context");
 
     let blog_tag_index = build_tag_index(&blog_index);
     tera_ctx.insert("blog_tag_index", &blog_tag_index);
+    info!("Inserted blog tag index into Tera's context");
 
     // Process file contents.
     for entry in WalkDir::new(content_dir).into_iter().filter_map(|e| e.ok()) {
@@ -191,7 +215,11 @@ fn copy_asset_file(
 
     // Copy the file
     fs::copy(file_path, &build_path)?;
-    println!("Copied {} to {}", file_path.display(), build_path.display());
+    info!(
+        "Copied asset file {} to {}",
+        file_path.display(),
+        build_path.display()
+    );
 
     Ok(())
 }
