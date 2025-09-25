@@ -1,6 +1,7 @@
-use std::{collections::HashMap, fs, path::Path};
+use std::{collections::HashMap, fs, path::Path, process};
 
 use chrono::NaiveDate;
+use log::{debug, error, info, warn};
 use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd, html};
 use pulldown_cmark_toc::{GitHubSlugifier, Slugify, TableOfContents};
 use regex::Regex;
@@ -60,6 +61,8 @@ impl Highlighter {
         let gruvbox = ThemeSet::get_theme("src/themes/gruvbox-dark.tmTheme").unwrap();
         theme_set.themes.insert("gruvbox_dark".to_string(), gruvbox);
 
+        info!("Loaded Gruvbox Dark theme");
+
         Self {
             syntax_set: SyntaxSet::load_defaults_newlines(),
             theme_set,
@@ -70,10 +73,22 @@ impl Highlighter {
         let syntax = self
             .syntax_set
             .find_syntax_by_token(lang)
-            .unwrap_or_else(|| self.syntax_set.find_syntax_plain_text());
+            .unwrap_or_else(|| {
+                error!("Failed to parse token `{lang}` from code block. Using plaintext...");
+                self.syntax_set.find_syntax_plain_text()
+            });
 
         // Select the Gruvbox theme from the theme set.
-        let theme = self.theme_set.themes.get("gruvbox_dark").unwrap();
+        let theme = match self.theme_set.themes.get("gruvbox_dark") {
+            Some(theme) => {
+                debug!("Selected Gruvbox Dark from the theme set");
+                theme
+            }
+            None => {
+                error!("Failed to select Gruvbox Dark from theme set, exiting...");
+                process::exit(1)
+            }
+        };
 
         highlighted_html_for_string(code, &self.syntax_set, syntax, theme).unwrap_or_else(|_| {
             format!("<pre><code>{}</code></pre>", html_escape::encode_text(code))
@@ -81,7 +96,7 @@ impl Highlighter {
     }
 }
 
-/// End-to-end processing of a markdown file.
+/// End-to-end processing of a Markdown file.
 ///
 /// Reads the file, parses `Latex` expressions and renders them into HTML with `katex`,
 /// renders the rest of the markdown into HTML, and writes it to the file system.
@@ -93,14 +108,18 @@ pub(crate) fn process_md_file(
     content_dir: &str,
     build_dir: &str,
 ) -> Result<PageMetadata, EngineError> {
+    info!("Processing Markdown file {}...", file_path.display());
+
     // Assemble the final build path.
     let relative_path = file_path.strip_prefix(content_dir)?;
     let build_path = Path::new(build_dir)
         .join(relative_path)
         .with_extension("html");
+    info!("Built build path: {}", build_path.display());
 
     // Read the file to a [`String`].
     let content = fs::read_to_string(file_path)?;
+    info!("Read file {}", file_path.display());
 
     // Split the Frontmatter from the Markdown and process the Markdown.
     let (mut metadata, html_content) = process_md_content(&content, tera, tera_ctx)?;
@@ -114,7 +133,16 @@ pub(crate) fn process_md_file(
     page_ctx.insert("content", &html_content);
 
     // Select the template defined in the Frontmatter or default to "base.html".
-    let template = metadata.clone().template.unwrap_or("base.html".to_string());
+    let template = match metadata.clone().template {
+        Some(template) => {
+            info!("Sucessfully selected template {}", template);
+            template
+        }
+        None => {
+            warn!("Failed to select template. Falling back to `base.html`");
+            "base.html".to_string()
+        }
+    };
 
     // Render the `Tera` context with the selected template.
     let rendered = tera.render(&template, &page_ctx)?;
@@ -126,8 +154,8 @@ pub(crate) fn process_md_file(
 
     // Write the rendered HTML to the build directory.
     fs::write(&build_path, rendered)?;
-    println!(
-        "Built {} into {}",
+    info!(
+        "Processed {} into {}",
         file_path.display(),
         build_path.display()
     );
@@ -141,6 +169,8 @@ fn process_md_content(
     tera: &mut Tera,
     tera_ctx: &Context,
 ) -> Result<(PageMetadata, String), EngineError> {
+    debug!("Processing Markdown content");
+
     // Extract and split `TOML` frontmatter and markdown.
     let extracted = match matter::matter(content) {
         Some(ext) => ext,
@@ -216,6 +246,8 @@ fn process_tera_selectively(
     tera: &mut Tera,
     tera_ctx: &Context,
 ) -> Result<String, EngineError> {
+    debug!("Processing Tera selectively...");
+
     // Only process if there are actual `Tera` directives.
     if !content.contains("{%") && !content.contains("{{") {
         return Ok(content.to_string());
@@ -265,6 +297,8 @@ fn process_tera_selectively(
 /// The KaTeX CSS file must be available. You can get it from
 /// <https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.css>
 fn process_katex(content: &str) -> Result<String, EngineError> {
+    debug!("Processing Katex");
+
     let mut result = content.to_string();
 
     // Exclude code blocks from `katex` processing
@@ -322,6 +356,8 @@ fn process_katex(content: &str) -> Result<String, EngineError> {
 
 /// Process code blocks into HTML with `syntect`.
 fn process_syntect(content: &str) -> Result<String, EngineError> {
+    debug!("Processing syntect...");
+
     let highlighter = Highlighter::new();
     let parser = Parser::new_ext(
         content,
@@ -375,6 +411,8 @@ fn process_syntect(content: &str) -> Result<String, EngineError> {
 
 /// Process sidenote (`[^key]`) and marginnote (`[*key]`) into TufteCSS classes.
 fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
+    debug!("Processing Tufte notes...");
+
     let mut result_lines = Vec::new();
     let mut sidenotes = HashMap::new();
     let mut marginnotes = HashMap::new();

@@ -43,9 +43,9 @@
         <h3>Random Quote</h3>
         <br/>
         <div id="quote-container">
-            &#x275D; {{ quote_text }} &#x275E;
+            &#x275D; {{ quote_text | safe }} &#x275E;
             <div class="author">
-                &mdash;{{ quote_author }}
+                &mdash;{{ quote_author | safe }}
             </div>
         </div>
     </div>
@@ -56,9 +56,9 @@
 <script>
     (function() {
         const quotes = {{ quotes_json | safe }};
-        const randQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
         document.getElementById('quote-container').innerHTML =
-            `&#x275D; ${randQuote.text} &#x275E;<div class="author">&mdash;${randQuote.author}</div>`;
+            `&#x275D; ${quote.text} &#x275E;<div class="author">&mdash;${quote.author}</div>`;
     })();
 </script>

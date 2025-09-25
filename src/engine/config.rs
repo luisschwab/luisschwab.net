@@ -1,5 +1,6 @@
 use std::{fs, path::PathBuf};
 
+use log::info;
 use serde::{Deserialize, Serialize};
 
 use crate::EngineError;
@@ -21,6 +22,8 @@ pub(crate) struct SiteConfig {
 pub(crate) fn parse_config_file(config_path: PathBuf) -> Result<SiteConfig, EngineError> {
     let config_raw: String = fs::read_to_string(config_path)?;
     let config: SiteConfig = toml::from_str(&config_raw)?;
+
+    info!("Succesfully read configuration file");
 
     Ok(config)
 }

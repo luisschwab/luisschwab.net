@@ -11,8 +11,10 @@ path = "src/site.rs"
 anyhow = "1.0.99"
 chrono = { version = "0.4.41", features = ["serde"] }
 clap = { version = "4.5.45", features = ["derive"] }
+env_logger = "0.11.8"
 html-escape = "0.2.13"
 katex = "0.4.6"
+log = "0.4.28"
 matter = "0.1.0-alpha4"
 pulldown-cmark = "0.13.0"
 pulldown-cmark-toc = "0.7.0"

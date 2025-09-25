@@ -1,7 +1,6 @@
 pub(crate) const QUOTES: &[(&str, &str)] = &[
     (
-        "If you want to build a ship, don't drum up the men to gather wood, divide the work,
-        and give orders. Instead, teach them to yearn for the vast and endless sea.",
+        "If you want to build a ship, don't drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea.",
         "Antoine de Saint-Exupéry",
     ),
     (
@@ -238,5 +237,23 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
     (
         "Bitcoin is not a refactor; Bitcoin is a rewrite",
         "Adam Jonas",
+    ),
+    (
+        "If you treat an individual as he is, he will remain how he is.
+        But if you treat him as if he were what he ought to be and could be,
+        he  will become what he ought to be and could be.",
+        "Johann Wolfgang von Goethe",
+    ),
+    (
+        "One Seed to rule them all,
+        One Key to find them,
+        One Path to bring them all,
+        And in cryptography bind them.",
+        "Sauron",
+    ),
+    (
+        "Because if in fact, you can't crack that at all, government can't get in,
+        then everybody's walking around with a Swiss bank account in their pocket.",
+        "Barack Obama",
     ),
 ];

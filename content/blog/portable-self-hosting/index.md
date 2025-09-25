@@ -64,14 +64,14 @@ or if you wan't to connect other devices to this network[*interface].
 ## VPS Hardening
 
 Disable SSH password authentication (password auth is a shitcoin), and ideally use hardware-based auth:
-```shell
+```bash
 ~$ vim /etc/ssh/sshd_config
 
 PasswordAuthentication no
 ```
 
 Install `ufw`:
-```shell
+```bash
 ~$ apt install ufw
 ```
 Later, open the ports necessary to run what you want (eg: 8333 for bitcoind,
@@ -83,19 +83,19 @@ The VPS will serve as a the VPN server, and pfSense will serve as the VPN client
 can be behind CG-NAT and it's IP can change. The client will **always** initiate the connection.
 
 Install wireguard:
-```shell
+```bash
 ~$ apt install wireguard
 ```
 
 Generate two key pairs, one for server and one for client:
-```shell
+```bash
 ~$ wg genkey | tee server-priv | wg pubkey > server-pub
 
 ~$ wg genkey | tee client-priv | wg pubkey > client-pub
 ```
 
 Now, create `wg0.conf`:
-```shell
+```bash
 ~$ vim /etc/wireguard/wg0.conf
 
 # VPS
@@ -119,7 +119,7 @@ AllowedIPs = 10.10.20.2/32, 10.10.10.0/24
 ```
 
 Now, enable the new interface:
-```shell
+```bash
 ~$ wg-quick up wg0
 ```
 
@@ -147,7 +147,7 @@ then come back here.
 
 After you're done, all traffic should be routed through the tunnel and out the VPS.
 Test this via:
-```shell
+```bash
 ~$ curl ipinfo.io
 {
   "ip": "< >",
@@ -168,7 +168,7 @@ You should be seeing your VPS's IP information.
 
 To proxy requests, we'll use `nginx`.
 
-```shell
+```bash
 ~$ apt install nginx
 ```
 

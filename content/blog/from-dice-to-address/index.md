@@ -3,7 +3,7 @@ title = "From Dice to Address"
 description = "Creating a Bitcoin address from scratch"
 date = "2024-03-19"
 template = "blog/blog.html"
-tags = ["bitcoin", "ecc"]
+tags = ["bitcoin", "crypto"]
 +++
 
 {% include "blog/toc.html" %}
@@ -123,7 +123,7 @@ words from the [BIP39 wordlist](https://github.com/bitcoin/bips/blob/master/bip-
 [^index]: Remember to add 1 to the numbers below, since the list from the link above is not 0-indexed.
 
 
-```shell
+```bash
  1: 11001101001 -> 1641 -> snake
  2: 01110101001 -> 937  -> inside
  3: 01110111110 -> 958  -> jelly
@@ -169,7 +169,7 @@ The first byte of the new digest is `4F`. Converting this to binary yields
 `01001111`. Appending this to `000` yields `00001001111`, or $ 79_{10}$.
 This corresponds to the word _antique_ in the wordlist. Our BIP39 mnemonic will then be:
 
-```console
+```bash
  1: 11001101001 -> 1641 -> snake
  2: 01110101001 -> 937  -> inside
  3: 01110111110 -> 958  -> jelly
@@ -241,7 +241,7 @@ over which operations are done. They are:
     ECDSA algorithm [after Taproot (circa 2021), Bitcoin implements the Schnorr algorithm],
     though the same curve with the same public/private keys can be used in some other algorithms such as Schnorr."
 
-```console
+```bash
 p = FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
   = 2^256 - 2^32 - 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1
 
@@ -455,7 +455,7 @@ That's it. We have now converted our 256 bit private key into a
 Wallet Importable Format.
 
 To summarize, we got:
-```console
+```bash
 Address -> 1HS7czgBHsRy93JTXfp974mM4G7WPF5xgW
 
     WIF -> KxnPUkZxhqQprt6j3FEwxiT6VLuPpKk9mgc5fe5GNLXg9ctKBjNh
