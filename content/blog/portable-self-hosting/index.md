@@ -18,6 +18,10 @@ _not your hardware, not your data_. This is an extended version of the
 [workshop](https://x.com/ClubeBitcoinUnB/status/1882250321029980236) I gave at
 [ClubeBitcoinUnB](https://x.com/ClubeBitcoinUnB).
 
+If you only need internal access to your server and don't wish to expose it to the wider
+internet, there are better and easier options, such as [Tailscale](https://tailscale.net),
+or an Onion Service via Tor.
+
 ## Why you should host your own services
 
 As stated above, _not your hardware, not your data_. People in general have become too used
@@ -33,11 +37,9 @@ to the internet is not very safe, especially if you don't own the hardware it's 
 
 ## Network Topology
 
-This is what the network will look like:
+![Network Topology for a portable self-hosting scheme](topology.png)
 
-![](topology.png)
-
-We'll use a VPS as a reverse proxy[^proxy] to your server. It will close a VPN tunnel to the pfSense
+We will use a VPS as a reverse proxy[^proxy] to the internal server. It will close a VPN tunnel to the _pfSense_
 router, securely routing our traffic over the wire.
 
 [^proxy]:

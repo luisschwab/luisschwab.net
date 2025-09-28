@@ -227,7 +227,7 @@ $$ y^2 = x^3 + ax + b $$
 
 where $a$ and $b$ are integers. A curve of this family looks like this:
 
-![an elliptic curve over an infinite field](ecc.jpg)
+![The secp256k1 elliptic curve over an infinite field](ecc.jpg)
 
 Bitcoin uses an elliptic curve called _secp256k1_[^secp256k1].
 It defines coefficients for the curve, where the _Generator Point_ ($G$) is,
@@ -261,7 +261,7 @@ $$ y^2 = x^3 + 7 $$
 Since the curve is over a finite field, it ceases being continuous
 and becomes discrete. It actually looks like this:
 
-![](ecc-discrete.png)
+![The secp256k1 elliptic curve over a finite field](ecc-discrete.png)
 
 When doing finite field math, all operations are done _modulo p_,
 so that we don't overflow out of the field.
@@ -449,7 +449,7 @@ our WIF-formatted private key.
 This diagram illustrates the byte-to-byte structure of a WIF-encoded
 private key:
 
-![](wif-bytes.png)
+![WIF byte structure](wif-bytes.png)
 
 That's it. We have now converted our 256 bit private key into a
 Wallet Importable Format.
@@ -461,10 +461,9 @@ Address -> 1HS7czgBHsRy93JTXfp974mM4G7WPF5xgW
     WIF -> KxnPUkZxhqQprt6j3FEwxiT6VLuPpKk9mgc5fe5GNLXg9ctKBjNh
 ```
 
-If you try to import this WIF into Sparrow, for example, you see that
-the address it derives is the same we did:
+If you try to import this WIF into Sparrow you'll see that the address it derives is the same we did:
 
-![](wif-import.png)
+![Importing a WIF on Sparrow Wallet](wif-import.png)
 
 ## Conclusion
 

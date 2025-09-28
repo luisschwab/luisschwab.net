@@ -256,4 +256,14 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
         then everybody's walking around with a Swiss bank account in their pocket.",
         "Barack Obama",
     ),
+    (
+        "How have you done any of this? We have to go back.
+
+        It's too late for that. We're closer to the other side.
+
+        What other side? You wanna drown us both?
+
+        You wanna know how I did it? This is how I did it Anton. I never saved anything for the swim back.",
+        "Anton and Vincent Freeman"
+    )
 ];

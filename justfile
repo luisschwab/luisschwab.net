@@ -24,7 +24,7 @@ prod port="8000": build-prod
 
 check:
     cargo +nightly fmt --all -- --check
-    cargo check
+    cargo +nightly check
     cargo clippy
 
 clean:
