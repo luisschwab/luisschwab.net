@@ -33,12 +33,14 @@ These are my latest blog posts. Click [here](/blog) to see all my blog posts.
 
 ## Lightning Network
 
-You can open a channel to my node on the lightning network[^ln]. Channels must have >=1M sats,
+You can open a channel to the
+[_Nabla ∇_&nbsp;&nbsp;](https://mempool.space/lightning/node/023e865073d71c6c054c2bb9c0bdbe59277f065544f4c152cb71c6611cc032c66d)
+node on the lightning network[^ln]. Channels must have >=1M sats,
 the base fee is 0 and the fee rate is dynamic, based on payment flows.
 
-- Pubkey: [022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17](https://mempool.luisschwab.net/lightning/node/022e6daa0464a77800ef0ad117497d687e21bab35b15672a7f9de7d8541b042f17)
-- IPv4 socket: 209.126.80.42:9735
-- Tor[^tor] socket: fp7joq2n66kq5oem3uweaov4ndeu4ulb2mzk6v34zgkrgmradpcmwxyd.onion:9735
+- Pubkey: 023e865073d71c6c054c2bb9c0bdbe59277f065544f4c152cb71c6611cc032c66d
+- IPv4 socket: 195.26.240.213:777
+- Tor[^tor] socket: 34g3cxkrfsptujruoel4gx4sdgtxuhvvbimp3ux53lybhzq4fbts75qd.onion:9735
 
 [^ln]:
     The [lightning network](https://river.com/learn/what-is-the-lightning-network/)
@@ -49,7 +51,7 @@ the base fee is 0 and the fee rate is dynamic, based on payment flows.
     [here](https://lightning.network/lightning-network-paper.pdf).
 [^tor]:
     [Tor](https://en.wikipedia.org/wiki/Tor_(network))
-    is a overlay network that enables anonymous communications,
+    is an overlay network that enables anonymous communicationsa,
     powered by volunteer-operated relays which route internet traffic
     via random paths through this relay network.
 
@@ -60,40 +62,29 @@ You can send me some sats via `sats@luisschwab.net`.
 
 ## Self-Hosted Stuff
 
-I like to self-host as much as possible, because not your hardware, not your data.
 These are my publicly availabe services:
 
-- mempool.space instance: [mempool.luisschwab.net](https://mempool.luisschwab.net)
-- Bitcoin DNS seeder[^seed]: [seed.bitcoin.luisschwab.com:53](https://seed.bitcoin.luisschwab.com:53)
-- Payjoin Directory[^payjoin]: [payjoin.luisschwab.net](https://payjoin.luisschwab.net)
-- O-HTTP relay[^ohttp]: [ohttp.luisschwab.net](https://ohttp.luisschwab.net)
-- Nostr relay[^nostr]: [wss://nostr.luisschwab.net](wss://nostr.luisschwab.net)
+- Utreexo Bridge: [utreexod.bitcoin.luisschwab.net:8433/38433]()
+- Mempool instance: [mempool.luisschwab.net](https://mempool.luisschwab.net)
+- Bitcoin DNS seeder[^seed]: [seed.bitcoin.luisschwab.com:53]()
+- O-HTTP relay: [ohttp.luisschwab.net](https://ohttp.luisschwab.net)
 
 [^seed]:
     A Bitcoin DNS seeder behaves like regular DNS server;
     but instead of returning IP addresses for a website, for example,
     it returns IP addresses of known, public Bitcoin nodes.
     You can test it out by running `dig seed.bitcoin.luisschwab.com`.
-[^payjoin]:
-    Payjoin is a protocol described in [BIP78]() and [BIP77]().
-    It enables batching Bitcoin transactions from multiple senders
-    in such a way that it breaks common heuristics used for chain-analysis.
-    By breaking these heuristics, Bitcoin becomes more private for all,
-    even those that don't use Payjoin.
-[^ohttp]:
-    O-HTTP, or Oblivious HTTP, is... TODO
-[^nostr]:
-    This is my personal nostr relay: only I get to write to it,
-    but anyone can read from it. Learn about nostr [here](https://nostr.com).
 
 [*apology]
 [*apology]: ![](/img/apology.webp)
 
 ## Selected Projects
 
-- [bdk-floresta](https://github.com/luisschwab/bdk-floresta): Floresta-powered chain-source crate for BDK.
-- [hashsat](https://github.com/luisschwab/hashsat): passphrase cracker.
-- [fakhr (فخر)](https://github.com/luisschwab/fakhr): vanity address and npub generator.
+- [bdk-floresta](https://github.com/luisschwab/bdk-floresta): Floresta-powered chain-source crate for BDK (wip).
+- [hashsat](https://github.com/luisschwab/hashsat): bitcoin passphrase cracker.
+- [fakhr (فخر)](https://github.com/luisschwab/fakhr): vanity bitcoin address and npub generator.
+- [koerier](https://github.com/luisschwab/koerier): self-hosted lightning address server for LND.
+- [smaug](https://github.com/luisschwab/smaug): guards your coins and sends you an email if they move.
 
 ## Contact
 
@@ -101,7 +92,7 @@ You can get in touch with me through one of these channels;
 if you want to encrypt it, use PGP[^pgp]. You can get my key
 [here 🔑](/pgp/FC43D25BEDD5EE7C.txt).
 
-- email: luisschwab at protonmail dot com
+- email: biz at luisschwab dot net
 - npub: [npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n](https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n)
 - x: [@luisschwab_](https://x.com/luisschwab_)
 - github: [luisschwab](https://github.com/luisschwab)
