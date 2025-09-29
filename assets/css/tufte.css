@@ -251,7 +251,6 @@ figcaption {
     line-height: 1.6;
     vertical-align: baseline;
     position: relative;
-    max-width: 40%;
 }
 
 figure.fullwidth figcaption {

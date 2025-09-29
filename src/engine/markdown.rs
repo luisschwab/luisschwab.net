@@ -214,8 +214,11 @@ fn process_md_content(
     temp_ctx.insert("page", &metadata);
     let markdown = process_tera_selectively(&markdown, tera, &temp_ctx)?;
 
+    // Convert plain HTML `<img>` into TufteCSS image format (images on sidenotes and marginnotes are ignored).
+    let markdown_with_figures = convert_img_md_to_tufte(&markdown);
+
     // Strip leading whitespace from HTML blocks (thx for that, CommonMark).
-    let markdown_stripped = strip_leading_whitespace_from_html(&markdown);
+    let markdown_stripped = strip_leading_whitespace_from_html(&markdown_with_figures);
 
     // Process and convert sidenote notation into TufteCSS classes.
     let markdown_sidenotes = process_tufte_notes(&markdown_stripped)?;
@@ -492,4 +495,51 @@ fn process_tufte_notes(content: &str) -> Result<String, EngineError> {
     }).to_string();
 
     Ok(result)
+}
+
+/// Converts all regular HTML images into TufteCSS image class (`<figure>` and `<figcaption>`).
+/// An image's `alt` becomes the content of `<figcaption>`.
+///
+/// Note: images on marginnotes and sidenotes get ignored.
+pub(crate) fn convert_img_md_to_tufte(markdown: &str) -> String {
+    let mut result = markdown.to_string();
+    let mut protected_blocks = Vec::new();
+    let mut counter = 0;
+
+    // Protect images inside marginnotes and sidenotes by replacing them with placeholders.
+    let note_def_rgx = Regex::new(r"(?m)^(\[[\^*][^\]]+\]:\s*.*(?:\n[ \t]+.*)*)").unwrap();
+    result = note_def_rgx
+        .replace_all(&result, |caps: &regex::Captures| {
+            let placeholder = format!("__PROTECTED_NOTE_{counter}__");
+            protected_blocks.push(caps[1].to_string());
+            counter += 1;
+            placeholder
+        })
+        .to_string();
+
+    // Convert the remaining `<img>`es.
+    let img_rgx = Regex::new(r"!\[([^\]]*)\]\(([^)]+)\)").unwrap();
+    result = img_rgx
+        .replace_all(&result, |caps: &regex::Captures| {
+            let alt_text = &caps[1];
+            let src = &caps[2];
+
+            if alt_text.is_empty() {
+                format!("<figure>\n<img src=\"{}\">\n</figure>", src)
+            } else {
+                format!(
+                    "<figure>\n<img src=\"{}\" alt=\"{}\">\n<figcaption>{}</figcaption>\n</figure>",
+                    src, alt_text, alt_text
+                )
+            }
+        })
+        .to_string();
+
+    // Restore protected marginnotes and sidenotes.
+    for (i, block) in protected_blocks.iter().enumerate() {
+        let placeholder = format!("__PROTECTED_NOTE_{i}__");
+        result = result.replace(&placeholder, block);
+    }
+
+    result
 }
