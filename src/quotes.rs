@@ -265,5 +265,16 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
 
         You wanna know how I did it? This is how I did it Anton. I never saved anything for the swim back.",
         "Anton and Vincent Freeman"
+    ),
+    (
+        "Talk is cheap, send patches",
+        "FFmpeg"
+    ),
+    (
+        "A King may move a man, a father may claim a son, but remember that even when those who
+        move you be Kings, or men of power, your soul is in your keeping alone. When you stand
+        before God, you cannot say, \"But I was told by others to do thus.\" Or that,
+        \"Virtue was not convenient at the time.\" This will not suffice. Remember that.",
+        "King Baldwin IV"
     )
 ];
