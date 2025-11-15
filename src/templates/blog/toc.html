@@ -47,7 +47,7 @@
         <ul>
             {% for entry in page.toc %}
             <li class="toc-level-{{ entry.level }}">
-                <a href="#{{ entry.id }}">{{ entry.title }}</a>
+                <a href="#{{ entry.id }}">↳ {{ entry.title }}</a>
             </li>
             {% endfor %}
         </ul>

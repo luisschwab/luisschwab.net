@@ -38,7 +38,7 @@
 <div class="tags-overview">
     {% for blog_tag_group in blog_tag_index %}
     <div class="tag-section">
-        <h2 class="tag-heading">{{ blog_tag_group.tag }}</h2>
+        <h2 class="tag-heading">↳{{ blog_tag_group.tag }}</h2>
         <ul class="blog-list" id="{{ blog_tag_group.tag }}">
             {% for post in blog_tag_group.posts %}
             <li>
