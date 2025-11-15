@@ -96,7 +96,6 @@ if you want to encrypt it, use PGP[^pgp]. You can get my key
 - npub: [npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n](https://njump.me/npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n)
 - x: [@luisschwab_](https://x.com/luisschwab_)
 - github: [luisschwab](https://github.com/luisschwab)
-- codeberg: [luisschwab](https://codeberg.org/luisschwab)
 
 [^pgp]:
     If you don't know what [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy),
