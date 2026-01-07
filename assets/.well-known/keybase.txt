@@ -1,0 +1,73 @@
+==================================================================
+https://keybase.io/luisschwab
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://luisschwab.net
+  * I am luisschwab (https://keybase.io/luisschwab) on keybase.
+  * I have a public key with fingerprint 5B80 DDCD 9A41 2144 5B92  DC3B FC43 D25B EDD5 EE7C
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010126f5b4c41a495f355f4ff52f0f895f348a317114e4222541a36b44ccf9b18a570a",
+      "fingerprint": "5b80ddcd9a4121445b92dc3bfc43d25bedd5ee7c",
+      "host": "keybase.io",
+      "key_id": "fc43d25bedd5ee7c",
+      "kid": "010126f5b4c41a495f355f4ff52f0f895f348a317114e4222541a36b44ccf9b18a570a",
+      "uid": "f4a3b259d9c078397893dbad957b2019",
+      "username": "luisschwab"
+    },
+    "service": {
+      "hostname": "luisschwab.net",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1767800746,
+  "expire_in": 157680000,
+  "prev": "890d65d708ecff6aa8a8096924603ac024a1b7959e01a5bc8da52d3be9281bcd",
+  "seqno": 3,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owJ4nK1Sa1BUZRheUCmXe2WGzCIeCaYgOvfLDgxNBkLYoDRgOMR6Lt9hDyy7yzmH
+RdphvCQC1mxkxXApNCIcbDDGxE2yggZC5ZI3pNQausjEyG0Swhmp7RzLX/WzX9+8
+z/c8z/u877x1wSsMRr9H0u6ON1xozvcbmuIMUsHubjfEOYQKyOyGisG9B9gEoKiW
+YkmAzBCMwAhKigSH8zjC4gwhYgQh4qJIoCIs0nqN0yyGUAiCAxxFUUKjYSSH4zwv
+MhxCswQFs1ACJEr2QiA7ZcmuarYER8OCwAsMiyMoguMEx6ACj3Eij2MCSnBAEAgA
+KF4TWh2KrtDCcawCEiWHhmmF5V68/+D/z7nL/u6DsxiHEozA8DBFYwxFM5jAsQJD
+UBwKI4xOVIBsZ0uAxraVSYrCW8tZDqpMgDTcJfFAX60+y784iXaganqn7FAdvMOm
+/VlV1amYda1a4dTJ5YCz/GNj4SS7oO1SU7iArEgOO2RGNCavSrovQpEUDcMUTiZA
+YJdTkoFF0hkERWowDOt9gEuzpBk4XyAJgYJpwIsiybI0S8MMyaA4CWMsD6M4i3AU
+QzAARliC42mBJVAB4wCD0gjHC5A+WandAZkxLSdbqHkqUqGdVctkAFUaa/2xlQY/
+o8H06IaVdvTO9UVQsYfsKfLev79V/vrxGYyrw+4jR98M9Vl/v+jqcT9oy5ise+WJ
+7HPm5c+PHGrZ8WJzJbE+nzLNn/d8uHgG6bHEITmP1Z3am7Jn1DTz640HklLgptgA
+7/P+OyJXQyGpw05mfwea+7HoZNxd8hzYvP7S6OGAS/WZcWWXK18W3b6svsMp3M1r
+8anZV0vT4ezFsWPD3hPYH3dijnc/O0Lmrq2pa02++MnJl+bY75Obss9uXBMpNk99
+zcq5oyOZ6U9PbFJ3BX420BB9a/mLUKTlVNzQwrqkjgb6xnRwXsR+54/BWSE7Z/5s
+zGwbb9z85afbij8aocdyJ7t+7u9fuzOgt4LtbGxv70hMi+mxVnler8moDrVtNfWe
+XyI7f4pNKXohBTu3bsYR3T14IL1MKeiGo7LU95fee00IiRebvsmXe961RLcdqZ0u
+8Ywcnf+tqHJxe+5TX73TXbUxx+iLerV2vjhv2INHzLqzLi8vb3jONlufjKwaQMrD
+frnydtRZcdzzwXj1RMVg1uNjBdcf9h4rOfFdced2fl/XQ8mejLShgJDZlrbBBdMS
+yHP1Bno3hRRhiWGn7yr9W/fVnL565lBQeKov8q2gZ0KDTAc6mGlD4JZrQwft254M
+L41IvaUUTO41rk+Ty2Ou5HsXBoLmdo/6btdsWf6hmvG90VJ9u73qeFJ9fFpObJsn
+48KaCVefrzX8W2vr1E04Mq8v0jrdP+d/csVfwarOfw==
+=4nhS
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/luisschwab
+
+==================================================================
+
