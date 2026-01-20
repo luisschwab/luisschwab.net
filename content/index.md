@@ -14,7 +14,8 @@ Currently, I'm a Computer Engineering student at [University of Brasília](https
 where I co-founded [ClubeBitcoinUnB](https://github.com/ClubeBitcoinUnB)[^clube-bitcoin-unb],
 a student club focused on Bitcoin-related  Research, Development, and Education.
 I'm also an open-source developer funded by the
-[BitcoinDevKit Foundation](https://bitcoindevkit.org/foundation/grantees/#luis-schwab).
+[BitcoinDevKit Foundation](https://bitcoindevkit.org/foundation/grantees/#luis-schwab), working mainly
+on [BDK](https://github.com/bitcoindevkit) and [Floresta](https://github.com/getfloresta/Floresta).
 
 [^clube-bitcoin-unb]: We hold technical seminars and workshops, and also host [Brasília BitDevs](https://bitdevs.bsb.br).
 
@@ -80,9 +81,8 @@ These are my publicly availabe services:
 
 ## Selected Projects
 
+- [bonsai](https://github.com/luisschwab/bonsai): desktop bitcoin wallet with an embedded full node.
 - [bdk-floresta](https://github.com/luisschwab/bdk-floresta): Floresta-powered chain-source crate for BDK (wip).
-- [hashsat](https://github.com/luisschwab/hashsat): bitcoin passphrase cracker.
-- [fakhr (فخر)](https://github.com/luisschwab/fakhr): vanity bitcoin address and npub generator.
 - [koerier](https://github.com/luisschwab/koerier): self-hosted lightning address server for LND.
 - [smaug](https://github.com/luisschwab/smaug): guards your coins and sends you an email if they move.
 

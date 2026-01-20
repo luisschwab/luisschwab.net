@@ -7,7 +7,6 @@ use std::{
 
 use env_logger::Env;
 use log::{error, info};
-use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tera::{Context, Tera};
@@ -80,8 +79,8 @@ fn main() -> Result<(), EngineError> {
     tera_ctx.insert("quotes_json", &quotes_json.to_string());
     info!("Inserted quotes JSON array into Tera's context");
 
-    // Used if the browser has "JavaScripto" disabled.
-    let fallback_quote: (&str, &str) = QUOTES[rand::rng().random_range(0..QUOTES.len())];
+    // Display the lats quote from `QUOTES`, if the browser has "JavaScripto" disabled.
+    let fallback_quote: (&str, &str) = QUOTES[QUOTES.len() - 1];
     let fallback_quote = (
         fallback_quote.0.replace("\n", "<br/>"),
         fallback_quote.1.replace("\n", "<br/>"),
