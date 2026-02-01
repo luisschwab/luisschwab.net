@@ -20,7 +20,7 @@ pulldown-cmark = "0.13.0"
 pulldown-cmark-toc = "0.7.0"
 regex = "1.12.2"
 serde = { version = "1.0.228", features = ["derive"] }
-serde_json = "1.0.145"
+serde_json = "1.0.149"
 syntect = "5.3.0"
 tera = "1.20.1"
 thiserror = "2.0.17"
