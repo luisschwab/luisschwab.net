@@ -9,7 +9,7 @@ path = "src/site.rs"
 
 [dependencies]
 anyhow = "1.0.100"
-chrono = { version = "0.4.42", features = ["serde"] }
+chrono = { version = "0.4.43", features = ["serde"] }
 clap = { version = "4.5.53", features = ["derive"] }
 env_logger = "0.11.8"
 html-escape = "0.2.13"
