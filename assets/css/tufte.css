@@ -81,6 +81,7 @@ body {
     margin: 0;
     display: -webkit-flex;
     -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
     padding-left: 16%;
     padding-right: 12.5%;
     overflow-x: hidden;
@@ -467,7 +468,6 @@ label.margin-toggle:not(.sidenote-number) {
         clear: both;
         width: 95%;
         margin: 1rem 2.5%;
-        vertical-align: baseline;
         position: relative;
     }
 
