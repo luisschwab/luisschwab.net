@@ -23,7 +23,7 @@ use engine::{
 use quotes::QUOTES;
 
 /// The file where site-wide definitions must be declared.
-/// The path is relative to the Cargo project's root.
+/// The path is relative to Cargo project's root.
 const CONFIG_FILE: &str = "config.toml";
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
