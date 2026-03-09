@@ -16,19 +16,10 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
         with:
           persist-credentials: false
-
-      - uses: dtolnay/rust-toolchain@22a6a5b0f9f487c5f5587025ae9d4a1caf2a8a78 # clippy
-
       - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2
         with:
           cache-on-failure: true
-
       - name: Install cargo-audit
-        run: cargo install cargo-audit --force --locked
-
-      - name: Check for audit warnings
-        run: cargo audit -D warnings
-        continue-on-error: true
-
+        run: cargo install cargo-audit --locked
       - name: Check for vulnerabilities
-        run: cargo audit
+        run: cargo audit -D warnings
