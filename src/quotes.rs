@@ -235,5 +235,13 @@ pub(crate) const QUOTES: &[(&str, &str)] = &[
     (
         "A King may move a man, a father may claim a son, but remember that even when those who move you be Kings, or men of power, your soul is in your keeping alone. When you stand before God, you cannot say, \"But I was told by others to do thus.\" Or that, \"Virtue was not convenient at the time.\" This will not suffice. Remember that.",
         "King Baldwin IV"
+    ),
+    (
+        "No matter how isolated you are and how lonely you feel, if you do your work truly and conscientiously, unknown allies will come and seek you.",
+        "Carl Jung"
+    ),
+    (
+        "I am an old man and have known a great many troubles, but most of them have never happened.",
+        "Mark Twain"
     )
 ];

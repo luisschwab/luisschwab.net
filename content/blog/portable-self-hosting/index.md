@@ -3,7 +3,7 @@ title = "Portable Self-Hosting"
 description = "A guide on self-hosting stuff from wherever"
 date = "2025-01-27"
 edited = "2025-08-12"
-tags = ["infrastructure", "networks", "privacy"]
+tags = ["netops", "privacy"]
 template = "blog/blog.html"
 +++
 

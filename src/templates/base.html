@@ -20,8 +20,10 @@
         <section>
             {{ content | safe }}
 
-            {% if page.path != "/blog/index.html" and page.path != "/blog/tags/index.html" %}
+            {% if page.path != "/blog/index.html" and page.path != "/blog/tags/index.html" and page.path != "/netops/index.html" %}
                 {% include "footer.html" %}
+            {% else %}
+                <div style="margin-bottom: 5rem;"></div>
             {% endif %}
         </section>
     </body>
