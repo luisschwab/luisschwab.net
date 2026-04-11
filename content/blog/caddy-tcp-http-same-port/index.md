@@ -3,7 +3,7 @@ title = "Making Caddy Listen"
 description = "A guide on configuring Caddy to work with TCP and HTTP on the same port"
 date = "2026-03-09"
 template = "blog/blog.html"
-tags = ["infrastructure"]
+tags = ["netops"]
 +++
 
 {% include "blog/toc.html" %}
