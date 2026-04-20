@@ -7,16 +7,15 @@ template = "index.html"
 
 # Network Operations
 
-Below are publicly available infrastructure that I operate.
+Below is the publicly available infrastructure that I operate.
 
 ## Bitcoin Nodes
 
 | Network    | Implementation | Version | IPv4 Socket            |
 | ---------- | -------------- | ------- | ---------------------- |
-| `Bitcoin`  | `Bitcoin Core` | `v30.2` | `195.26.240.213:8333`  |
-| `Signet`   | `Bitcoin Core` | `v30.2` | `195.26.240.213:38333` |
-| `Testnet4` | `Bitcoin Core` | `v30.2` | `195.26.240.213:48333` |
-| `Testnet3` | `Bitcoin Core` | `v30.2` | `195.26.240.213:28333` |
+| `Bitcoin`  | `Bitcoin Core` | `v31.0` | `195.26.240.213:8333`  |
+| `Signet`   | `Bitcoin Core` | `v31.0` | `195.26.240.213:38333` |
+| `Testnet4` | `Bitcoin Core` | `v31.0` | `195.26.240.213:48333` |
 
 ## Utreexo Bridges
 
